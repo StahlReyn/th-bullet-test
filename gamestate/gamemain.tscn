@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://b7v7flp6p65gf"]
+
+[ext_resource type="PackedScene" uid="uid://chg817g0wf0ij" path="res://gamestate/hud/gamehud.tscn" id="1_585am"]
+[ext_resource type="Script" path="res://gamestate/gamemain.gd" id="1_jvava"]
+[ext_resource type="PackedScene" uid="uid://btg4d8khha007" path="res://gamestate/gameview.tscn" id="2_frqqi"]
+
+[node name="Gamemain" type="Node2D" node_paths=PackedStringArray("game_hud", "game_view")]
+script = ExtResource("1_jvava")
+game_hud = NodePath("Gamehud")
+game_view = NodePath("Gameview")
+
+[node name="Gamehud" parent="." instance=ExtResource("1_585am")]
+z_index = 10
+
+[node name="Gameview" parent="." instance=ExtResource("2_frqqi")]
+position = Vector2(64, 32)
