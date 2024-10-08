@@ -7,3 +7,4 @@
 script = ExtResource("1_cj2ko")
 bullet_scene = ExtResource("2_qqrfq")
 aim_at_player = true
+base_speed = 400.0

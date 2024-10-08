@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://ciofssv5xc11h"]
 
-[ext_resource type="Script" path="res://scripts/enemy.gd" id="1_p451m"]
+[ext_resource type="Script" path="res://scripts/character/enemy.gd" id="1_p451m"]
 [ext_resource type="Texture2D" uid="uid://b2wsxd72kbhxl" path="res://icon.svg" id="2_f2hwq"]
 [ext_resource type="Script" path="res://scripts/shooter_container.gd" id="3_kul0l"]
 [ext_resource type="PackedScene" uid="uid://doiombwegy5ru" path="res://scripts/shooters/shooter_test.tscn" id="4_21boi"]
@@ -19,8 +19,12 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_t7bub"]
 radius = 76.0263
 
-[node name="EnemyTest" type="Area2D"]
+[node name="EnemyTest" type="Area2D" node_paths=PackedStringArray("main_collision")]
+collision_layer = 0
+collision_mask = 8
 script = ExtResource("1_p451m")
+main_collision = NodePath("CollisionShape2D")
+mhp = 10
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_y3i8h")
@@ -32,3 +36,5 @@ shape = SubResource("CircleShape2D_t7bub")
 script = ExtResource("3_kul0l")
 
 [node name="ShooterTest" parent="ShooterContainer" instance=ExtResource("4_21boi")]
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

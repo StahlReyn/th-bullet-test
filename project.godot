@@ -27,6 +27,8 @@ window/stretch/scale_mode="integer"
 player=""
 bullet=""
 bullet_container=""
+game_view=""
+effect_container=""
 
 [input]
 

@@ -1,16 +1,13 @@
 extends Label
 
-var game_hud : GameHud
-var game_main : GameMain 
 var game_view : GameView 
+var player : Player
 
 func _ready() -> void:
-	game_hud = get_parent()
-	game_main = game_hud.get_parent()
-	game_view = game_main.game_view
+	game_view = GameUtils.get_game_view(self)
+	player = GameUtils.get_player(self)
 
-func _process(delta: float) -> void:
-	var player = GameUtils.get_player(self)
+func _process(_delta: float) -> void:
 	text = (
 		"Time: " + str(game_view.game_time) + "\n" +
 		"X: " + str(player.position.x) + "\n" +

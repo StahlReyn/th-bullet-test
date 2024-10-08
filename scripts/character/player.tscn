@@ -1,6 +1,6 @@
 [gd_scene load_steps=22 format=3 uid="uid://dopo8g5mkyblm"]
 
-[ext_resource type="Script" path="res://scripts/player.gd" id="1_wuaqp"]
+[ext_resource type="Script" path="res://scripts/character/player.gd" id="1_wuaqp"]
 [ext_resource type="Texture2D" uid="uid://cqmf5jdt1g1o4" path="res://assets/img/character/reimu.png" id="2_k7rwp"]
 [ext_resource type="AudioStream" uid="uid://dq30caahnggrl" path="res://assets/audio/sfx/pichuun_processed.wav" id="3_jd03f"]
 [ext_resource type="Texture2D" uid="uid://dqdl2bwkkx363" path="res://assets/img/character/focus_dot.png" id="4_frfr6"]
@@ -97,10 +97,15 @@ radius = 3.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_e5t30"]
 radius = 40.0
 
-[node name="Player" type="Area2D" groups=["player"]]
+[node name="Player" type="Area2D" node_paths=PackedStringArray("area_graze", "audio_graze", "main_anim_sprite", "main_collision", "audio_death") groups=["player"]]
 collision_layer = 0
 collision_mask = 4
 script = ExtResource("1_wuaqp")
+area_graze = NodePath("AreaGraze")
+audio_graze = NodePath("AudioGraze")
+main_anim_sprite = NodePath("AnimatedSprite2D")
+main_collision = NodePath("CollisionShape2D")
+audio_death = NodePath("AudioDeath")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(2, 2)

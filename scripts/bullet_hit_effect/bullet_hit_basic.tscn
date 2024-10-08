@@ -1,0 +1,40 @@
+[gd_scene load_steps=8 format=3 uid="uid://djohlf5howpr"]
+
+[ext_resource type="Script" path="res://scripts/bullet_hit_effect/bullet_hit_effect.gd" id="1_08awb"]
+[ext_resource type="AudioStream" uid="uid://c7r4fudpm8xph" path="res://assets/audio/sfx/bullet_hit.mp3" id="2_4mvpx"]
+[ext_resource type="Script" path="res://scripts/sprite_effects/particle_oneshot.gd" id="3_rtdho"]
+
+[sub_resource type="Curve" id="Curve_y6q7d"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.839607, 0.486889), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.03561, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_xi8jg"]
+curve = SubResource("Curve_y6q7d")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_c3gkl"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+angle_min = -720.0
+angle_max = 720.0
+spread = 180.0
+initial_velocity_max = 104.9
+gravity = Vector3(0, 0, 0)
+damping_min = 70.0
+damping_max = 70.0
+alpha_curve = SubResource("CurveTexture_xi8jg")
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_vhqdw"]
+size = Vector2(10, 10)
+
+[node name="BulletHitBasic" type="Node2D" node_paths=PackedStringArray("audio_hit")]
+script = ExtResource("1_08awb")
+audio_hit = NodePath("BulletHit")
+
+[node name="BulletHit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_4mvpx")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 300
+process_material = SubResource("ParticleProcessMaterial_c3gkl")
+texture = SubResource("PlaceholderTexture2D_vhqdw")
+script = ExtResource("3_rtdho")
