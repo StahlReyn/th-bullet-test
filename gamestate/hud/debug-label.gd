@@ -10,10 +10,10 @@ func _ready() -> void:
 	game_view = game_main.game_view
 
 func _process(delta: float) -> void:
-	var player = game_view.get_player()
+	var player = GameUtils.get_player(self)
 	text = (
 		"Time: " + str(game_view.game_time) + "\n" +
 		"X: " + str(player.position.x) + "\n" +
 		"Y: " + str(player.position.y) + "\n" +
-		"Bullet Count: " + str(game_view.get_bullet_count()) + "\n" 
+		"Bullet Count: " + str(GameUtils.get_bullet_count(self)) + "\n" 
 	)

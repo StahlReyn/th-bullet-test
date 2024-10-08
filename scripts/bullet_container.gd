@@ -1,7 +1,5 @@
-class_name AreaGraze
-extends Area2D
-
-@onready var graze_sprite : Sprite2D = $GrazeCircle
+class_name BulletContainer
+extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -10,5 +8,4 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	graze_sprite.rotation += delta
 	pass

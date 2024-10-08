@@ -37,7 +37,7 @@ func process_movement_input() -> void:
 
 func process_movement(delta) -> void:
 	position += velocity * delta
-	position = position.clamp(Vector2.ZERO, game_view.get_game_area())
+	position = position.clamp(Vector2.ZERO, GameUtils.get_game_area())
 
 func process_animation() -> void:
 	if velocity.x > 0:

@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://qbaoce8pthqa"]
+
+[ext_resource type="Texture2D" uid="uid://dskbsnsab2j0" path="res://assets/img/bullets/yingyang_shot.png" id="1_b37pd"]
+[ext_resource type="Script" path="res://scripts/shooters/shooter.gd" id="1_vfgha"]
+[ext_resource type="PackedScene" uid="uid://bg5moqhkb6v0k" path="res://scripts/bullets/reimu_amulet.tscn" id="2_2uugs"]
+
+[node name="ReimuYingyang" type="Node2D"]
+script = ExtResource("1_vfgha")
+bullet_scene = ExtResource("2_2uugs")
+need_input = true
+
+[node name="YingyangShot" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("1_b37pd")

@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://btg4d8khha007"]
+[gd_scene load_steps=6 format=3 uid="uid://btg4d8khha007"]
 
 [ext_resource type="Script" path="res://gamestate/hud/gameview.gd" id="1_dyv06"]
 [ext_resource type="PackedScene" uid="uid://dopo8g5mkyblm" path="res://scripts/player.tscn" id="1_u7skv"]
-[ext_resource type="PackedScene" uid="uid://ciofssv5xc11h" path="res://scripts/enemy.tscn" id="2_4xvup"]
+[ext_resource type="PackedScene" uid="uid://ciofssv5xc11h" path="res://scripts/enemy_test.tscn" id="2_4xvup"]
+[ext_resource type="Script" path="res://scripts/bullet_container.gd" id="4_q2e0v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pak0s"]
 size = Vector2(768, 896)
@@ -20,12 +21,14 @@ position = Vector2(230, 125)
 position = Vector2(542, 130)
 
 [node name="Area2D" type="Area2D" parent="."]
-visible = false
 collision_layer = 0
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(384, 448)
 shape = SubResource("RectangleShape2D_pak0s")
+
+[node name="BulletContainer" type="Node2D" parent="." groups=["bullet_container"]]
+script = ExtResource("4_q2e0v")
 
 [connection signal="body_entered" from="Player" to="Player" method="_on_body_entered"]

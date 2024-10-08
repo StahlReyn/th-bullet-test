@@ -26,6 +26,7 @@ window/stretch/scale_mode="integer"
 
 player=""
 bullet=""
+bullet_container=""
 
 [input]
 
@@ -70,3 +71,4 @@ focus={
 2d_physics/layer_1="player"
 2d_physics/layer_2="enemy"
 2d_physics/layer_3="bullet"
+2d_physics/layer_4="bullet-player"

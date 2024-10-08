@@ -3,6 +3,8 @@ extends Area2D
 
 var velocity = Vector2.ZERO
 var game_view : GameView
+var credit
+var damage
 
 func _ready() -> void:
 	#game_view = get_node("/root/Gamemain/Gameview")
@@ -17,6 +19,5 @@ func process_movement(delta) -> void:
 	position += velocity * delta
 
 func check_remove() -> void:
-	if global_position.x > 1000 or global_position.x < -200 or global_position.y > 1000 or global_position.y < -200:
-		print(global_position)
+	if global_position.x > 1600 or global_position.x < -400 or global_position.y > 1600 or global_position.y < -400:
 		queue_free()
