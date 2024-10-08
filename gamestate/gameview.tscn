@@ -11,12 +11,16 @@ size = Vector2(768, 896)
 script = ExtResource("1_dyv06")
 
 [node name="Player" parent="." instance=ExtResource("1_u7skv")]
-position = Vector2(254, 531)
+position = Vector2(351, 620)
 
 [node name="Enemy" parent="." instance=ExtResource("2_4xvup")]
-position = Vector2(246, 57)
+position = Vector2(230, 125)
+
+[node name="Enemy2" parent="." instance=ExtResource("2_4xvup")]
+position = Vector2(542, 130)
 
 [node name="Area2D" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 0
 

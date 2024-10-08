@@ -12,13 +12,13 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	total_time += delta
-	
+	await get_tree().create_timer(2).timeout
 	if to_spawn:
 		to_spawn = false
 		var bullet = bullet_scene.instantiate()
-		bullet.velocity = get_to_player_direction() * 200
+		bullet.velocity = get_to_player_direction() * 400
 		add_child(bullet)
-		await get_tree().create_timer(1).timeout
+		await get_tree().create_timer(0.1).timeout
 		to_spawn = true
 
 func get_to_player_vector():

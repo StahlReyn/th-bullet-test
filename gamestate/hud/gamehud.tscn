@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://chg817g0wf0ij"]
+[gd_scene load_steps=5 format=3 uid="uid://chg817g0wf0ij"]
 
 [ext_resource type="Script" path="res://gamestate/hud/gamehud.gd" id="1_ovxsb"]
 [ext_resource type="Texture2D" uid="uid://c7cx5yj4h5drb" path="res://assets/img/system/hud-test.png" id="1_tnihf"]
 [ext_resource type="Script" path="res://gamestate/hud/debug-label.gd" id="2_hgmoc"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_k5vxq"]
+font_size = 24
 
 [node name="Gamehud" type="Control"]
 z_index = 1
@@ -22,8 +25,9 @@ centered = false
 layout_mode = 2
 offset_left = 869.0
 offset_top = 69.0
-offset_right = 909.0
+offset_right = 965.0
 offset_bottom = 92.0
 text = "DEBUG TEXT
 "
+label_settings = SubResource("LabelSettings_k5vxq")
 script = ExtResource("2_hgmoc")
