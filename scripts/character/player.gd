@@ -1,12 +1,10 @@
 class_name Player
 extends Character
 
-signal graze
-
-@export var base_speed : int = 400 # pixels/sec
-@export var focus_speed : int = 100 # pixels/sec
+@export var base_speed : int = 400 ## pixels/sec
+@export var focus_speed : int = 100 ## pixels/sec
 @export var area_graze : AreaGraze
-@export var audio_graze : AudioStreamPlayer2D
+@export var audio_shoot : AudioStreamPlayer2D ## shoot audio is done on player side to not overlap multiple shooters
 @onready var game_view : GameView = $".."
 
 func process_movement_input() -> void:
@@ -19,6 +17,8 @@ func process_movement_input() -> void:
 		velocity.y = get_speed()
 	if Input.is_action_pressed("move_up"):
 		velocity.y = -get_speed()
+	if Input.is_action_pressed("shoot") and not audio_shoot.playing:
+		audio_shoot.play()
 
 func process_movement(delta) -> void:
 	position += velocity * delta
@@ -28,9 +28,3 @@ func get_speed():
 	if Input.is_action_pressed("focus"):
 		return focus_speed
 	return base_speed
-
-func _on_area_graze_area_entered(area: Area2D) -> void:
-	if area is Bullet:
-		graze.emit()
-		audio_graze.play()
-		#print("GRAZE!")
