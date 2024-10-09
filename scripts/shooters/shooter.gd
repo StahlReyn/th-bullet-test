@@ -4,7 +4,6 @@ extends Node2D
 @export var bullet_scene : PackedScene
 @export var cooldown : float = 0.05
 @export var aim_at_player : bool = false
-@export var need_input : bool = false
 @export var base_speed : float = 2000
 
 var cooldown_time : float
@@ -18,12 +17,7 @@ func _process(delta: float) -> void:
 		do_shoot()
 
 func can_shoot() -> bool:
-	if cooldown_time > 0:
-		return false
-	if need_input:
-		return Input.is_action_pressed("shoot")
-	else:
-		return true
+	return cooldown_time <= 0
 
 func do_shoot() -> void:
 	var bullet : Bullet = bullet_scene.instantiate()

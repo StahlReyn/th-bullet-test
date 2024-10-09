@@ -49,7 +49,7 @@ func take_damage(dmg : int):
 	hp -= dmg
 
 func check_death():
-	if hp < 0:
+	if hp <= 0:
 		do_death()
 
 func do_death():
