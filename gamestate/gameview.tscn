@@ -1,11 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://btg4d8khha007"]
+[gd_scene load_steps=9 format=3 uid="uid://btg4d8khha007"]
 
 [ext_resource type="Script" path="res://gamestate/hud/gameview.gd" id="1_dyv06"]
 [ext_resource type="PackedScene" uid="uid://dopo8g5mkyblm" path="res://scripts/character/player.tscn" id="1_u7skv"]
 [ext_resource type="PackedScene" uid="uid://ciofssv5xc11h" path="res://scripts/character/enemy_test.tscn" id="2_4xvup"]
+[ext_resource type="Script" path="res://data/stages/stage_test.gd" id="2_x6fis"]
 [ext_resource type="Script" path="res://scripts/bullet_container.gd" id="4_q2e0v"]
 [ext_resource type="Script" path="res://scripts/effect_container.gd" id="5_fx8wi"]
 [ext_resource type="PackedScene" uid="uid://clrod6py644iu" path="res://scripts/character/enemy_test_2.tscn" id="6_thyhd"]
+[ext_resource type="Script" path="res://gamestate/stage_handler.gd" id="8_e6ddu"]
 
 [node name="Gameview" type="Node2D" groups=["game_view"]]
 script = ExtResource("1_dyv06")
@@ -29,5 +31,9 @@ script = ExtResource("4_q2e0v")
 script = ExtResource("5_fx8wi")
 
 [node name="EnemyTest2" parent="." instance=ExtResource("6_thyhd")]
+
+[node name="StageHandler" type="Node" parent="."]
+script = ExtResource("8_e6ddu")
+script_stage = ExtResource("2_x6fis")
 
 [connection signal="body_entered" from="Player" to="Player" method="_on_body_entered"]
