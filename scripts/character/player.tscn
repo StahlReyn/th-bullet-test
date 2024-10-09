@@ -115,11 +115,6 @@ animation = &"idle"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_5yl3a")
 
-[node name="FocusDot" type="Sprite2D" parent="."]
-z_index = 1
-scale = Vector2(2, 2)
-texture = ExtResource("4_frfr6")
-
 [node name="AudioDeath" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_jd03f")
 
@@ -138,6 +133,11 @@ shape = SubResource("CircleShape2D_e5t30")
 modulate = Color(1, 1, 1, 0.352941)
 scale = Vector2(2, 2)
 texture = ExtResource("7_sufo8")
+
+[node name="FocusDot" type="Sprite2D" parent="AreaGraze"]
+z_index = 1
+scale = Vector2(2, 2)
+texture = ExtResource("4_frfr6")
 
 [node name="ShooterContainer" type="Node2D" parent="."]
 script = ExtResource("8_ecnlh")
