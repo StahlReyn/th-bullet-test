@@ -1,0 +1,111 @@
+[gd_scene load_steps=10 format=3 uid="uid://clrod6py644iu"]
+
+[ext_resource type="Script" path="res://scripts/character/enemy.gd" id="1_adryj"]
+[ext_resource type="Texture2D" uid="uid://b2wsxd72kbhxl" path="res://icon.svg" id="2_fmx36"]
+[ext_resource type="Script" path="res://scripts/shooter_container.gd" id="3_yexrn"]
+[ext_resource type="PackedScene" uid="uid://doiombwegy5ru" path="res://scripts/shooters/shooter_test.tscn" id="4_xm444"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rfmqn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_fmx36")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uv7br"]
+radius = 76.0263
+
+[sub_resource type="Animation" id="Animation_xtg15"]
+resource_name = "default"
+length = 10.0
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 10),
+"transitions": PackedFloat32Array(0.420448, 0.25, 1),
+"update": 0,
+"values": [Vector2(300, 0), Vector2(600, 400), Vector2(100, 300)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.217638, 2.07053),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+
+[sub_resource type="Animation" id="Animation_onabi"]
+length = 0.001
+step = 1.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_x421h"]
+_data = {
+"RESET": SubResource("Animation_onabi"),
+"default": SubResource("Animation_xtg15")
+}
+
+[node name="EnemyTest2" type="Area2D" node_paths=PackedStringArray("animation_player", "main_anim_sprite", "main_collision")]
+collision_layer = 0
+collision_mask = 8
+script = ExtResource("1_adryj")
+animation_player = NodePath("AnimationPlayer")
+main_anim_sprite = NodePath("AnimatedSprite2D")
+main_collision = NodePath("CollisionShape2D")
+mhp = 30
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+modulate = Color(1, 0.835294, 0.615686, 1)
+sprite_frames = SubResource("SpriteFrames_rfmqn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_uv7br")
+
+[node name="ShooterContainer" type="Node2D" parent="."]
+script = ExtResource("3_yexrn")
+
+[node name="ShooterTest" parent="ShooterContainer" instance=ExtResource("4_xm444")]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_x421h")
+}
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
