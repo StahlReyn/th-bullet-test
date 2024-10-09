@@ -7,6 +7,10 @@ extends Character
 @export var audio_shoot : AudioStreamPlayer2D ## shoot audio is done on player side to not overlap multiple shooters
 @onready var game_view : GameView = $".."
 
+var lives : int
+var bombs : int
+var power : float
+
 func process_movement_input() -> void:
 	velocity = Vector2.ZERO
 	if Input.is_action_pressed("move_right"):
