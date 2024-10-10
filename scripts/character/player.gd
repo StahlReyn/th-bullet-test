@@ -8,9 +8,12 @@ extends Character
 @export var audio_item : AudioStreamPlayer2D ## Audio for item collection
 @onready var game_view : GameView = $".."
 
-var lives : int
-var bombs : int
-var power : float
+var lives : int = 3
+var bombs : int = 3
+var power : int = 0 ##Powers are in integer for simplicity, display divides by 100
+
+var power_min : int = 0
+var power_max : int = 500
 
 func process_movement_input() -> void:
 	velocity = Vector2.ZERO
@@ -39,3 +42,19 @@ func _on_area_entered(area: Area2D) -> void:
 	if area is Item:
 		area.do_collect()
 		audio_item.play()
+		process_item(area)
+
+func process_item(item: Item) -> void:
+	match item.type:
+		Item.Type.POWER:
+			power += 1
+		Item.Type.POWER_BIG:
+			power += 100
+		Item.Type.POWER_FULL:
+			power += 500
+		Item.Type.POINT:
+			GameUtils.add_score(self, 1000)
+
+func add_power(value: float) -> void:
+	power += value
+	power = clamp(power, power_min, power_max)

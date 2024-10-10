@@ -12,7 +12,7 @@ enum Type {
 
 @onready var sprite_node : AnimatedSprite2D = $AnimatedSprite2D
 
-static var item_scene : PackedScene = preload("res://scripts/items/item_point.tscn")
+static var item_scene : PackedScene = preload("res://scripts/items/item.tscn")
 
 var type : int = Type.POINT
 

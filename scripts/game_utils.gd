@@ -22,3 +22,6 @@ static func get_item_container(node : Node) -> ItemContainer:
 
 static func get_game_area() -> Vector2:
 	return game_area
+
+static func add_score(node: Node, value: int) -> void:
+	get_game_view(node).score += value
