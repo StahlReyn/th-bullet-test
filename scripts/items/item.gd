@@ -1,7 +1,20 @@
 class_name Item
 extends Area2D
 
+enum Type {
+	POWER,
+	POINT,
+	POWER_BIG,
+	POWER_FULL,
+	LIFE,
+	BOMB,
+}
+
+@onready var sprite_node : AnimatedSprite2D = $AnimatedSprite2D
+
 static var item_scene : PackedScene = preload("res://scripts/items/item_point.tscn")
+
+var type : int = Type.POINT
 
 var max_speed : float = 200
 var down_speed : float = -100
@@ -13,11 +26,9 @@ var spawn_time : float
 var magnet_speed : float = 1000
 var magnet_target : Node2D
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	pass
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	spawn_time -= delta
 	if magnet_target:
@@ -46,6 +57,23 @@ func set_random_spawn_velocity(speed : float, time : float):
 	var direction = Vector2(randf_range(-1,1),randf_range(-1,1)).normalized()
 	self.spawn_velocity = direction * speed
 
+func set_type(type : int) -> void:
+	self.type = type
+	set_sprite()
+	
+func set_sprite() -> void:
+	match type:
+		Type.POWER:
+			sprite_node.play("power")
+		Type.POINT:
+			sprite_node.play("point")
+		Type.POWER_BIG:
+			sprite_node.play("power_big")
+		Type.POWER_FULL:
+			sprite_node.play("power_full")
+		Type.LIFE:
+			sprite_node.play("life")
+	
 func do_collect() -> void:
 	queue_free()
 

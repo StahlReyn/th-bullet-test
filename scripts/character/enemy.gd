@@ -25,9 +25,15 @@ func do_death():
 
 func drop_items():
 	var item_container : ItemContainer = GameUtils.get_item_container(self)
-	for i in drop_power:
+	drop_item_type(item_container, Item.Type.POWER, drop_power)
+	drop_item_type(item_container, Item.Type.POINT, drop_point)
+
+func drop_item_type(item_container: ItemContainer, type: int, count: int):
+	for i in count:
 		var item : Item = Item.item_scene.instantiate()
 		item.top_level = true
 		item.global_position = self.global_position
 		item.set_random_spawn_velocity(drop_spawn_speed, drop_spawn_time)
 		item_container.call_deferred("add_child", item)
+		item.call_deferred("set_type", type)
+	
