@@ -1,33 +1,23 @@
-[gd_scene load_steps=12 format=3 uid="uid://btg4d8khha007"]
+[gd_scene load_steps=11 format=3 uid="uid://btg4d8khha007"]
 
 [ext_resource type="Script" path="res://gamestate/hud/gameview.gd" id="1_dyv06"]
 [ext_resource type="PackedScene" uid="uid://dopo8g5mkyblm" path="res://scripts/character/player.tscn" id="1_u7skv"]
-[ext_resource type="PackedScene" uid="uid://ciofssv5xc11h" path="res://scripts/character/enemy_test.tscn" id="2_4xvup"]
 [ext_resource type="Script" path="res://data/stages/stage_test.gd" id="2_x6fis"]
 [ext_resource type="Script" path="res://scripts/bullet_container.gd" id="4_q2e0v"]
 [ext_resource type="Script" path="res://scripts/effect_container.gd" id="5_fx8wi"]
 [ext_resource type="Script" path="res://gamestate/item_container.gd" id="6_0wgp6"]
-[ext_resource type="PackedScene" uid="uid://clrod6py644iu" path="res://scripts/character/enemy_test_2.tscn" id="6_thyhd"]
 [ext_resource type="Script" path="res://gamestate/stage_handler.gd" id="8_e6ddu"]
+[ext_resource type="Texture2D" uid="uid://cb0p73frtui6m" path="res://assets/img/system/item_get_line.png" id="9_gyqvd"]
 [ext_resource type="Script" path="res://gamestate/area_collection.gd" id="10_w4su3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nify0"]
-size = Vector2(768, 200)
+size = Vector2(768, 250)
 
 [node name="Gameview" type="Node2D" groups=["game_view"]]
 script = ExtResource("1_dyv06")
 
 [node name="Player" parent="." instance=ExtResource("1_u7skv")]
 position = Vector2(351, 620)
-
-[node name="Enemy" parent="." instance=ExtResource("2_4xvup")]
-position = Vector2(230, 125)
-
-[node name="Enemy2" parent="." instance=ExtResource("2_4xvup")]
-position = Vector2(542, 130)
-
-[node name="Enemy3" parent="." instance=ExtResource("2_4xvup")]
-position = Vector2(390, 124)
 
 [node name="BulletContainer" type="Node2D" parent="." groups=["bullet_container"]]
 script = ExtResource("4_q2e0v")
@@ -38,8 +28,6 @@ script = ExtResource("5_fx8wi")
 [node name="ItemContainer" type="Node2D" parent="." groups=["item_container"]]
 script = ExtResource("6_0wgp6")
 
-[node name="EnemyTest2" parent="." instance=ExtResource("6_thyhd")]
-
 [node name="StageHandler" type="Node" parent="."]
 script = ExtResource("8_e6ddu")
 script_stage = ExtResource("2_x6fis")
@@ -49,9 +37,15 @@ collision_layer = 0
 script = ExtResource("10_w4su3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AreaCollection"]
-position = Vector2(384, 100)
+position = Vector2(384, 126)
 shape = SubResource("RectangleShape2D_nify0")
 
+[node name="ItemGetLine" type="Sprite2D" parent="AreaCollection"]
+position = Vector2(383, 250)
+scale = Vector2(2, 2)
+texture = ExtResource("9_gyqvd")
+
+[connection signal="game_start" from="." to="AreaCollection" method="_on_gameview_game_start"]
 [connection signal="body_entered" from="Player" to="Player" method="_on_body_entered"]
 [connection signal="area_entered" from="AreaCollection" to="AreaCollection" method="_on_area_entered"]
 [connection signal="area_exited" from="AreaCollection" to="AreaCollection" method="_on_area_exited"]
