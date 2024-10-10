@@ -17,5 +17,8 @@ static func get_bullet_container(node : Node) -> BulletContainer:
 static func get_effect_container(node : Node) -> EffectContainer:
 	return node.get_tree().get_nodes_in_group("effect_container")[0]
 
+static func get_item_container(node : Node) -> ItemContainer:
+	return node.get_tree().get_nodes_in_group("item_container")[0]
+
 static func get_game_area() -> Vector2:
 	return game_area

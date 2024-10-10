@@ -47,7 +47,7 @@ script = ExtResource("1_81vh5")
 speed = 0.1
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
-transform = Transform3D(0.99999, -1.92024e-05, 0.00211613, -3.63795e-12, 0.999945, 0.0090738, -0.00211623, -0.00907379, 0.999943, 0, 0.350035, 0)
+transform = Transform3D(0.99999, -1.92023e-05, 0.00211613, -9.09488e-13, 0.999945, 0.00907379, -0.00211623, -0.00907377, 0.999943, 0, 0.350035, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Path3D/PathFollow3D"]
 transform = Transform3D(1.00001, 0, 0, 0, 1.00001, 0, 0, 0, 1.00001, 0, 0, 0)

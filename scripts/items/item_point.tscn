@@ -1,0 +1,81 @@
+[gd_scene load_steps=13 format=3 uid="uid://d3vvpd13843s4"]
+
+[ext_resource type="Script" path="res://scripts/items/item.gd" id="1_yw8ou"]
+[ext_resource type="Shape2D" uid="uid://fsp376u4jkj8" path="res://scripts/items/collision_item.tres" id="2_h7no2"]
+[ext_resource type="Texture2D" uid="uid://yipm4qncoxvx" path="res://assets/img/system/point_items.png" id="3_bbyl3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xxjy6"]
+atlas = ExtResource("3_bbyl3")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1bw2e"]
+atlas = ExtResource("3_bbyl3")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jqfye"]
+atlas = ExtResource("3_bbyl3")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r06ps"]
+atlas = ExtResource("3_bbyl3")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lxw84"]
+atlas = ExtResource("3_bbyl3")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f4fme"]
+atlas = ExtResource("3_bbyl3")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1p5xq"]
+atlas = ExtResource("3_bbyl3")
+region = Rect2(96, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_52qjk"]
+atlas = ExtResource("3_bbyl3")
+region = Rect2(112, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rbbcd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xxjy6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1bw2e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jqfye")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r06ps")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lxw84")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f4fme")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1p5xq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_52qjk")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="ItemPoint" type="Area2D"]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("1_yw8ou")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = ExtResource("2_h7no2")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_rbbcd")

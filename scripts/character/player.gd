@@ -5,6 +5,7 @@ extends Character
 @export var focus_speed : int = 100 ## pixels/sec
 @export var area_graze : AreaGraze
 @export var audio_shoot : AudioStreamPlayer2D ## shoot audio is done on player side to not overlap multiple shooters
+@export var audio_item : AudioStreamPlayer2D ## Audio for item collection
 @onready var game_view : GameView = $".."
 
 var lives : int
@@ -32,3 +33,9 @@ func get_speed():
 	if Input.is_action_pressed("focus"):
 		return focus_speed
 	return base_speed
+
+func _on_area_entered(area: Area2D) -> void:
+	super(area)
+	if area is Item:
+		area.do_collect()
+		audio_item.play()

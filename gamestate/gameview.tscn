@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://btg4d8khha007"]
+[gd_scene load_steps=10 format=3 uid="uid://btg4d8khha007"]
 
 [ext_resource type="Script" path="res://gamestate/hud/gameview.gd" id="1_dyv06"]
 [ext_resource type="PackedScene" uid="uid://dopo8g5mkyblm" path="res://scripts/character/player.tscn" id="1_u7skv"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://data/stages/stage_test.gd" id="2_x6fis"]
 [ext_resource type="Script" path="res://scripts/bullet_container.gd" id="4_q2e0v"]
 [ext_resource type="Script" path="res://scripts/effect_container.gd" id="5_fx8wi"]
+[ext_resource type="Script" path="res://gamestate/item_container.gd" id="6_0wgp6"]
 [ext_resource type="PackedScene" uid="uid://clrod6py644iu" path="res://scripts/character/enemy_test_2.tscn" id="6_thyhd"]
 [ext_resource type="Script" path="res://gamestate/stage_handler.gd" id="8_e6ddu"]
 
@@ -29,6 +30,9 @@ script = ExtResource("4_q2e0v")
 
 [node name="EffectContainer" type="Node2D" parent="." groups=["effect_container"]]
 script = ExtResource("5_fx8wi")
+
+[node name="ItemContainer" type="Node2D" parent="." groups=["item_container"]]
+script = ExtResource("6_0wgp6")
 
 [node name="EnemyTest2" parent="." instance=ExtResource("6_thyhd")]
 

@@ -13,6 +13,7 @@ var total_time : float = 0;
 var hp : int
 
 var velocity = Vector2.ZERO
+var is_dead : bool = false
 
 func _ready() -> void:
 	reset_hp()
@@ -47,12 +48,14 @@ func reset_hp():
 
 func take_damage(dmg : int):
 	hp -= dmg
+	check_death()
 
 func check_death():
-	if hp <= 0:
+	if hp <= 0 and not is_dead:
 		do_death()
 
 func do_death():
+	is_dead = true
 	if audio_death:
 		audio_death.play()
 
@@ -61,4 +64,3 @@ func _on_area_entered(area: Area2D) -> void:
 		hit.emit()
 		take_damage(area.damage)
 		area.on_hit()
-		check_death()

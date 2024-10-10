@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dopo8g5mkyblm"]
+[gd_scene load_steps=24 format=3 uid="uid://dopo8g5mkyblm"]
 
 [ext_resource type="Script" path="res://scripts/character/player.gd" id="1_wuaqp"]
 [ext_resource type="Texture2D" uid="uid://cqmf5jdt1g1o4" path="res://assets/img/character/reimu.png" id="2_k7rwp"]
@@ -9,6 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://d2xwmw785vew0" path="res://assets/audio/sfx/bullet_player.wav" id="5_u1jrk"]
 [ext_resource type="Texture2D" uid="uid://c0wruv71j8ich" path="res://assets/img/character/graze_circle.png" id="7_sufo8"]
 [ext_resource type="PackedScene" uid="uid://curt0mp7nsjs6" path="res://scripts/shooters/homing_amulet_1.tscn" id="8_nfcem"]
+[ext_resource type="Script" path="res://scripts/character/area_item_collection.gd" id="9_73hfm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o0t4v"]
 atlas = ExtResource("2_k7rwp")
@@ -97,12 +98,16 @@ radius = 3.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_e5t30"]
 radius = 40.0
 
-[node name="Player" type="Area2D" node_paths=PackedStringArray("area_graze", "audio_shoot", "main_anim_sprite", "main_collision", "audio_death") groups=["player"]]
+[sub_resource type="CircleShape2D" id="CircleShape2D_2obxy"]
+radius = 150.0
+
+[node name="Player" type="Area2D" node_paths=PackedStringArray("area_graze", "audio_shoot", "audio_item", "main_anim_sprite", "main_collision", "audio_death") groups=["player"]]
 collision_layer = 0
-collision_mask = 4
+collision_mask = 20
 script = ExtResource("1_wuaqp")
 area_graze = NodePath("AreaGraze")
 audio_shoot = NodePath("BulletPlayer")
+audio_item = NodePath("AudioItem")
 main_anim_sprite = NodePath("AnimatedSprite2D")
 main_collision = NodePath("CollisionShape2D")
 audio_death = NodePath("AudioDeath")
@@ -120,6 +125,9 @@ stream = ExtResource("3_jd03f")
 
 [node name="BulletPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_u1jrk")
+
+[node name="AudioItem" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_btd5j")
 
 [node name="AreaGraze" type="Area2D" parent="."]
 collision_layer = 0
@@ -142,7 +150,16 @@ texture = ExtResource("4_frfr6")
 [node name="AudioGraze" type="AudioStreamPlayer2D" parent="AreaGraze"]
 stream = ExtResource("5_btd5j")
 
+[node name="AreaItemCollection" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16
+script = ExtResource("9_73hfm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaItemCollection"]
+shape = SubResource("CircleShape2D_2obxy")
+
 [node name="HomingAmulet1" parent="." instance=ExtResource("8_nfcem")]
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="area_entered" from="AreaGraze" to="AreaGraze" method="_on_area_entered"]
+[connection signal="area_entered" from="AreaItemCollection" to="AreaItemCollection" method="_on_area_entered"]
