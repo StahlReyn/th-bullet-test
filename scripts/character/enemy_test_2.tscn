@@ -87,6 +87,7 @@ collision_layer = 0
 collision_mask = 8
 script = ExtResource("1_adryj")
 drop_power = 15
+drop_power_big = 1
 animation_player = NodePath("AnimationPlayer")
 main_anim_sprite = NodePath("AnimatedSprite2D")
 main_collision = NodePath("CollisionShape2D")

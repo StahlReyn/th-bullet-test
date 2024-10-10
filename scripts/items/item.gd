@@ -106,3 +106,13 @@ func get_point_value() -> int:
 		Type.POWER_FULL:
 			return 1000
 	return 0
+
+func get_power_value() -> int:
+	match type:
+		Type.POWER:
+			return 1
+		Type.POWER_BIG:
+			return 100
+		Type.POWER_FULL:
+			return 500
+	return 0
