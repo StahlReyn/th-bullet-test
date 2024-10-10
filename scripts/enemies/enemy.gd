@@ -22,6 +22,22 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	super(delta)
 
+func process_animation() -> void:
+	if not main_anim_sprite:
+		return
+	var sprite_frames = main_anim_sprite.sprite_frames
+	if abs(velocity.x) * 0.5 > abs(velocity.y) and sprite_frames.has_animation("side"):
+		main_anim_sprite.play("side")
+	elif abs(velocity.x) * 3.0 > abs(velocity.y) and sprite_frames.has_animation("diagonal"):
+		main_anim_sprite.play("diagonal")
+	elif sprite_frames.has_animation("default"):
+		main_anim_sprite.play("default")
+	main_anim_sprite.flip_h = velocity.x < 0
+
+func check_despawn() -> void:
+	if global_position.x > 1600 or global_position.x < -400 or global_position.y > 1600 or global_position.y < -400:
+		queue_free()
+
 func do_death():
 	super()
 	drop_items()

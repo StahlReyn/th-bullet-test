@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://clrod6py644iu"]
 
-[ext_resource type="Script" path="res://scripts/character/enemy.gd" id="1_adryj"]
+[ext_resource type="Script" path="res://scripts/enemies/enemy.gd" id="1_adryj"]
 [ext_resource type="Texture2D" uid="uid://b2wsxd72kbhxl" path="res://icon.svg" id="2_fmx36"]
 [ext_resource type="Script" path="res://scripts/shooter_container.gd" id="3_yexrn"]
 [ext_resource type="PackedScene" uid="uid://doiombwegy5ru" path="res://scripts/shooters/shooter_test.tscn" id="4_xm444"]

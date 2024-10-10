@@ -27,7 +27,7 @@ func _process(delta: float) -> void:
 	pass
 
 func process_movement_input() -> void:
-	velocity = Vector2.ZERO
+	pass
 
 func process_movement(delta) -> void:
 	position += velocity * delta
