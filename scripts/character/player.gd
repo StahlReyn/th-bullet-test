@@ -45,6 +45,7 @@ func _on_area_entered(area: Area2D) -> void:
 		process_item(area)
 
 func process_item(item: Item) -> void:
+	GameUtils.add_score(self, item.get_point_value())
 	match item.type:
 		Item.Type.POWER:
 			power += 1
@@ -52,8 +53,6 @@ func process_item(item: Item) -> void:
 			power += 100
 		Item.Type.POWER_FULL:
 			power += 500
-		Item.Type.POINT:
-			GameUtils.add_score(self, 1000)
 
 func add_power(value: float) -> void:
 	power += value

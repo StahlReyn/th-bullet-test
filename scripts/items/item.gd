@@ -25,6 +25,7 @@ var spawn_time : float
 
 var magnet_speed : float = 1000
 var magnet_target : Node2D
+var maximum_collect : bool = false
 
 func _ready() -> void:
 	pass
@@ -75,8 +76,33 @@ func set_sprite() -> void:
 			sprite_node.play("life")
 	
 func do_collect() -> void:
-	queue_free()
+	var item_display : ItemCollectDisplay = ItemCollectDisplay.item_scene.instantiate()
+	var effect_container : EffectContainer = GameUtils.get_effect_container(self)
+	item_display.top_level = true
+	item_display.global_position = self.global_position
+	effect_container.add_child(item_display)
+	var point = get_point_value()
+	if point > 0:
+		item_display.set_text(str(point))
+	if maximum_collect:
+		item_display.set_maximum_style()
+	call_deferred("queue_free")
 
 func check_despawn() -> void:
 	if position.y > 1200:
-		queue_free()
+		call_deferred("queue_free")
+
+func get_point_value() -> int:
+	match type:
+		Type.POWER:
+			return 10
+		Type.POINT:
+			if maximum_collect:
+				return 20000
+			var pos_y = GameUtils.get_player(self).position.y
+			return 20000 - int(pos_y * 10) # Further Up (Lower Y), higher point
+		Type.POWER_BIG:
+			return 100
+		Type.POWER_FULL:
+			return 1000
+	return 0

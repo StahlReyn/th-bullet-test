@@ -102,7 +102,6 @@ radius = 40.0
 radius = 150.0
 
 [node name="Player" type="Area2D" node_paths=PackedStringArray("area_graze", "audio_shoot", "audio_item", "main_anim_sprite", "main_collision", "audio_death") groups=["player"]]
-collision_layer = 0
 collision_mask = 20
 script = ExtResource("1_wuaqp")
 area_graze = NodePath("AreaGraze")

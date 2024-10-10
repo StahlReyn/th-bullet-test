@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://btg4d8khha007"]
+[gd_scene load_steps=12 format=3 uid="uid://btg4d8khha007"]
 
 [ext_resource type="Script" path="res://gamestate/hud/gameview.gd" id="1_dyv06"]
 [ext_resource type="PackedScene" uid="uid://dopo8g5mkyblm" path="res://scripts/character/player.tscn" id="1_u7skv"]
@@ -9,15 +9,16 @@
 [ext_resource type="Script" path="res://gamestate/item_container.gd" id="6_0wgp6"]
 [ext_resource type="PackedScene" uid="uid://clrod6py644iu" path="res://scripts/character/enemy_test_2.tscn" id="6_thyhd"]
 [ext_resource type="Script" path="res://gamestate/stage_handler.gd" id="8_e6ddu"]
+[ext_resource type="Script" path="res://gamestate/area_collection.gd" id="10_w4su3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nify0"]
+size = Vector2(768, 200)
 
 [node name="Gameview" type="Node2D" groups=["game_view"]]
 script = ExtResource("1_dyv06")
 
 [node name="Player" parent="." instance=ExtResource("1_u7skv")]
 position = Vector2(351, 620)
-base_speed = 400
-focus_speed = 100
-mhp = 1
 
 [node name="Enemy" parent="." instance=ExtResource("2_4xvup")]
 position = Vector2(230, 125)
@@ -43,4 +44,14 @@ script = ExtResource("6_0wgp6")
 script = ExtResource("8_e6ddu")
 script_stage = ExtResource("2_x6fis")
 
+[node name="AreaCollection" type="Area2D" parent="."]
+collision_layer = 0
+script = ExtResource("10_w4su3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaCollection"]
+position = Vector2(384, 100)
+shape = SubResource("RectangleShape2D_nify0")
+
 [connection signal="body_entered" from="Player" to="Player" method="_on_body_entered"]
+[connection signal="area_entered" from="AreaCollection" to="AreaCollection" method="_on_area_entered"]
+[connection signal="area_exited" from="AreaCollection" to="AreaCollection" method="_on_area_exited"]

@@ -30,6 +30,7 @@ bullet_container=""
 game_view=""
 effect_container=""
 item_container=""
+item=""
 
 [input]
 

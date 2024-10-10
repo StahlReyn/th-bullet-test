@@ -20,6 +20,9 @@ static func get_effect_container(node : Node) -> EffectContainer:
 static func get_item_container(node : Node) -> ItemContainer:
 	return node.get_tree().get_nodes_in_group("item_container")[0]
 
+static func get_point_items(node : Node) -> Array[Node]:
+	return node.get_tree().get_nodes_in_group("item")
+
 static func get_game_area() -> Vector2:
 	return game_area
 
