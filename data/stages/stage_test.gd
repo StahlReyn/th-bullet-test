@@ -2,9 +2,11 @@ extends StageScript
 
 var cd1 : float = 3.0
 var cd2 : float = 10.0
+var cd_script : float = 20.0
 
 @onready var enemy_fairy : PackedScene = preload("res://data/enemies/enemy_lesser_fairy.tscn")
 @onready var title_card : PackedScene = preload("res://data/title_cards/title_card_test.tscn")
+@onready var next_script : GDScript = preload("res://data/stages/stage_test_2.gd")
 
 func _ready() -> void:
 	spawn_title_card(title_card, Vector2(500,300))
@@ -14,7 +16,9 @@ func _process(delta: float) -> void:
 	super(delta)
 	cd1 -= delta
 	cd2 -= delta
-	title_card
+	cd_script -= delta
+	if cd_script <= 0:
+		switch_script(next_script)
 	if cd1 <= 0:
 		for i in 5:
 			var enemy = spawn_enemy(enemy_fairy, Vector2(randi_range(200,600), -100))

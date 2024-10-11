@@ -19,6 +19,14 @@ func spawn_enemy(scene : PackedScene, pos : Vector2 = Vector2(0,0)) -> Enemy:
 func get_enemy_container() -> Node:
 	return get_parent().get_parent()
 
+func get_stage_handler() -> StageHandler:
+	return get_parent()
+
+func switch_script(script : GDScript) -> void:
+	var handler : StageHandler = get_stage_handler()
+	handler.replace_script(script)
+	print("Switch Script")
+	
 func spawn_image(image : Texture2D, pos : Vector2 = Vector2(0,0)) -> Sprite2D:
 	var sprite = Sprite2D.new()
 	var container = GameUtils.get_image_container(self)
