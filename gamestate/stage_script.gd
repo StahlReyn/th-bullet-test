@@ -18,3 +18,20 @@ func spawn_enemy(scene : PackedScene, pos : Vector2 = Vector2(0,0)) -> Enemy:
 
 func get_enemy_container() -> Node:
 	return get_parent().get_parent()
+
+func spawn_image(image : Texture2D, pos : Vector2 = Vector2(0,0)) -> Sprite2D:
+	var sprite = Sprite2D.new()
+	var container = GameUtils.get_image_container(self)
+	sprite.texture = image
+	sprite.top_level = true
+	sprite.global_position = pos
+	container.add_child(sprite)
+	return sprite
+
+func spawn_title_card(scene : PackedScene, pos : Vector2 = Vector2(0,0)) -> TitleCard:
+	var image_container = GameUtils.get_image_container(self)
+	var image : TitleCard = scene.instantiate()
+	image.top_level = true
+	image.global_position = pos
+	image_container.add_child(image)
+	return image
