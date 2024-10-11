@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://ciofssv5xc11h"]
 
-[ext_resource type="Script" path="res://scripts/enemies/enemy.gd" id="1_p451m"]
+[ext_resource type="Script" path="res://scripts/gameplay/enemy.gd" id="1_p451m"]
 [ext_resource type="Texture2D" uid="uid://b2wsxd72kbhxl" path="res://icon.svg" id="2_f2hwq"]
-[ext_resource type="Script" path="res://scripts/shooter_container.gd" id="3_kul0l"]
-[ext_resource type="PackedScene" uid="uid://doiombwegy5ru" path="res://scripts/shooters/shooter_test.tscn" id="4_21boi"]
+[ext_resource type="Script" path="res://scripts/containers/shooter_container.gd" id="3_vnffi"]
+[ext_resource type="PackedScene" uid="uid://doiombwegy5ru" path="res://data/shooters/shooter_test.tscn" id="4_21boi"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_y3i8h"]
 animations = [{
@@ -37,7 +37,7 @@ sprite_frames = SubResource("SpriteFrames_y3i8h")
 shape = SubResource("CircleShape2D_t7bub")
 
 [node name="ShooterContainer" type="Node2D" parent="."]
-script = ExtResource("3_kul0l")
+script = ExtResource("3_vnffi")
 
 [node name="ShooterTest" parent="ShooterContainer" instance=ExtResource("4_21boi")]
 cooldown = 0.2

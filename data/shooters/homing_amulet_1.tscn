@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://curt0mp7nsjs6"]
 
-[ext_resource type="Script" path="res://scripts/shooter_container.gd" id="1_rwmxh"]
-[ext_resource type="PackedScene" uid="uid://qbaoce8pthqa" path="res://scripts/shooters/reimu_yingyang.tscn" id="2_6m7pe"]
+[ext_resource type="Script" path="res://scripts/containers/shooter_container.gd" id="1_rwmxh"]
+[ext_resource type="PackedScene" uid="uid://qbaoce8pthqa" path="res://data/shooters/reimu_yingyang.tscn" id="2_6m7pe"]
 
 [node name="HomingAmulet1" type="Node2D"]
 script = ExtResource("1_rwmxh")

@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://djohlf5howpr"]
 
-[ext_resource type="Script" path="res://scripts/bullet_hit_effect/bullet_hit_effect.gd" id="1_08awb"]
+[ext_resource type="Script" path="res://scripts/gameplay/bullet_hit_effect.gd" id="1_08awb"]
 [ext_resource type="AudioStream" uid="uid://c7r4fudpm8xph" path="res://assets/audio/sfx/bullet_hit.mp3" id="2_4mvpx"]
 [ext_resource type="Script" path="res://scripts/sprite_effects/particle_oneshot.gd" id="3_rtdho"]
 

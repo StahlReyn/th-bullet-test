@@ -1,9 +1,9 @@
 [gd_scene load_steps=16 format=3 uid="uid://y1ht13i0dqug"]
 
-[ext_resource type="Script" path="res://scripts/enemies/enemy.gd" id="1_5bg83"]
+[ext_resource type="Script" path="res://scripts/gameplay/enemy.gd" id="1_5bg83"]
 [ext_resource type="Texture2D" uid="uid://dd8tet8s1inyg" path="res://assets/img/enemies/lesser_fairy.png" id="2_t2qqo"]
-[ext_resource type="Script" path="res://scripts/shooter_container.gd" id="3_lmh3n"]
-[ext_resource type="PackedScene" uid="uid://doiombwegy5ru" path="res://scripts/shooters/shooter_test.tscn" id="4_x0yn4"]
+[ext_resource type="Script" path="res://scripts/containers/shooter_container.gd" id="3_jj8m1"]
+[ext_resource type="PackedScene" uid="uid://doiombwegy5ru" path="res://data/shooters/shooter_test.tscn" id="4_x0yn4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kl7ry"]
 atlas = ExtResource("2_t2qqo")
@@ -107,7 +107,7 @@ sprite_frames = SubResource("SpriteFrames_y3i8h")
 shape = SubResource("CircleShape2D_t7bub")
 
 [node name="ShooterContainer" type="Node2D" parent="."]
-script = ExtResource("3_lmh3n")
+script = ExtResource("3_jj8m1")
 
 [node name="ShooterTest" parent="ShooterContainer" instance=ExtResource("4_x0yn4")]
 cooldown = 0.5
