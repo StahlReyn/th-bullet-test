@@ -11,6 +11,8 @@ enum Type {
 }
 
 static var item_scene : PackedScene = preload("res://scripts/items/item.tscn")
+static var audio_collect : AudioStream = preload("res://assets/audio/sfx/click_collect.wav")
+static var audio_collect_big : AudioStream = preload("res://assets/audio/sfx/item_get.wav")
 
 static var max_speed : float = 200
 static var down_speed : float = -100
@@ -103,7 +105,9 @@ func do_point_display() -> void:
 	var item_display : ItemCollectDisplay = ItemCollectDisplay.item_scene.instantiate()
 	var effect_container : EffectContainer = GameUtils.get_effect_container(self)
 	item_display.top_level = true
-	item_display.global_position = self.global_position
+	if magnet_target:
+		item_display.global_position = magnet_target.global_position
+		item_display.global_position.x -= 28
 	effect_container.add_child(item_display)
 	var point = get_point_value()
 	if point > 0:
