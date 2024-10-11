@@ -1,5 +1,5 @@
 class_name Item
-extends Area2D
+extends AnimatedSprite2D
 
 enum Type {
 	POWER,
@@ -10,35 +10,52 @@ enum Type {
 	BOMB,
 }
 
-@onready var sprite_node : AnimatedSprite2D = $AnimatedSprite2D
-
 static var item_scene : PackedScene = preload("res://scripts/items/item.tscn")
 
+static var max_speed : float = 200
+static var down_speed : float = -100
+static var down_accel : float = 200
+
+static var magnet_range_squared : float = 40000
+static var collect_range_squared : float = 360
+static var collect_line_y : float = 300
+static var magnet_speed : float = 1000
+
 var type : int = Type.POINT
-
-var max_speed : float = 200
-var down_speed : float = -100
-var down_accel : float = 200
-
 var spawn_velocity : Vector2
 var spawn_time : float
 
-var magnet_speed : float = 1000
 var magnet_target : Node2D
 var maximum_collect : bool = false
+var distance_squared : float
 
 func _ready() -> void:
+	magnet_target = GameUtils.get_player(self)
 	pass
 
 func _process(delta: float) -> void:
 	spawn_time -= delta
 	if magnet_target:
+		distance_squared = global_position.distance_squared_to(magnet_target.global_position)
+	else:
+		distance_squared = 100000
+	if distance_squared < collect_range_squared:
+		do_collect()
+	elif is_magnetic():
 		process_target_movement(delta)
-	elif spawn_time > 0: # Gravity move when not spawning
+	elif is_spawning(): # Gravity move when not spawning
 		process_spawn_movement(delta)
 	else:
 		process_movement(delta)
 	check_despawn()
+
+func is_magnetic() -> bool:
+	if not magnet_target: # Sometimes self is Nil when A lot happens
+		return false
+	return distance_squared < magnet_range_squared or magnet_target.position.y < collect_line_y
+
+func is_spawning() -> bool:
+	return spawn_time > 0
 
 func process_movement(delta: float) -> void:
 	down_speed += down_accel * delta
@@ -65,17 +82,24 @@ func set_type(type : int) -> void:
 func set_sprite() -> void:
 	match type:
 		Type.POWER:
-			sprite_node.play("power")
+			play("power")
 		Type.POINT:
-			sprite_node.play("point")
+			play("point")
 		Type.POWER_BIG:
-			sprite_node.play("power_big")
+			play("power_big")
 		Type.POWER_FULL:
-			sprite_node.play("power_full")
+			play("power_full")
 		Type.LIFE:
-			sprite_node.play("life")
+			play("life")
 	
 func do_collect() -> void:
+	do_point_display()
+	if magnet_target is Player:
+		GameUtils.add_score(self, get_point_value())
+		magnet_target.add_power(get_power_value())
+	call_deferred("queue_free")
+
+func do_point_display() -> void:
 	var item_display : ItemCollectDisplay = ItemCollectDisplay.item_scene.instantiate()
 	var effect_container : EffectContainer = GameUtils.get_effect_container(self)
 	item_display.top_level = true
@@ -86,7 +110,6 @@ func do_collect() -> void:
 		item_display.set_text(str(point))
 	if maximum_collect:
 		item_display.set_maximum_style()
-	call_deferred("queue_free")
 
 func check_despawn() -> void:
 	if position.y > 1200:

@@ -1,11 +1,10 @@
 class_name ItemCollectDisplay
-extends Node2D
+extends Label
 
 static var item_scene : PackedScene = preload("res://scripts/items/item_collect_display.tscn")
 
-@onready var label : Label = $Label
 var up_speed : float = 50.0
-var fade_speed : float = 1.0
+var fade_speed : float = 2.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -20,10 +19,6 @@ func _process(delta: float) -> void:
 	position.y -= up_speed * delta
 	if color.a <= 0:
 		call_deferred("queue_free")
-	pass
-
-func set_text(text: String) -> void:
-	label.text = text
 
 func set_maximum_style() -> void:
 	var color : Color = get_modulate()

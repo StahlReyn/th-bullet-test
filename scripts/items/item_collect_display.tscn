@@ -2,19 +2,11 @@
 
 [ext_resource type="Script" path="res://scripts/items/item_collect_display.gd" id="1_x4j6n"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_puwtd"]
+[sub_resource type="LabelSettings" id="LabelSettings_u86ey"]
 outline_size = 10
 outline_color = Color(0, 0, 0, 1)
 
-[node name="ItemCollectDisplay" type="Node2D"]
-script = ExtResource("1_x4j6n")
-
-[node name="Label" type="Label" parent="."]
-offset_left = -48.0
-offset_top = -11.0
-offset_right = 49.0
-offset_bottom = 12.0
+[node name="ItemCollectDisplay" type="Label"]
 text = "000000"
-label_settings = SubResource("LabelSettings_puwtd")
-horizontal_alignment = 1
-vertical_alignment = 1
+label_settings = SubResource("LabelSettings_u86ey")
+script = ExtResource("1_x4j6n")

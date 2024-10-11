@@ -39,14 +39,6 @@ func get_speed():
 
 func _on_area_entered(area: Area2D) -> void:
 	super(area)
-	if area is Item:
-		area.do_collect()
-		audio_item.play()
-		process_item(area)
-
-func process_item(item: Item) -> void:
-	GameUtils.add_score(self, item.get_point_value())
-	add_power(item.get_power_value())
 
 func add_power(value: float) -> void:
 	power += value

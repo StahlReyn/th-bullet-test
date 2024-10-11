@@ -10,5 +10,4 @@ func _process(delta: float) -> void:
 	pass
 
 func _on_area_entered(area: Area2D) -> void:
-	if area is Item:
-		area.magnet_target = self
+	pass

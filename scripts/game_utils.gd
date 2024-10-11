@@ -8,6 +8,9 @@ static func get_player(node : Node) -> Player:
 static func get_bullet_count(node : Node) -> int:
 	return len(node.get_tree().get_nodes_in_group("bullet"))
 
+static func get_item_count(node : Node) -> int:
+	return len(node.get_tree().get_nodes_in_group("item"))
+
 static func get_game_view(node : Node) -> GameView:
 	return node.get_tree().get_nodes_in_group("game_view")[0]
 
