@@ -17,14 +17,12 @@ var is_dead : bool = false
 
 func _ready() -> void:
 	reset_hp()
-	pass
 
 func _process(delta: float) -> void:	
 	total_time += delta
 	process_movement_input()
 	process_movement(delta)
 	process_animation()
-	pass
 
 func process_movement_input() -> void:
 	pass
