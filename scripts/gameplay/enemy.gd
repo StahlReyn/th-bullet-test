@@ -37,7 +37,6 @@ func process_animation() -> void:
 
 func check_despawn() -> void:
 	if position.x > 1000 or position.x < -200 or position.y > 1000 or position.y < -300:
-		print("DESPAWN")
 		queue_free()
 
 func do_death():

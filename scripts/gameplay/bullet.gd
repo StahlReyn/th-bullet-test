@@ -22,7 +22,7 @@ func process_movement(delta) -> void:
 	position += velocity * delta
 
 func check_remove() -> void:
-	if global_position.x > 1600 or global_position.x < -400 or global_position.y > 1600 or global_position.y < -400:
+	if position.x > 1000 or position.x < -300 or position.y > 1000 or position.y < -300:
 		queue_free()
 
 func on_hit():

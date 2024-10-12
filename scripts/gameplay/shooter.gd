@@ -20,31 +20,17 @@ func can_shoot() -> bool:
 	return cooldown_time <= 0
 
 func do_shoot() -> void:
+	var player = GameUtils.get_player(self)
+	var bullet_container = GameUtils.get_bullet_container(self)
 	var bullet : Bullet = bullet_scene.instantiate()
 	bullet.top_level = true
 	bullet.global_position = self.global_position
 	if aim_at_player:
-		bullet.velocity = get_to_player_direction()
+		bullet.velocity = bullet.position.direction_to(player.position) * base_speed
 	else:
-		bullet.velocity = Vector2.UP
-	bullet.velocity *= base_speed
-	
-	var bullet_container = get_bullet_container()
+		bullet.velocity = Vector2.UP * base_speed
 	bullet_container.add_child(bullet)
 	reset_cooldown()
 
 func reset_cooldown() -> void:
 	cooldown_time = cooldown
-	
-func get_bullet_container() -> BulletContainer:
-	return get_tree().get_nodes_in_group("bullet_container")[0]
-
-func get_player() -> Player:
-	return get_tree().get_nodes_in_group("player")[0]
-
-func get_to_player_vector() -> Vector2:
-	var player = get_player()
-	return player.global_position - self.global_position
-	
-func get_to_player_direction() -> Vector2:
-	return get_to_player_vector().normalized()
