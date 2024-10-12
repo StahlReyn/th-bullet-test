@@ -29,5 +29,5 @@ func _process(delta: float) -> void:
 func _on_area_entered(area: Area2D) -> void:
 	if area is Bullet:
 		graze.emit()
-		GameUtils.get_game_view(self).graze_count += 1
+		GameUtils.get_game_view().graze_count += 1
 		audio_graze.play()

@@ -32,6 +32,6 @@ func on_hit():
 			var bullet_hit_effect : BulletHitEffect = bullet_hit_effect_scene.instantiate()
 			bullet_hit_effect.top_level = true
 			bullet_hit_effect.global_position = self.global_position
-			GameUtils.get_effect_container(self).add_child(bullet_hit_effect)
+			GameUtils.get_effect_container().add_child(bullet_hit_effect)
 		queue_free()
 	

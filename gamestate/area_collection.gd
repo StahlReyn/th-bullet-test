@@ -17,12 +17,12 @@ func _process(delta: float) -> void:
 		visible = false
 
 func _on_area_entered(area: Area2D) -> void:
-	for item in GameUtils.get_point_items(self):
-		item.magnet_target = GameUtils.get_player(self)
+	for item in GameUtils.get_point_items():
+		item.magnet_target = GameUtils.get_player()
 		item.maximum_collect = true
 
 func _on_area_exited(area: Area2D) -> void:
-	for item in GameUtils.get_point_items(self):
+	for item in GameUtils.get_point_items():
 		item.magnet_target = null
 		item.maximum_collect = false
 

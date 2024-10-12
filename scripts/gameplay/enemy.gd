@@ -45,7 +45,7 @@ func do_death():
 	queue_free()
 
 func drop_items():
-	var item_container : ItemContainer = GameUtils.get_item_container(self)
+	var item_container : ItemContainer = GameUtils.get_item_container()
 	drop_item_type(item_container, Item.Type.POWER, drop_power)
 	drop_item_type(item_container, Item.Type.POINT, drop_point)
 	drop_item_type(item_container, Item.Type.POWER_BIG, drop_power_big)

@@ -32,7 +32,7 @@ var maximum_collect : bool = false
 var distance_squared : float
 
 func _ready() -> void:
-	magnet_target = GameUtils.get_player(self)
+	magnet_target = GameUtils.get_player()
 	pass
 
 func _process(delta: float) -> void:
@@ -97,13 +97,13 @@ func set_sprite() -> void:
 func do_collect() -> void:
 	do_point_display()
 	if magnet_target is Player:
-		GameUtils.add_score(self, get_point_value())
+		GameUtils.add_score(get_point_value())
 		magnet_target.add_power(get_power_value())
 	call_deferred("queue_free")
 
 func do_point_display() -> void:
 	var item_display : ItemCollectDisplay = ItemCollectDisplay.item_scene.instantiate()
-	var effect_container : EffectContainer = GameUtils.get_effect_container(self)
+	var effect_container : EffectContainer = GameUtils.get_effect_container()
 	item_display.top_level = true
 	if magnet_target:
 		item_display.global_position = magnet_target.global_position
@@ -116,7 +116,7 @@ func do_point_display() -> void:
 		item_display.set_maximum_style()
 
 func check_despawn() -> void:
-	if position.y > 1200:
+	if position.y > 1000:
 		call_deferred("queue_free")
 
 func get_point_value() -> int:
@@ -126,7 +126,7 @@ func get_point_value() -> int:
 		Type.POINT:
 			if maximum_collect:
 				return 20000
-			var pos_y = GameUtils.get_player(self).position.y
+			var pos_y = GameUtils.get_player().position.y
 			return 20000 - int(pos_y * 10) # Further Up (Lower Y), higher point
 		Type.POWER_BIG:
 			return 100

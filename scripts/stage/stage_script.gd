@@ -29,7 +29,7 @@ func switch_script(script : GDScript) -> void:
 	
 func spawn_image(image : Texture2D, pos : Vector2 = Vector2(0,0)) -> Sprite2D:
 	var sprite = Sprite2D.new()
-	var container = GameUtils.get_image_container(self)
+	var container = GameUtils.get_image_container()
 	sprite.texture = image
 	sprite.top_level = true
 	sprite.global_position = pos
@@ -37,7 +37,7 @@ func spawn_image(image : Texture2D, pos : Vector2 = Vector2(0,0)) -> Sprite2D:
 	return sprite
 
 func spawn_title_card(scene : PackedScene, pos : Vector2 = Vector2(0,0)) -> TitleCard:
-	var image_container = GameUtils.get_image_container(self)
+	var image_container = GameUtils.get_image_container()
 	var image : TitleCard = scene.instantiate()
 	image.top_level = true
 	image.global_position = pos

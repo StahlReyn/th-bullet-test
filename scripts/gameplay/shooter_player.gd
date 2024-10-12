@@ -9,7 +9,7 @@ var player : Player
 
 func _ready() -> void:
 	super()
-	player = GameUtils.get_player(self)
+	player = GameUtils.get_player()
 	position = position_unfocused
 	
 func _process(delta: float) -> void:

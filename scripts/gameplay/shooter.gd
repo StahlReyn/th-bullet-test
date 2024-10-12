@@ -20,8 +20,8 @@ func can_shoot() -> bool:
 	return cooldown_time <= 0
 
 func do_shoot() -> void:
-	var player = GameUtils.get_player(self)
-	var bullet_container = GameUtils.get_bullet_container(self)
+	var player = GameUtils.get_player()
+	var bullet_container = GameUtils.get_bullet_container()
 	var bullet : Bullet = bullet_scene.instantiate()
 	bullet.top_level = true
 	bullet.global_position = self.global_position
