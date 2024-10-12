@@ -28,7 +28,6 @@ var spawn_velocity : Vector2
 var spawn_time : float
 
 var magnet_target : Node2D
-var maximum_collect : bool = false
 var distance_squared : float
 
 func _ready() -> void:
@@ -54,7 +53,7 @@ func _process(delta: float) -> void:
 func is_magnetic() -> bool:
 	if not magnet_target: # Sometimes self is Nil when A lot happens
 		return false
-	return distance_squared < magnet_range_squared or magnet_target.position.y < collect_line_y
+	return is_player_range() or is_item_border_range()
 
 func is_spawning() -> bool:
 	return spawn_time > 0
@@ -112,19 +111,27 @@ func do_point_display() -> void:
 	var point = get_point_value()
 	if point > 0:
 		item_display.set_text(str(point))
-	if maximum_collect:
+	if is_item_border_range():
 		item_display.set_maximum_style()
 
 func check_despawn() -> void:
 	if position.y > 1000:
 		call_deferred("queue_free")
 
+func is_player_range() -> bool:
+	return distance_squared < magnet_range_squared
+
+func is_item_border_range() -> bool:
+	if magnet_target:
+		return magnet_target.position.y < collect_line_y
+	return false
+
 func get_point_value() -> int:
 	match type:
 		Type.POWER:
 			return 10
 		Type.POINT:
-			if maximum_collect:
+			if is_item_border_range():
 				return 20000
 			var pos_y = GameUtils.get_player().position.y
 			return 20000 - int(pos_y * 10) # Further Up (Lower Y), higher point

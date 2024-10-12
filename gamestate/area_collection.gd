@@ -1,10 +1,10 @@
 class_name AreaCollection
-extends Area2D
+extends Sprite2D
 
 var appear_time : float = 0
 
 func _ready() -> void:
-	pass
+	appear_time = 0
 
 func _process(delta: float) -> void:
 	if appear_time > 0:
@@ -16,17 +16,6 @@ func _process(delta: float) -> void:
 	else:
 		visible = false
 
-func _on_area_entered(area: Area2D) -> void:
-	for item in GameUtils.get_point_items():
-		item.magnet_target = GameUtils.get_player()
-		item.maximum_collect = true
-
-func _on_area_exited(area: Area2D) -> void:
-	for item in GameUtils.get_point_items():
-		item.magnet_target = null
-		item.maximum_collect = false
-
 func _on_gameview_game_start() -> void:
 	appear_time = 7.0
-	
 	
