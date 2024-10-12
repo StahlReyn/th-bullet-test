@@ -2,7 +2,7 @@ extends StageScript
 
 var cd1 : float = 3.0
 var cd2 : float = 10.0
-var cd_script : float = 20.0
+var cd_script : float = 1.0
 
 @onready var enemy_fairy : PackedScene = preload("res://data/enemies/enemy_lesser_fairy.tscn")
 @onready var title_card : PackedScene = preload("res://data/title_cards/title_card_test.tscn")

@@ -8,7 +8,6 @@ outline_size = 10
 outline_color = Color(0, 0, 0, 1)
 
 [node name="ItemCollectDisplay" type="Label"]
-anchors_preset = -1
 text = "000000"
 label_settings = SubResource("LabelSettings_u86ey")
 horizontal_alignment = 1

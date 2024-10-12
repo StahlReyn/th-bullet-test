@@ -21,6 +21,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	super(delta)
+	check_despawn()
 
 func process_animation() -> void:
 	if not main_anim_sprite:
@@ -35,7 +36,8 @@ func process_animation() -> void:
 	main_anim_sprite.flip_h = velocity.x < 0
 
 func check_despawn() -> void:
-	if global_position.x > 1600 or global_position.x < -400 or global_position.y > 1600 or global_position.y < -400:
+	if position.x > 1000 or position.x < -200 or position.y > 1000 or position.y < -300:
+		print("DESPAWN")
 		queue_free()
 
 func do_death():

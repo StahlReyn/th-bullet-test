@@ -12,8 +12,9 @@ func _process(_delta: float) -> void:
 		"FPS: " + str(Engine.get_frames_per_second()  ) + "\n" +
 		"Time: " + ("%.3f" % game_view.game_time) + "\n" +
 		"X: " + ("%.3f" % player.position.x) + "\n" +
-		"Y: " + ("%.3f" % player.position.y) + "\n" +
+		"Y: " + ("%.3f" % player.position.y) + "\n\n" +
 		"Bullet Count: " + str(GameUtils.get_bullet_count(self)) + "\n" +
+		"Enemy Count: " + str(GameUtils.get_enemy_count(self)) + "\n" +
 		"Item Count: " + str(GameUtils.get_item_count(self)) + "\n\n" +
 		"Power: " + str(player.power) + "\n" +
 		"Score: " + str(game_view.score) + "\n" +

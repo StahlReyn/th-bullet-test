@@ -15,4 +15,4 @@ func _process(delta: float) -> void:
 		for i in 3:
 			var enemy = spawn_enemy(enemy_fairy, Vector2(300, -100))
 			enemy.velocity = Vector2(randi_range(-50,50), randi_range(50,150))
-		cd1 += 1.0
+		cd1 += 0.1

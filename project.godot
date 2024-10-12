@@ -32,6 +32,7 @@ effect_container=""
 item_container=""
 item=""
 image_container=""
+enemy=""
 
 [input]
 
