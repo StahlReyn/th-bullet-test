@@ -7,14 +7,12 @@ signal graze
 @onready var graze_sprite : Sprite2D = $GrazeCircle
 @onready var audio_graze : AudioStreamPlayer2D = $AudioGraze
 
-var focus_transition_speed : float = 20.0
+static var focus_transition_speed : float = 20.0
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	graze_sprite.rotation = 0
+	graze_sprite.scale = Vector2(2,2)
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	graze_sprite.rotation += delta
 	if Input.is_action_pressed("focus"):
@@ -29,5 +27,5 @@ func _process(delta: float) -> void:
 func _on_area_entered(area: Area2D) -> void:
 	if area is Bullet:
 		graze.emit()
-		GameUtils.get_game_view().graze_count += 1
+		GameVariables.add_graze_count()
 		audio_graze.play()

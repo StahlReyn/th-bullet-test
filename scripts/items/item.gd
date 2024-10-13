@@ -96,7 +96,7 @@ func set_sprite() -> void:
 func do_collect() -> void:
 	do_point_display()
 	if magnet_target is Player:
-		GameUtils.add_score(get_point_value())
+		GameVariables.add_score(get_point_value())
 		magnet_target.add_power(get_power_value())
 	call_deferred("queue_free")
 

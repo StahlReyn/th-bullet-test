@@ -34,6 +34,3 @@ func get_point_items() -> Array[Node]:
 
 func get_game_area() -> Vector2:
 	return game_area
-
-func add_score(value: int) -> void:
-	get_game_view().score += value

@@ -17,8 +17,9 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-GameUtils="*res://scripts/game_utils.gd"
-SceneHandler="*res://scripts/scene_handler.gd"
+GameUtils="*res://scripts/globals/game_utils.gd"
+SceneHandler="*res://scripts/globals/scene_handler.gd"
+GameVariables="*res://scripts/globals/game_variables.gd"
 
 [display]
 
