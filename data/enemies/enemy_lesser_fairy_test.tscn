@@ -1,7 +1,6 @@
-[gd_scene load_steps=17 format=3 uid="uid://dlcdwqphvlnso"]
+[gd_scene load_steps=16 format=3 uid="uid://dlcdwqphvlnso"]
 
 [ext_resource type="Script" path="res://scripts/gameplay/enemy.gd" id="1_oi2c2"]
-[ext_resource type="Script" path="res://data/movement/movement_test.gd" id="2_bbskh"]
 [ext_resource type="Texture2D" uid="uid://dd8tet8s1inyg" path="res://assets/img/enemies/lesser_fairy.png" id="2_pbdpq"]
 [ext_resource type="Script" path="res://scripts/containers/shooter_container.gd" id="3_i3p81"]
 [ext_resource type="PackedScene" uid="uid://doiombwegy5ru" path="res://data/shooters/shooter_test.tscn" id="4_g5e2x"]
@@ -96,7 +95,6 @@ collision_mask = 8
 script = ExtResource("1_oi2c2")
 drop_power = 3
 drop_point = 3
-movement_script = ExtResource("2_bbskh")
 main_anim_sprite = NodePath("AnimatedSprite2D")
 main_collision = NodePath("CollisionShape2D")
 mhp = 3

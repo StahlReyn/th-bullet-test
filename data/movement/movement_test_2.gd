@@ -5,4 +5,4 @@ func process_movement(delta: float) -> void:
 	velocity.x += cos(parent.total_time * 3) * 300
 	velocity.y += sin(parent.total_time * 3) * 300 + 100
 	parent.position += velocity * delta
-	parent.process_animation(velocity)
+	parent.update_animation(velocity)

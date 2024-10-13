@@ -11,25 +11,23 @@ extends Character
 @export var drop_bomb : int = 0
 @export var drop_life : int = 0
 
-@export_group("Movement")
-@export var movement_script : GDScript
-
-var cur_movement_script : MovementScript
+var movement_handler : MovementHandler # Movement Handler is auto created
+var self_update_anim : bool = true
 
 func _ready() -> void:
 	super()
-	if movement_script:
-		add_movement_script(movement_script)
+	movement_handler = MovementHandler.new()
+	add_child(movement_handler)
 
 func _process(delta: float) -> void:
 	total_time += delta
-	process_script(delta)
+	movement_handler.process_script(delta)
 	process_movement(delta)
 	update_animation(velocity)
 	check_despawn()
 	
 # Passes velocity so script can also access
-func process_animation(velocity: Vector2) -> void:
+func update_animation(velocity: Vector2) -> void:
 	if not main_anim_sprite:
 		return
 	var sprite_frames = main_anim_sprite.sprite_frames
@@ -67,13 +65,8 @@ func drop_item_type(item_container: ItemContainer, type: int, count: int):
 		item.call_deferred("set_type", type)
 
 func add_movement_script(script : GDScript) -> Node:
-	if cur_movement_script:
-		cur_movement_script.queue_free()
-	cur_movement_script = script.new()
-	add_child(cur_movement_script)
-	cur_movement_script.set_parent(self)
-	return cur_movement_script
-
-func process_script(delta: float) -> void:
-	if cur_movement_script:
-		cur_movement_script.process_movement(delta)
+	self_update_anim = false # Auto set false so script can calculate own
+	var node_script = script.new()
+	movement_handler.add_child(node_script)
+	node_script.set_parent(self)
+	return node_script
