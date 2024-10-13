@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://ckdjymfct6mt5" path="res://assets/img/bullets/test-bullet.png" id="2_quidt"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_eyqfo"]
+radius = 5.0
 
 [node name="Bullet" type="Area2D" groups=["bullet"]]
 collision_layer = 4
@@ -14,4 +15,5 @@ script = ExtResource("1_afkbm")
 shape = SubResource("CircleShape2D_eyqfo")
 
 [node name="Test-bullet" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_quidt")

@@ -28,10 +28,11 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	state_timer -= delta
-	super(delta)
+	process_movement_input()
 	process_shoot_input()
 	process_state()
 	process_iframe()
+	super(delta)
 
 func process_movement_input() -> void:
 	velocity = Vector2.ZERO
@@ -43,6 +44,17 @@ func process_movement_input() -> void:
 		velocity.y = get_speed()
 	if Input.is_action_pressed("move_up"):
 		velocity.y = -get_speed()
+
+func update_animation(velocity: Vector2) -> void:
+	if not main_anim_sprite:
+		return
+	var sprite_frames = main_anim_sprite.sprite_frames
+	if velocity.x > 0 and sprite_frames.has_animation("right"):
+		main_anim_sprite.play("right")
+	elif velocity.x < 0 and sprite_frames.has_animation("left"):
+		main_anim_sprite.play("left")
+	elif sprite_frames.has_animation("idle"):
+		main_anim_sprite.play("idle")
 
 func process_shoot_input() -> void:
 	if Input.is_action_pressed("shoot") and can_shoot() and not audio_shoot.playing:

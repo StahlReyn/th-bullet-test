@@ -20,26 +20,14 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:	
 	total_time += delta
-	process_movement_input()
 	process_movement(delta)
-	process_animation()
-
-func process_movement_input() -> void:
-	pass
+	update_animation(velocity)
 
 func process_movement(delta) -> void:
 	position += velocity * delta
 
-func process_animation() -> void:
-	if not main_anim_sprite:
-		return
-	var sprite_frames = main_anim_sprite.sprite_frames
-	if velocity.x > 0 and sprite_frames.has_animation("right"):
-		main_anim_sprite.play("right")
-	elif velocity.x < 0 and sprite_frames.has_animation("left"):
-		main_anim_sprite.play("left")
-	elif sprite_frames.has_animation("idle"):
-		main_anim_sprite.play("idle")
+func update_animation(velocity: Vector2) -> void:
+	pass
 
 func reset_hp():
 	hp = mhp

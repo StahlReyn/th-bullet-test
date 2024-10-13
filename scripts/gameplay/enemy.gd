@@ -11,19 +11,25 @@ extends Character
 @export var drop_bomb : int = 0
 @export var drop_life : int = 0
 
-@export_group("Animation")
-@export var animation_player : AnimationPlayer
+@export_group("Movement")
+@export var movement_script : GDScript
+
+var cur_movement_script : MovementScript
 
 func _ready() -> void:
 	super()
-	if animation_player:
-		animation_player.play("default")
+	if movement_script:
+		add_movement_script(movement_script)
 
 func _process(delta: float) -> void:
-	super(delta)
+	total_time += delta
+	process_script(delta)
+	process_movement(delta)
+	update_animation(velocity)
 	check_despawn()
-
-func process_animation() -> void:
+	
+# Passes velocity so script can also access
+func process_animation(velocity: Vector2) -> void:
 	if not main_anim_sprite:
 		return
 	var sprite_frames = main_anim_sprite.sprite_frames
@@ -59,4 +65,15 @@ func drop_item_type(item_container: ItemContainer, type: int, count: int):
 		item.set_random_spawn_velocity(drop_spawn_speed, drop_spawn_time)
 		item_container.call_deferred("add_child", item)
 		item.call_deferred("set_type", type)
-	
+
+func add_movement_script(script : GDScript) -> Node:
+	if cur_movement_script:
+		cur_movement_script.queue_free()
+	cur_movement_script = script.new()
+	add_child(cur_movement_script)
+	cur_movement_script.set_parent(self)
+	return cur_movement_script
+
+func process_script(delta: float) -> void:
+	if cur_movement_script:
+		cur_movement_script.process_movement(delta)
