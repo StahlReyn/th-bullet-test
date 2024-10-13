@@ -2,7 +2,7 @@ extends Node
 
 var game_time : float = 0.0
 var score : int = 0
-var graze_count : int = 0
+var graze : int = 0
 
 var lives : int = 3
 var bombs : int = 3
@@ -14,7 +14,7 @@ static var power_max : int = 500
 func reset_variables() -> void:
 	game_time = 0.0
 	score = 0
-	graze_count = 0
+	graze = 0
 	lives = 3
 	bombs = 3
 	power = 0
@@ -23,7 +23,7 @@ func add_score(value: int) -> void:
 	score += value
 
 func add_graze_count(value:int = 1) -> void:
-	score += value
+	graze += value
 
 func add_lives(value:int = 1) -> void:
 	lives += value

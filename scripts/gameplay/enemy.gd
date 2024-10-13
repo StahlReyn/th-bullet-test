@@ -23,7 +23,8 @@ func _process(delta: float) -> void:
 	total_time += delta
 	movement_handler.process_script(delta)
 	process_movement(delta)
-	update_animation(velocity)
+	if self_update_anim:
+		update_animation(velocity)
 	check_despawn()
 	
 # Passes velocity so script can also access
@@ -65,7 +66,6 @@ func drop_item_type(item_container: ItemContainer, type: int, count: int):
 		item.call_deferred("set_type", type)
 
 func add_movement_script(script : GDScript) -> Node:
-	self_update_anim = false # Auto set false so script can calculate own
 	var node_script = script.new()
 	movement_handler.add_child(node_script)
 	node_script.set_parent(self)

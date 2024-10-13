@@ -26,7 +26,7 @@ func do_shoot() -> void:
 	bullet.top_level = true
 	bullet.global_position = self.global_position
 	if aim_at_player:
-		bullet.velocity = bullet.position.direction_to(player.position) * base_speed
+		bullet.velocity = bullet.global_position.direction_to(player.global_position) * base_speed
 	else:
 		bullet.velocity = Vector2.UP * base_speed
 	bullet_container.add_child(bullet)
