@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://b7v7flp6p65gf"]
 
-[ext_resource type="PackedScene" uid="uid://chg817g0wf0ij" path="res://gamestate/hud/gamehud.tscn" id="1_585am"]
-[ext_resource type="Script" path="res://gamestate/gamemain.gd" id="1_jvava"]
-[ext_resource type="PackedScene" uid="uid://btg4d8khha007" path="res://gamestate/gameview.tscn" id="2_frqqi"]
+[ext_resource type="PackedScene" uid="uid://chg817g0wf0ij" path="res://scripts/gamestate/gamehud.tscn" id="1_585am"]
+[ext_resource type="Script" path="res://scripts/gamestate/gamemain.gd" id="1_jvava"]
+[ext_resource type="PackedScene" uid="uid://btg4d8khha007" path="res://scripts/gamestate/gameview.tscn" id="2_frqqi"]
 [ext_resource type="PackedScene" uid="uid://djh1d5tgxtxjj" path="res://scripts/background/background-test.tscn" id="4_4i7d7"]
 
 [node name="Gamemain" type="Node2D"]

@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://chg817g0wf0ij"]
 
-[ext_resource type="Script" path="res://gamestate/hud/gamehud.gd" id="1_ovxsb"]
+[ext_resource type="Script" path="res://scripts/gamestate/gamehud.gd" id="1_ovxsb"]
 [ext_resource type="Texture2D" uid="uid://c7cx5yj4h5drb" path="res://assets/img/system/hud-test.png" id="1_tnihf"]
-[ext_resource type="Script" path="res://gamestate/hud/debug-label.gd" id="2_hgmoc"]
+[ext_resource type="Script" path="res://scripts/gamestate/debug-label.gd" id="2_hgmoc"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_k5vxq"]
 font_size = 24

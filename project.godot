@@ -11,14 +11,14 @@ config_version=5
 [application]
 
 config/name="th-bullet-test"
-run/main_scene="res://gamestate/gamemain.tscn"
+run/main_scene="res://scripts/menu/menu.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
-Global="*res://scripts/global.gd"
 GameUtils="*res://scripts/game_utils.gd"
+SceneHandler="*res://scripts/scene_handler.gd"
 
 [display]
 
