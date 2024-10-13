@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 GameUtils="*res://scripts/globals/game_utils.gd"
 SceneHandler="*res://scripts/globals/scene_handler.gd"
 GameVariables="*res://scripts/globals/game_variables.gd"
+MathUtils="*res://scripts/globals/math_utils.gd"
 
 [display]
 

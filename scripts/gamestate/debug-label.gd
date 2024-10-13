@@ -14,7 +14,7 @@ func _process(_delta: float) -> void:
 		"Bullet Count: " + str(GameUtils.get_bullet_count()) + "\n" +
 		"Enemy Count: " + str(GameUtils.get_enemy_count()) + "\n" +
 		"Item Count: " + str(GameUtils.get_item_count()) + "\n\n" +
-		"Power: " + str(player.power) + "\n" +
+		"Power: " + str(GameVariables.power) + "\n" +
 		"Score: " + str(GameVariables.score) + "\n" +
 		"Graze Count: " + str(GameVariables.graze_count) + "\n" 
 	)

@@ -18,13 +18,6 @@ enum State {
 @export var audio_item : AudioStreamPlayer2D ## Audio for item collection
 @onready var game_view : GameView = $".."
 
-var lives : int = 3
-var bombs : int = 3
-var power : int = 0 ##Powers are in integer for simplicity, display divides by 100
-
-var power_min : int = 0
-var power_max : int = 500
-
 var state_timer : float = 0.0
 var state : int = State.NORMAL
 
@@ -91,7 +84,7 @@ func take_damage(dmg : int):
 func do_death():
 	if audio_death:
 		audio_death.play()
-	lives -= 1
+	GameVariables.lose_lives()
 	check_game_over()
 	do_spawn_movement()
 
@@ -105,7 +98,7 @@ func switch_state(state: int, state_timer: float):
 	self.state_timer = state_timer
 
 func check_game_over():
-	if lives <= 0:
+	if GameVariables.lives <= 0:
 		game_over.emit()
 		print("GAME OVER")
 
@@ -114,7 +107,3 @@ func is_invincible() -> bool:
 
 func can_shoot() -> bool:
 	return not (state == State.DEAD_DELAY or state == State.SPAWNING)
-
-func add_power(value: float) -> void:
-	power += value
-	power = clamp(power, power_min, power_max)

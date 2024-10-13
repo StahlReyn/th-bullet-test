@@ -32,7 +32,6 @@ var distance_squared : float
 
 func _ready() -> void:
 	magnet_target = GameUtils.get_player()
-	pass
 
 func _process(delta: float) -> void:
 	spawn_time -= delta
@@ -67,13 +66,12 @@ func process_spawn_movement(delta: float) -> void:
 	position += spawn_velocity * delta
 	
 func process_target_movement(delta: float) -> void:
-	var direction = magnet_target.global_position - self.global_position
-	direction = direction.normalized()
+	var direction = (magnet_target.global_position - self.global_position).normalized()
 	self.position += direction * magnet_speed * delta
 	
 func set_random_spawn_velocity(speed : float, time : float):
 	self.spawn_time = randf_range(0, time)
-	var direction = Vector2(randf_range(-1,1),randf_range(-1,1)).normalized()
+	var direction = MathUtils.get_random_direction_vector()
 	self.spawn_velocity = direction * speed
 
 func set_type(type : int) -> void:
@@ -94,10 +92,9 @@ func set_sprite() -> void:
 			play("life")
 	
 func do_collect() -> void:
+	GameVariables.add_score(get_point_value())
+	GameVariables.add_power(get_power_value())
 	do_point_display()
-	if magnet_target is Player:
-		GameVariables.add_score(get_point_value())
-		magnet_target.add_power(get_power_value())
 	call_deferred("queue_free")
 
 func do_point_display() -> void:
