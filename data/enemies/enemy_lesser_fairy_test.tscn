@@ -101,9 +101,9 @@ drop_power_big = null
 drop_power_full = null
 drop_bomb = null
 drop_life = null
+mhp = 3
 main_anim_sprite = NodePath("AnimatedSprite2D")
 main_collision = NodePath("CollisionShape2D")
-mhp = 3
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(2, 2)
