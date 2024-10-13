@@ -40,6 +40,8 @@ item_container=""
 item=""
 image_container=""
 enemy=""
+enemy_container=""
+stage_handler=""
 
 [input]
 

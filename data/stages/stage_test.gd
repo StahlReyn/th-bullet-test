@@ -9,12 +9,12 @@ extends StageScript
 @onready var title_card : PackedScene = preload("res://data/title_cards/title_card_test.tscn")
 @onready var next_script : GDScript = preload("res://data/stages/stage_test_2.gd")
 
-
-
 var cd1 : float = 3.0
 var count1 : int = 10
 var cd1_loop : float = 0.0
 var cd1_count_loop : int = 0
+
+var cd2 : float = 0.0
 
 var cd_script : float = 100.0
 
@@ -24,12 +24,12 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	super(delta)
-
 	cd_script -= delta
 	if cd_script <= 0:
 		switch_script(next_script)
 
 	cd1 -= delta
+	cd2 -= delta
 	
 	if count1 <= 0:
 		cd1_loop = 0.0
@@ -44,7 +44,11 @@ func _process(delta: float) -> void:
 				enemy.add_movement_script(movement_script_2)
 			else:
 				enemy.add_movement_script(movement_script_1)
-			var bullet = spawn_bullet(bullet_circle, Vector2(randi_range(200,500), -100))
-			bullet.add_movement_script(movement_script_1)
 			count1 -= 1
 			cd1_loop += 0.2
+	if cd2 <= 0:
+		var bullet = spawn_bullet(bullet_circle)
+		bullet.position.x = cos(time_elapsed * 2) * 50 + 700
+		bullet.position.y = -50
+		bullet.velocity.y = 200
+		cd2 += 0.1

@@ -1,5 +1,5 @@
 class_name MovementScript
-extends Node
+extends ModScript
 
 var parent : Node
 

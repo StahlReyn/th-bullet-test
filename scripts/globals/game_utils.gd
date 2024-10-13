@@ -29,6 +29,12 @@ func get_item_container() -> ItemContainer:
 func get_image_container() -> ImageContainer:
 	return get_tree().get_nodes_in_group("image_container")[0]
 
+func get_enemy_container() -> EnemyContainer:
+	return get_tree().get_nodes_in_group("enemy_container")[0]
+
+func get_stage_handler() -> StageHandler:
+	return get_tree().get_nodes_in_group("stage_handler")[0]
+
 func get_point_items() -> Array[Node]:
 	return get_tree().get_nodes_in_group("item")
 
