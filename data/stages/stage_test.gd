@@ -1,7 +1,7 @@
 extends StageScript
 
 @onready var enemy_fairy : PackedScene = preload("res://data/enemies/enemy_lesser_fairy.tscn")
-@onready var enemy_fairy2 : PackedScene = preload("res://data/enemies/enemy_lesser_fairy_test.tscn")
+@onready var bullet_circle : PackedScene = preload("res://data/bullets/bullet_test.tscn")
 
 @onready var movement_script_1 : GDScript = preload("res://data/movement/movement_test.gd")
 @onready var movement_script_2 : GDScript = preload("res://data/movement/movement_test_2.gd")
@@ -39,10 +39,12 @@ func _process(delta: float) -> void:
 	if cd1 <= 0:
 		cd1_loop -= delta
 		while cd1_loop <= 0 and count1 > 0:
-			var enemy = spawn_enemy(enemy_fairy2, Vector2(randi_range(200,500), -100))
+			var enemy = spawn_enemy(enemy_fairy, Vector2(randi_range(200,500), -100))
 			if cd1_count_loop % 2 == 1:
 				enemy.add_movement_script(movement_script_2)
 			else:
 				enemy.add_movement_script(movement_script_1)
+			var bullet = spawn_bullet(bullet_circle, Vector2(randi_range(200,500), -100))
+			bullet.add_movement_script(movement_script_1)
 			count1 -= 1
 			cd1_loop += 0.2

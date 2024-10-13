@@ -66,7 +66,4 @@ func drop_item_type(item_container: ItemContainer, type: int, count: int):
 		item.call_deferred("set_type", type)
 
 func add_movement_script(script : GDScript) -> Node:
-	var node_script = script.new()
-	movement_handler.add_child(node_script)
-	node_script.set_parent(self)
-	return node_script
+	return movement_handler.add_movement_script(self, script)

@@ -16,6 +16,13 @@ func spawn_enemy(scene : PackedScene, pos : Vector2 = Vector2(0,0)) -> Enemy:
 	enemy_container.add_child(enemy)
 	return enemy
 
+func spawn_bullet(scene : PackedScene, pos : Vector2 = Vector2(0,0)) -> Bullet:
+	var container = GameUtils.get_bullet_container()
+	var bullet : Bullet = scene.instantiate()
+	bullet.global_position = pos
+	container.add_child(bullet)
+	return bullet
+
 func get_enemy_container() -> Node:
 	return get_parent().get_parent()
 

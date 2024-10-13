@@ -5,16 +5,24 @@ extends Area2D
 @export var bullet_hit_effect_scene : PackedScene
 @export var damage : int = 1
 @export var penetration : int = 1
-var velocity = Vector2.ZERO
-var penetration_count
+
+var velocity : Vector2 = Vector2.ZERO
+var total_time : float
+var penetration_count : int
+
+var movement_handler : MovementHandler # Movement Handler is auto created
 
 func _ready() -> void:
+	total_time = 0.0
 	penetration_count = penetration
+	movement_handler = MovementHandler.new()
+	add_child(movement_handler)
 	if audio_spawn:
 		audio_spawn.play()
-	pass
 
 func _process(delta: float) -> void:
+	total_time += delta
+	movement_handler.process_script(delta)
 	process_movement(delta)
 	check_remove()
 
@@ -35,3 +43,5 @@ func on_hit():
 			GameUtils.get_effect_container().add_child(bullet_hit_effect)
 		queue_free()
 	
+func add_movement_script(script : GDScript) -> Node:
+	return movement_handler.add_movement_script(self, script)
