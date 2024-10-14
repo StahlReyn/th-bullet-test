@@ -1,16 +1,23 @@
 extends Node
 
+static var power_max : int = 400
+static var point_value_max : int = 300000
+static var lives_max : int = 8
+static var bombs_max : int = 8
+static var life_pieces_max : int = 3
+static var bomb_pieces_max : int = 5
+
 var game_time : float = 0.0
 var score : int = 0
 var graze : int = 0
 var point_value : int = 10000
 
 var lives : int = 3
+var life_pieces : int = 0
 var bombs : int = 3
-var power : int = 0 ##Powers are in integer for simplicity, display divides by 100
+var bomb_pieces : int = 0
 
-static var power_min : int = 0
-static var power_max : int = 400
+var power : int = 0 ##Powers are in integer for simplicity, display divides by 100
 
 func reset_variables() -> void:
 	game_time = 0.0
@@ -39,13 +46,29 @@ func add_bombs(value:int = 1) -> void:
 func lose_bombs(value:int = 1) -> void:
 	bombs -= value
 
+func add_life_pieces(value:int = 1) -> void:
+	life_pieces += value
+	update_pieces()
+
+func add_bomb_pieces(value:int = 1) -> void:
+	bomb_pieces += value
+	update_pieces()
+	
+func update_pieces() -> void:
+	if life_pieces > life_pieces_max:
+		lives += life_pieces / life_pieces_max # Integer does floor division
+		life_pieces = life_pieces % life_pieces_max # Remainder pieces
+	if bomb_pieces > bomb_pieces_max:
+		bombs += bomb_pieces / bomb_pieces_max # Integer does floor division
+		bomb_pieces = bomb_pieces % bomb_pieces_max # Remainder pieces
+
 func add_power(value:int = 1) -> void:
 	power += value
-	power = clamp(power, power_min, power_max)
+	power = clamp(power, 0, power_max)
 
 func lose_power(value:int = 1) -> void:
 	power += value
-	power = clamp(power, power_min, power_max)
+	power = clamp(power, 0, power_max)
 
 func get_score_display():
 	return thousands_sep(score)

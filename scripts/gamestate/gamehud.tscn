@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://chg817g0wf0ij"]
+[gd_scene load_steps=16 format=3 uid="uid://chg817g0wf0ij"]
 
 [ext_resource type="Script" path="res://scripts/gamestate/gamehud.gd" id="1_ovxsb"]
 [ext_resource type="Texture2D" uid="uid://c7cx5yj4h5drb" path="res://assets/img/system/hud-test.png" id="1_tnihf"]
@@ -8,6 +8,9 @@
 [ext_resource type="Script" path="res://scripts/gamehud/label_score.gd" id="6_4fk43"]
 [ext_resource type="PackedScene" uid="uid://n0hdyxbn6h0s" path="res://scripts/gamehud/life_container.tscn" id="6_gap30"]
 [ext_resource type="Texture2D" uid="uid://yipm4qncoxvx" path="res://assets/img/system/point_items.png" id="7_03ov1"]
+[ext_resource type="Script" path="res://scripts/gamehud/life_container.gd" id="7_qnu2t"]
+[ext_resource type="Script" path="res://scripts/gamehud/life_display.gd" id="8_x7aou"]
+[ext_resource type="LabelSettings" uid="uid://cn3hc1ibtcc1w" path="res://assets/resources/label_settings/label_score_smaller.tres" id="9_c5ru6"]
 [ext_resource type="Script" path="res://scripts/gamehud/label_power.gd" id="9_kiwta"]
 [ext_resource type="Script" path="res://scripts/gamehud/label_point_value.gd" id="10_aeftu"]
 [ext_resource type="Script" path="res://scripts/gamehud/label_graze.gd" id="11_ghxsy"]
@@ -32,10 +35,10 @@ centered = false
 
 [node name="DebugLabel" type="Label" parent="."]
 layout_mode = 2
-offset_left = 854.0
-offset_top = 717.0
-offset_right = 1222.0
-offset_bottom = 924.0
+offset_left = 876.0
+offset_top = 618.0
+offset_right = 1244.0
+offset_bottom = 825.0
 text = "DEBUG TEXT
 "
 label_settings = SubResource("LabelSettings_k5vxq")
@@ -107,8 +110,43 @@ scale = Vector2(2, 2)
 texture = ExtResource("5_7bs50")
 centered = false
 
-[node name="LifeContainer" parent="Stats" instance=ExtResource("6_gap30")]
+[node name="LifeContainer" type="VBoxContainer" parent="Stats"]
 layout_mode = 2
+script = ExtResource("7_qnu2t")
+
+[node name="MainContainer" type="HBoxContainer" parent="Stats/LifeContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Stats/LifeContainer/MainContainer"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+text = "Lives
+"
+label_settings = ExtResource("4_w0ro3")
+
+[node name="LifeDisplay" type="HBoxContainer" parent="Stats/LifeContainer/MainContainer"]
+layout_mode = 2
+script = ExtResource("8_x7aou")
+
+[node name="PieceContainer" type="HBoxContainer" parent="Stats/LifeContainer"]
+layout_mode = 2
+
+[node name="Space" type="Control" parent="Stats/LifeContainer/PieceContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Stats/LifeContainer/PieceContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "(pieces)"
+label_settings = ExtResource("9_c5ru6")
+horizontal_alignment = 1
+
+[node name="Value" type="Label" parent="Stats/LifeContainer/PieceContainer"]
+layout_mode = 2
+text = "(0/0)"
+label_settings = ExtResource("9_c5ru6")
+horizontal_alignment = 2
 
 [node name="DividerMid" type="Control" parent="Stats"]
 z_index = -1
@@ -149,12 +187,14 @@ centered = false
 hframes = 8
 
 [node name="Label" type="Label" parent="Stats/PowerContainer"]
+modulate = Color(1, 0.439216, 0.439216, 1)
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 text = "Power"
 label_settings = ExtResource("4_w0ro3")
 
 [node name="Value" type="Label" parent="Stats/PowerContainer"]
+modulate = Color(1, 0.439216, 0.439216, 1)
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 text = "0.00/0.00"
@@ -163,6 +203,7 @@ horizontal_alignment = 2
 script = ExtResource("9_kiwta")
 
 [node name="DividerRight" type="Control" parent="Stats"]
+modulate = Color(1, 0.439216, 0.439216, 1)
 z_index = -1
 layout_mode = 2
 
@@ -188,12 +229,14 @@ hframes = 8
 frame = 1
 
 [node name="Label" type="Label" parent="Stats/ValueContainer"]
+modulate = Color(0.381352, 0.645355, 1, 1)
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 text = "Value"
 label_settings = ExtResource("4_w0ro3")
 
 [node name="Value" type="Label" parent="Stats/ValueContainer"]
+modulate = Color(0.381352, 0.645355, 1, 1)
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 text = "000,000"
@@ -202,6 +245,7 @@ horizontal_alignment = 2
 script = ExtResource("10_aeftu")
 
 [node name="DividerRight2" type="Control" parent="Stats"]
+modulate = Color(0.381352, 0.645355, 1, 1)
 z_index = -1
 layout_mode = 2
 
@@ -212,6 +256,7 @@ texture = ExtResource("5_7bs50")
 centered = false
 
 [node name="GrazeContainer" type="HBoxContainer" parent="Stats"]
+modulate = Color(0.730913, 0.730913, 0.730913, 1)
 layout_mode = 2
 
 [node name="Icon" type="Control" parent="Stats/GrazeContainer"]
@@ -233,6 +278,7 @@ horizontal_alignment = 2
 script = ExtResource("11_ghxsy")
 
 [node name="DividerRight3" type="Control" parent="Stats"]
+modulate = Color(0.730913, 0.730913, 0.730913, 1)
 z_index = -1
 layout_mode = 2
 

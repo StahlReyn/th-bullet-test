@@ -128,10 +128,7 @@ func get_point_value() -> int:
 		Type.POWER:
 			return 10
 		Type.POINT:
-			if is_item_border_range():
-				return 20000
-			var pos_y = GameUtils.get_player().position.y
-			return 20000 - int(pos_y * 10) # Further Up (Lower Y), higher point
+			return GameVariables.point_value
 		Type.POWER_BIG:
 			return 100
 		Type.POWER_FULL:

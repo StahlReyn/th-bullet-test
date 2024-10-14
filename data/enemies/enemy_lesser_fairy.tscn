@@ -1,9 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://y1ht13i0dqug"]
+[gd_scene load_steps=6 format=3 uid="uid://y1ht13i0dqug"]
 
 [ext_resource type="Script" path="res://scripts/gameplay/enemy.gd" id="1_5bg83"]
 [ext_resource type="PackedScene" uid="uid://clkj0kllal1wy" path="res://data/after_effects/enemy_death_basic.tscn" id="2_85fke"]
 [ext_resource type="Texture2D" uid="uid://dd8tet8s1inyg" path="res://assets/img/enemies/lesser_fairy.png" id="2_t2qqo"]
-[ext_resource type="SpriteFrames" uid="uid://dlfvo4pp4wqwj" path="res://data/enemies/sprite_resource/enemy_lesser_fairy.tres" id="3_l331o"]
 [ext_resource type="Script" path="res://data/enemies/sprite_group_fairy.gd" id="5_v4aap"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_t7bub"]
@@ -19,12 +18,6 @@ main_sprite = NodePath("SpriteFairy")
 main_collision = NodePath("CollisionShape2D")
 death_effect_scene = ExtResource("2_85fke")
 mhp = 3
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-visible = false
-scale = Vector2(2, 2)
-sprite_frames = ExtResource("3_l331o")
-animation = &"side"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_t7bub")

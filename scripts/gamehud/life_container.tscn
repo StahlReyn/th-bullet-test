@@ -12,7 +12,7 @@ script = ExtResource("1_pk3yf")
 [node name="SymbolContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
 
-[node name="LabelMain" type="Label" parent="SymbolContainer"]
+[node name="Label" type="Label" parent="SymbolContainer"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 text = "Life
@@ -23,6 +23,9 @@ label_settings = ExtResource("1_usf24")
 layout_mode = 2
 text = "X X X X X X X X"
 label_settings = ExtResource("1_usf24")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SymbolContainer"]
+layout_mode = 2
 
 [node name="SubtextContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
