@@ -16,7 +16,7 @@ var cd1_loop : float = 0.0
 var cd1_count_loop : int = 0
 
 var cd2 : float = 0.0
-var cd_big : float = 16.0
+var cd_big : float = 0.0
 
 var cd_script : float = 100.0
 

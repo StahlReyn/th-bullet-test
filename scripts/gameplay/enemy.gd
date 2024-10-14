@@ -10,6 +10,8 @@ extends Character
 @export var drop_power_full : int = 0
 @export var drop_bomb : int = 0
 @export var drop_life : int = 0
+@export_group("After Effects")
+@export var death_effect_scene : PackedScene
 
 var movement_handler : MovementHandler # Movement Handler is auto created
 var self_update_anim : bool = true
@@ -46,6 +48,8 @@ func check_despawn() -> void:
 
 func do_death():
 	super()
+	if death_effect_scene:
+		AfterEffect.add_effect(death_effect_scene, self)
 	drop_items()
 	queue_free()
 
