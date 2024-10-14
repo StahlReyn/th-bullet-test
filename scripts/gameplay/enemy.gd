@@ -10,8 +10,6 @@ extends Character
 @export var drop_power_full : int = 0
 @export var drop_bomb : int = 0
 @export var drop_life : int = 0
-@export_group("After Effects")
-@export var death_effect_scene : PackedScene
 
 var movement_handler : MovementHandler # Movement Handler is auto created
 var self_update_anim : bool = true
@@ -26,21 +24,8 @@ func _process(delta: float) -> void:
 	movement_handler.process_script(delta)
 	process_movement(delta)
 	if self_update_anim:
-		update_animation(velocity)
+		update_animation()
 	check_despawn()
-	
-# Passes velocity so script can also access
-func update_animation(velocity: Vector2) -> void:
-	if not main_anim_sprite:
-		return
-	var sprite_frames = main_anim_sprite.sprite_frames
-	if abs(velocity.x) * 0.5 > abs(velocity.y) and sprite_frames.has_animation("side"):
-		main_anim_sprite.play("side")
-	elif abs(velocity.x) * 3.0 > abs(velocity.y) and sprite_frames.has_animation("diagonal"):
-		main_anim_sprite.play("diagonal")
-	elif sprite_frames.has_animation("default"):
-		main_anim_sprite.play("default")
-	main_anim_sprite.flip_h = velocity.x < 0
 
 func check_despawn() -> void:
 	if position.x > 1000 or position.x < -200 or position.y > 1000 or position.y < -300:
@@ -48,8 +33,6 @@ func check_despawn() -> void:
 
 func do_death():
 	super()
-	if death_effect_scene:
-		AfterEffect.add_effect(death_effect_scene, self)
 	drop_items()
 	queue_free()
 

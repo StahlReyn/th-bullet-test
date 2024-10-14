@@ -4,11 +4,16 @@ extends Area2D
 
 signal hit
 
-@export var main_anim_sprite : AnimatedSprite2D
+@export_group("Nodes")
+@export var main_sprite : Node2D
 @export var main_collision : CollisionShape2D
-@export var audio_death : AudioStreamPlayer2D
 
+@export_group("After Effects")
+@export var death_effect_scene : PackedScene
+
+@export_group("Stat")
 @export var mhp : int = 1
+
 var total_time : float = 0;
 var hp : int
 
@@ -21,13 +26,16 @@ func _ready() -> void:
 func _process(delta: float) -> void:	
 	total_time += delta
 	process_movement(delta)
-	update_animation(velocity)
+	update_animation()
 
 func process_movement(delta) -> void:
 	position += velocity * delta
 
-func update_animation(velocity: Vector2) -> void:
-	pass
+# Passes self so script can also access other like velocity
+func update_animation() -> void:
+	if not main_sprite:
+		return
+	main_sprite.update_animation(self)
 
 func reset_hp():
 	hp = mhp
@@ -42,8 +50,8 @@ func check_death():
 
 func do_death():
 	is_dead = true
-	if audio_death:
-		audio_death.play()
+	if death_effect_scene:
+		AfterEffect.add_effect(death_effect_scene, self)
 
 func _on_area_entered(area: Area2D) -> void:
 	if area is Bullet:

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="SpriteSet" load_steps=3 format=3 uid="uid://cp5y0yqmanth1"]
+
+[ext_resource type="Script" path="res://scripts/resources/sprite_set.gd" id="1_1r2re"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6y6f7"]
+
+[resource]
+script = ExtResource("1_1r2re")
+sprite_frame_set = Array[SpriteFrames]([SubResource("SpriteFrames_6y6f7")])

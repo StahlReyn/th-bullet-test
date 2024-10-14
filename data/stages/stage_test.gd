@@ -37,16 +37,21 @@ func _process(delta: float) -> void:
 	if count1 <= 0:
 		cd1_loop = 0.0
 		count1 = 10
-		cd1 += 5.0
+		cd1 += 4.0
 		cd1_count_loop += 1
 	if cd1 <= 0:
 		cd1_loop -= delta
 		while cd1_loop <= 0 and count1 > 0:
 			var enemy = spawn_enemy(enemy_fairy, Vector2(randi_range(150,400), -100))
-			if cd1_count_loop % 2 == 1:
+			if cd1_count_loop % 3 == 2:
+				enemy.add_movement_script(movement_script_1)
+				enemy.main_sprite.set_type(SpriteGroupFairy.Type.YELLOW)
+			elif cd1_count_loop % 3 == 1:
 				enemy.add_movement_script(movement_script_2)
+				enemy.main_sprite.set_type(SpriteGroupFairy.Type.RED)
 			else:
 				enemy.add_movement_script(movement_script_1)
+				enemy.main_sprite.set_type(SpriteGroupFairy.Type.GREEN)
 			count1 -= 1
 			cd1_loop += 0.2
 	if cd2 <= 0:
@@ -63,4 +68,5 @@ func _process(delta: float) -> void:
 		print("BIG FAIRY")
 		var enemy = spawn_enemy(enemy_fairy, Vector2(400, -100))
 		enemy.add_movement_script(movement_script_3)
+		enemy.main_sprite.set_type(SpriteGroupFairy.Type.BLUE)
 		cd_big += 20

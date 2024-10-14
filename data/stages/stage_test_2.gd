@@ -13,6 +13,7 @@ func _process(delta: float) -> void:
 	cd1 -= delta
 	if cd1 <= 0:
 		for i in 3:
-			var enemy = spawn_enemy(enemy_fairy, Vector2(300, -100))
+			var enemy = spawn_enemy(enemy_fairy, Vector2(400, -100))
 			enemy.velocity = Vector2(randi_range(-50,50), randi_range(50,150))
+			enemy.main_sprite.set_type(randi_range(0,3))
 		cd1 += 0.1

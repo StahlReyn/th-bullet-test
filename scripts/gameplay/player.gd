@@ -45,17 +45,6 @@ func process_movement_input() -> void:
 	if Input.is_action_pressed("move_up"):
 		velocity.y = -get_speed()
 
-func update_animation(velocity: Vector2) -> void:
-	if not main_anim_sprite:
-		return
-	var sprite_frames = main_anim_sprite.sprite_frames
-	if velocity.x > 0 and sprite_frames.has_animation("right"):
-		main_anim_sprite.play("right")
-	elif velocity.x < 0 and sprite_frames.has_animation("left"):
-		main_anim_sprite.play("left")
-	elif sprite_frames.has_animation("idle"):
-		main_anim_sprite.play("idle")
-
 func process_shoot_input() -> void:
 	if Input.is_action_pressed("shoot") and can_shoot() and not audio_shoot.playing:
 		audio_shoot.play()
@@ -78,10 +67,11 @@ func process_state() -> void:
 				switch_state(State.NORMAL, 0.0)
 	
 func process_iframe() -> void:
-	if is_invincible():
-		var color : Color = main_anim_sprite.get_modulate()
-		color.a = cos(state_timer * 20) * 0.2 + 0.8
-		main_anim_sprite.set_modulate(color)
+	pass
+	#if is_invincible():
+		#var color : Color = main_anim_sprite.get_modulate()
+		#color.a = cos(state_timer * 20) * 0.2 + 0.8
+		#main_anim_sprite.set_modulate(color)
 
 func get_speed():
 	if Input.is_action_pressed("focus"):
@@ -94,8 +84,6 @@ func take_damage(dmg : int):
 		check_death()
 
 func do_death():
-	if audio_death:
-		audio_death.play()
 	GameVariables.lose_lives()
 	check_game_over()
 	do_spawn_movement()
