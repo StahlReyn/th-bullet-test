@@ -6,6 +6,7 @@ extends StageScript
 @onready var movement_script_1 : GDScript = preload("res://data/movement/movement_test.gd")
 @onready var movement_script_2 : GDScript = preload("res://data/movement/movement_test_2.gd")
 @onready var movement_script_3 : GDScript = preload("res://data/movement/movement_test_3.gd")
+@onready var movement_script_4 : GDScript = preload("res://data/movement/movement_test_4.gd")
 
 @onready var title_card : PackedScene = preload("res://data/title_cards/title_card_test.tscn")
 @onready var next_script : GDScript = preload("res://data/stages/stage_test_2.gd")
@@ -17,6 +18,7 @@ var cd1_count_loop : int = 0
 
 var cd2 : float = 0.0
 var cd_big : float = 0.0
+var cd_count : int = 0
 
 var cd_script : float = 100.0
 
@@ -33,11 +35,12 @@ func _process(delta: float) -> void:
 	cd1 -= delta
 	cd2 -= delta
 	cd_big -= delta
+	cd_big -= delta
 	
 	if count1 <= 0:
 		cd1_loop = 0.0
 		count1 = 10
-		cd1 += 4.0
+		cd1 += 5.0
 		cd1_count_loop += 1
 	if cd1 <= 0:
 		cd1_loop -= delta
@@ -65,8 +68,19 @@ func _process(delta: float) -> void:
 		bullet2.velocity.y = 200
 		cd2 += 0.1
 	if cd_big <= 0:
-		print("BIG FAIRY")
-		var enemy = spawn_enemy(enemy_fairy, Vector2(400, -100))
-		enemy.add_movement_script(movement_script_3)
-		enemy.main_sprite.set_type(SpriteGroupFairy.Type.BLUE)
+		print("BIG FAIRY ", cd_count)
+		if cd_count % 2 == 0:
+			var enemy = spawn_enemy(enemy_fairy, Vector2(400, -100))
+			enemy.add_movement_script(movement_script_3)
+			enemy.main_sprite.set_type(SpriteGroupFairy.Type.BLUE)
+		else:
+			var positions = [
+				Vector2(200, -100), 
+				Vector2(600, -100)
+			]
+			for pos in positions:
+				var enemy = spawn_enemy(enemy_fairy, pos)
+				enemy.add_movement_script(movement_script_4)
+				enemy.main_sprite.set_type(SpriteGroupFairy.Type.YELLOW)
 		cd_big += 20
+		cd_count += 1
