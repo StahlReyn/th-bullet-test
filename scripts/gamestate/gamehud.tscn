@@ -1,11 +1,19 @@
-[gd_scene load_steps=5 format=3 uid="uid://chg817g0wf0ij"]
+[gd_scene load_steps=13 format=3 uid="uid://chg817g0wf0ij"]
 
 [ext_resource type="Script" path="res://scripts/gamestate/gamehud.gd" id="1_ovxsb"]
 [ext_resource type="Texture2D" uid="uid://c7cx5yj4h5drb" path="res://assets/img/system/hud-test.png" id="1_tnihf"]
 [ext_resource type="Script" path="res://scripts/gamestate/debug-label.gd" id="2_hgmoc"]
+[ext_resource type="LabelSettings" uid="uid://bkay61kan2hfv" path="res://assets/resources/label_settings/label_score.tres" id="4_w0ro3"]
+[ext_resource type="Texture2D" uid="uid://ba2ttc5hf8t30" path="res://assets/img/system/divider_stat.png" id="5_7bs50"]
+[ext_resource type="Script" path="res://scripts/gamehud/label_score.gd" id="6_4fk43"]
+[ext_resource type="PackedScene" uid="uid://n0hdyxbn6h0s" path="res://scripts/gamehud/life_container.tscn" id="6_gap30"]
+[ext_resource type="Texture2D" uid="uid://yipm4qncoxvx" path="res://assets/img/system/point_items.png" id="7_03ov1"]
+[ext_resource type="Script" path="res://scripts/gamehud/label_power.gd" id="9_kiwta"]
+[ext_resource type="Script" path="res://scripts/gamehud/label_point_value.gd" id="10_aeftu"]
+[ext_resource type="Script" path="res://scripts/gamehud/label_graze.gd" id="11_ghxsy"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_k5vxq"]
-font_size = 24
+font_size = 14
 
 [node name="Gamehud" type="Control"]
 z_index = 1
@@ -18,16 +26,218 @@ grow_vertical = 2
 script = ExtResource("1_ovxsb")
 
 [node name="Hud-test" type="Sprite2D" parent="."]
+z_index = -3
 texture = ExtResource("1_tnihf")
 centered = false
 
-[node name="Label" type="Label" parent="."]
+[node name="DebugLabel" type="Label" parent="."]
 layout_mode = 2
-offset_left = 869.0
-offset_top = 69.0
-offset_right = 965.0
-offset_bottom = 92.0
+offset_left = 854.0
+offset_top = 717.0
+offset_right = 1222.0
+offset_bottom = 924.0
 text = "DEBUG TEXT
 "
 label_settings = SubResource("LabelSettings_k5vxq")
 script = ExtResource("2_hgmoc")
+
+[node name="Stats" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 878.0
+offset_top = 36.0
+offset_right = 1242.0
+offset_bottom = 632.0
+
+[node name="Difficulty" type="Label" parent="Stats"]
+layout_mode = 2
+text = "DIFFICULTY"
+label_settings = ExtResource("4_w0ro3")
+horizontal_alignment = 1
+
+[node name="HiScoreContainer" type="HBoxContainer" parent="Stats"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Stats/HiScoreContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Hi-Score"
+label_settings = ExtResource("4_w0ro3")
+
+[node name="Value" type="Label" parent="Stats/HiScoreContainer"]
+custom_minimum_size = Vector2(210, 0)
+layout_mode = 2
+text = "000,000,000"
+label_settings = ExtResource("4_w0ro3")
+horizontal_alignment = 2
+
+[node name="Divider" type="Control" parent="Stats"]
+z_index = -1
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Stats/Divider"]
+position = Vector2(0, -20)
+scale = Vector2(2, 2)
+texture = ExtResource("5_7bs50")
+centered = false
+
+[node name="ScoreContainer" type="HBoxContainer" parent="Stats"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Stats/ScoreContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Score"
+label_settings = ExtResource("4_w0ro3")
+
+[node name="Value" type="Label" parent="Stats/ScoreContainer"]
+custom_minimum_size = Vector2(210, 0)
+layout_mode = 2
+text = "000,000,000"
+label_settings = ExtResource("4_w0ro3")
+horizontal_alignment = 2
+script = ExtResource("6_4fk43")
+
+[node name="Divider2" type="Control" parent="Stats"]
+z_index = -1
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Stats/Divider2"]
+position = Vector2(0, -20)
+scale = Vector2(2, 2)
+texture = ExtResource("5_7bs50")
+centered = false
+
+[node name="LifeContainer" parent="Stats" instance=ExtResource("6_gap30")]
+layout_mode = 2
+
+[node name="DividerMid" type="Control" parent="Stats"]
+z_index = -1
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Stats/DividerMid"]
+scale = Vector2(2, 2)
+texture = ExtResource("5_7bs50")
+centered = false
+
+[node name="BombContainer" parent="Stats" instance=ExtResource("6_gap30")]
+layout_mode = 2
+text_main = "Bombs"
+
+[node name="DividerMid2" type="Control" parent="Stats"]
+z_index = -1
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Stats/DividerMid2"]
+scale = Vector2(2, 2)
+texture = ExtResource("5_7bs50")
+centered = false
+
+[node name="PowerContainer" type="HBoxContainer" parent="Stats"]
+layout_mode = 2
+
+[node name="Icon" type="Control" parent="Stats/PowerContainer"]
+custom_minimum_size = Vector2(80, 32)
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Stats/PowerContainer/Icon"]
+position = Vector2(40, 10)
+scale = Vector2(2, 2)
+texture = ExtResource("7_03ov1")
+centered = false
+hframes = 8
+
+[node name="Label" type="Label" parent="Stats/PowerContainer"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+text = "Power"
+label_settings = ExtResource("4_w0ro3")
+
+[node name="Value" type="Label" parent="Stats/PowerContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "0.00/0.00"
+label_settings = ExtResource("4_w0ro3")
+horizontal_alignment = 2
+script = ExtResource("9_kiwta")
+
+[node name="DividerRight" type="Control" parent="Stats"]
+z_index = -1
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Stats/DividerRight"]
+position = Vector2(80, -15)
+scale = Vector2(1.5, 2)
+texture = ExtResource("5_7bs50")
+centered = false
+
+[node name="ValueContainer" type="HBoxContainer" parent="Stats"]
+layout_mode = 2
+
+[node name="Icon" type="Control" parent="Stats/ValueContainer"]
+custom_minimum_size = Vector2(80, 32)
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Stats/ValueContainer/Icon"]
+position = Vector2(40, 10)
+scale = Vector2(2, 2)
+texture = ExtResource("7_03ov1")
+centered = false
+hframes = 8
+frame = 1
+
+[node name="Label" type="Label" parent="Stats/ValueContainer"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+text = "Value"
+label_settings = ExtResource("4_w0ro3")
+
+[node name="Value" type="Label" parent="Stats/ValueContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "000,000"
+label_settings = ExtResource("4_w0ro3")
+horizontal_alignment = 2
+script = ExtResource("10_aeftu")
+
+[node name="DividerRight2" type="Control" parent="Stats"]
+z_index = -1
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Stats/DividerRight2"]
+position = Vector2(80, -15)
+scale = Vector2(1.5, 2)
+texture = ExtResource("5_7bs50")
+centered = false
+
+[node name="GrazeContainer" type="HBoxContainer" parent="Stats"]
+layout_mode = 2
+
+[node name="Icon" type="Control" parent="Stats/GrazeContainer"]
+custom_minimum_size = Vector2(80, 32)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Stats/GrazeContainer"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+text = "Graze"
+label_settings = ExtResource("4_w0ro3")
+
+[node name="Value" type="Label" parent="Stats/GrazeContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "00,000"
+label_settings = ExtResource("4_w0ro3")
+horizontal_alignment = 2
+script = ExtResource("11_ghxsy")
+
+[node name="DividerRight3" type="Control" parent="Stats"]
+z_index = -1
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Stats/DividerRight3"]
+position = Vector2(80, -15)
+scale = Vector2(1.5, 2)
+texture = ExtResource("5_7bs50")
+centered = false
