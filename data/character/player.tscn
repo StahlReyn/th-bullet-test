@@ -1,7 +1,8 @@
-[gd_scene load_steps=23 format=3 uid="uid://dopo8g5mkyblm"]
+[gd_scene load_steps=24 format=3 uid="uid://dopo8g5mkyblm"]
 
 [ext_resource type="Script" path="res://scripts/gameplay/player.gd" id="1_wuaqp"]
 [ext_resource type="Texture2D" uid="uid://cqmf5jdt1g1o4" path="res://assets/img/character/reimu.png" id="2_k7rwp"]
+[ext_resource type="PackedScene" uid="uid://d2eem28mf01vm" path="res://data/after_effects/player_death.tscn" id="2_xmw86"]
 [ext_resource type="AudioStream" uid="uid://dq30caahnggrl" path="res://assets/audio/sfx/pichuun_processed.wav" id="3_jd03f"]
 [ext_resource type="Script" path="res://data/character/sprite_player.gd" id="3_osp8b"]
 [ext_resource type="Texture2D" uid="uid://dqdl2bwkkx363" path="res://assets/img/character/focus_dot.png" id="4_frfr6"]
@@ -106,6 +107,7 @@ audio_shoot = NodePath("BulletPlayer")
 audio_item = NodePath("AudioItem")
 main_sprite = NodePath("AnimatedSprite2D")
 main_collision = NodePath("CollisionShape2D")
+death_effect_scene = ExtResource("2_xmw86")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(2, 2)

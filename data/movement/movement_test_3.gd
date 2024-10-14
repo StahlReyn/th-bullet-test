@@ -18,13 +18,16 @@ func _ready() -> void:
 	player = GameUtils.get_player()
 	call_deferred("setup_enemy")
 
-func set_hp(value : int):
+func set_stat():
 	if parent is Enemy:
-		parent.mhp = value
+		parent.mhp = 80
 		parent.reset_hp()
+		parent.drop_power = 10
+		parent.drop_point = 15
+		parent.drop_power_big = 1
 
 func setup_enemy():
-	set_hp(100)
+	set_stat()
 	audio_node = AudioStreamPlayer2D.new()
 	audio_node.set_stream(audio_shoot)
 	parent.add_child(audio_node)

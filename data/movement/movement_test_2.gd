@@ -1,6 +1,7 @@
 extends MovementScript
 
 @onready var bullet_circle : PackedScene = preload("res://data/bullets/bullet_test.tscn")
+@onready var audio_shoot : AudioStream = preload("res://assets/audio/sfx/hit_noise_fade.wav")
 
 var player : Player
 var cd_shoot : float
@@ -25,6 +26,7 @@ func process_movement(delta: float) -> void:
 			var bullet = spawn_bullet(bullet_circle, parent.position)
 			bullet.velocity = direction * 300
 			i += 1
+		AudioManager.play_audio(audio_shoot)
 		cd_shoot += 2.0
 
 # bullet.global_position.direction_to(player.global_position)

@@ -61,6 +61,7 @@ func process_state() -> void:
 		match state:
 			State.DEAD_DELAY: # When finish switch to spawn
 				switch_state(State.SPAWNING, 0.4)
+				is_dead = false
 			State.SPAWNING:
 				switch_state(State.GRACE, 3.0)
 			State.GRACE:
@@ -84,6 +85,7 @@ func take_damage(dmg : int):
 		check_death()
 
 func do_death():
+	super()
 	GameVariables.lose_lives()
 	check_game_over()
 	do_spawn_movement()
