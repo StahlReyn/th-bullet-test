@@ -36,15 +36,21 @@ func add_graze_count(value:int = 1) -> void:
 
 func add_lives(value:int = 1) -> void:
 	lives += value
+	lives = clamp(lives, 0, lives_max)
+	AudioManager.play_item_get()
 
 func lose_lives(value:int = 1) -> void: ## Remove counterpart for clarity and debugging purposes
 	lives -= value
+	lives = clamp(lives, 0, lives_max)
 
 func add_bombs(value:int = 1) -> void:
 	bombs += value
+	bombs = clamp(bombs, 0, bombs_max)
+	AudioManager.play_item_get()
 
 func lose_bombs(value:int = 1) -> void:
 	bombs -= value
+	bombs = clamp(bombs, 0, bombs_max)
 
 func add_life_pieces(value:int = 1) -> void:
 	life_pieces += value
@@ -55,11 +61,11 @@ func add_bomb_pieces(value:int = 1) -> void:
 	update_pieces()
 	
 func update_pieces() -> void:
-	if life_pieces > life_pieces_max:
-		lives += life_pieces / life_pieces_max # Integer does floor division
+	if life_pieces >= life_pieces_max:
+		add_lives(life_pieces / life_pieces_max) # Integer does floor division
 		life_pieces = life_pieces % life_pieces_max # Remainder pieces
-	if bomb_pieces > bomb_pieces_max:
-		bombs += bomb_pieces / bomb_pieces_max # Integer does floor division
+	if bomb_pieces >= bomb_pieces_max:
+		add_bombs(bomb_pieces / bomb_pieces_max) # Integer does floor division
 		bomb_pieces = bomb_pieces % bomb_pieces_max # Remainder pieces
 
 func add_power(value:int = 1) -> void:
@@ -81,6 +87,12 @@ func get_point_value_display():
 
 func get_graze_display():
 	return thousands_sep(graze)
+
+func get_life_piece_display():
+	return "(" + str(life_pieces) + "/" + str(life_pieces_max) + ")"
+
+func get_bomb_piece_display():
+	return "(" + str(bomb_pieces) + "/" + str(bomb_pieces_max) + ")"
 
 static func two_decimal_int(number : int) -> String:
 	return "%.2f" % (float(number) / 100)

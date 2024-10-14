@@ -9,7 +9,9 @@ extends Character
 @export var drop_power_big : int = 0
 @export var drop_power_full : int = 0
 @export var drop_bomb : int = 0
+@export var drop_bomb_piece : int = 0
 @export var drop_life : int = 0
+@export var drop_life_piece : int = 0
 
 var movement_handler : MovementHandler # Movement Handler is auto created
 var self_update_anim : bool = true
@@ -42,6 +44,10 @@ func drop_items():
 	drop_item_type(item_container, Item.Type.POINT, drop_point)
 	drop_item_type(item_container, Item.Type.POWER_BIG, drop_power_big)
 	drop_item_type(item_container, Item.Type.POWER_FULL, drop_power_full)
+	drop_item_type(item_container, Item.Type.LIFE, drop_life)
+	drop_item_type(item_container, Item.Type.LIFE_PIECE, drop_life_piece)
+	drop_item_type(item_container, Item.Type.BOMB, drop_bomb)
+	drop_item_type(item_container, Item.Type.BOMB_PIECE, drop_bomb_piece)
 
 func drop_item_type(item_container: ItemContainer, type: int, count: int):
 	for i in count:

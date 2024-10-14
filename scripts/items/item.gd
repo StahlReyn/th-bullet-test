@@ -8,6 +8,8 @@ enum Type {
 	POWER_FULL,
 	LIFE,
 	BOMB,
+	LIFE_PIECE,
+	BOMB_PIECE,
 }
 
 static var item_scene : PackedScene = preload("res://scripts/items/item.tscn")
@@ -90,10 +92,21 @@ func set_sprite() -> void:
 			play("power_full")
 		Type.LIFE:
 			play("life")
+		Type.LIFE_PIECE:
+			play("life_piece")
 	
 func do_collect() -> void:
 	GameVariables.add_score(get_point_value())
 	GameVariables.add_power(get_power_value())
+	match type:
+		Type.LIFE:
+			GameVariables.add_lives()
+		Type.LIFE_PIECE:
+			GameVariables.add_life_pieces()
+		Type.BOMB:
+			GameVariables.add_bomb()
+		Type.BOMB_PIECE:
+			GameVariables.add_bomb_pieces()
 	do_point_display()
 	call_deferred("queue_free")
 

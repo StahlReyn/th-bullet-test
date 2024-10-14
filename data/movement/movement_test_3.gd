@@ -25,6 +25,8 @@ func set_stat():
 		parent.drop_power = 10
 		parent.drop_point = 15
 		parent.drop_power_big = 1
+		parent.drop_life_piece = 10
+		parent.drop_bomb_piece = 10
 
 func setup_enemy():
 	set_stat()

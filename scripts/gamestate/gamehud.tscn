@@ -6,13 +6,13 @@
 [ext_resource type="LabelSettings" uid="uid://bkay61kan2hfv" path="res://assets/resources/label_settings/label_score.tres" id="4_w0ro3"]
 [ext_resource type="Texture2D" uid="uid://ba2ttc5hf8t30" path="res://assets/img/system/divider_stat.png" id="5_7bs50"]
 [ext_resource type="Script" path="res://scripts/gamehud/label_score.gd" id="6_4fk43"]
-[ext_resource type="PackedScene" uid="uid://n0hdyxbn6h0s" path="res://scripts/gamehud/life_container.tscn" id="6_gap30"]
 [ext_resource type="Texture2D" uid="uid://yipm4qncoxvx" path="res://assets/img/system/point_items.png" id="7_03ov1"]
-[ext_resource type="Script" path="res://scripts/gamehud/life_container.gd" id="7_qnu2t"]
 [ext_resource type="Script" path="res://scripts/gamehud/life_display.gd" id="8_x7aou"]
 [ext_resource type="LabelSettings" uid="uid://cn3hc1ibtcc1w" path="res://assets/resources/label_settings/label_score_smaller.tres" id="9_c5ru6"]
 [ext_resource type="Script" path="res://scripts/gamehud/label_power.gd" id="9_kiwta"]
 [ext_resource type="Script" path="res://scripts/gamehud/label_point_value.gd" id="10_aeftu"]
+[ext_resource type="Script" path="res://scripts/gamehud/label_bomb_piece.gd" id="10_iwmip"]
+[ext_resource type="Script" path="res://scripts/gamehud/label_life_piece.gd" id="10_la0fy"]
 [ext_resource type="Script" path="res://scripts/gamehud/label_graze.gd" id="11_ghxsy"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_k5vxq"]
@@ -46,10 +46,10 @@ script = ExtResource("2_hgmoc")
 
 [node name="Stats" type="VBoxContainer" parent="."]
 layout_mode = 0
-offset_left = 878.0
-offset_top = 36.0
-offset_right = 1242.0
-offset_bottom = 632.0
+offset_left = 865.0
+offset_top = 33.0
+offset_right = 1229.0
+offset_bottom = 623.0
 
 [node name="Difficulty" type="Label" parent="Stats"]
 layout_mode = 2
@@ -112,13 +112,13 @@ centered = false
 
 [node name="LifeContainer" type="VBoxContainer" parent="Stats"]
 layout_mode = 2
-script = ExtResource("7_qnu2t")
 
 [node name="MainContainer" type="HBoxContainer" parent="Stats/LifeContainer"]
 layout_mode = 2
 
 [node name="Label" type="Label" parent="Stats/LifeContainer/MainContainer"]
-custom_minimum_size = Vector2(120, 0)
+modulate = Color(1, 0.537255, 1, 1)
+custom_minimum_size = Vector2(140, 0)
 layout_mode = 2
 text = "Lives
 "
@@ -143,10 +143,12 @@ label_settings = ExtResource("9_c5ru6")
 horizontal_alignment = 1
 
 [node name="Value" type="Label" parent="Stats/LifeContainer/PieceContainer"]
+custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 text = "(0/0)"
 label_settings = ExtResource("9_c5ru6")
 horizontal_alignment = 2
+script = ExtResource("10_la0fy")
 
 [node name="DividerMid" type="Control" parent="Stats"]
 z_index = -1
@@ -154,15 +156,53 @@ custom_minimum_size = Vector2(0, 15)
 layout_mode = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="Stats/DividerMid"]
+modulate = Color(1, 0.415686, 1, 1)
 scale = Vector2(2, 2)
 texture = ExtResource("5_7bs50")
 centered = false
 
-[node name="BombContainer" parent="Stats" instance=ExtResource("6_gap30")]
+[node name="BombContainer" type="VBoxContainer" parent="Stats"]
 layout_mode = 2
-text_main = "Bombs"
+
+[node name="MainContainer" type="HBoxContainer" parent="Stats/BombContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Stats/BombContainer/MainContainer"]
+modulate = Color(0.496, 0.8, 0.5112, 1)
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+text = "Spell Card"
+label_settings = ExtResource("4_w0ro3")
+
+[node name="LifeDisplay" type="HBoxContainer" parent="Stats/BombContainer/MainContainer"]
+layout_mode = 2
+script = ExtResource("8_x7aou")
+type = 1
+
+[node name="PieceContainer" type="HBoxContainer" parent="Stats/BombContainer"]
+layout_mode = 2
+
+[node name="Space" type="Control" parent="Stats/BombContainer/PieceContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Stats/BombContainer/PieceContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "(pieces)"
+label_settings = ExtResource("9_c5ru6")
+horizontal_alignment = 1
+
+[node name="Value" type="Label" parent="Stats/BombContainer/PieceContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+text = "(0/0)"
+label_settings = ExtResource("9_c5ru6")
+horizontal_alignment = 2
+script = ExtResource("10_iwmip")
 
 [node name="DividerMid2" type="Control" parent="Stats"]
+modulate = Color(0.496, 0.8, 0.5112, 1)
 z_index = -1
 custom_minimum_size = Vector2(0, 15)
 layout_mode = 2

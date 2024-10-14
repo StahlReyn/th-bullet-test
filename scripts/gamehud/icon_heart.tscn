@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://beypwk68ep872" path="res://assets/img/system/life.png" id="1_fwx2n"]
 
 [node name="IconHeart" type="Control" node_paths=PackedStringArray("sprite_icon")]
-custom_minimum_size = Vector2(26, 0)
+custom_minimum_size = Vector2(24, 0)
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_2e4f7")
@@ -15,4 +15,4 @@ position = Vector2(-2, 12)
 scale = Vector2(2, 2)
 texture = ExtResource("1_fwx2n")
 centered = false
-hframes = 4
+hframes = 5
