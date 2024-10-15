@@ -1,8 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://btg4d8khha007"]
+[gd_scene load_steps=12 format=3 uid="uid://btg4d8khha007"]
 
 [ext_resource type="Script" path="res://scripts/gamestate/gameview.gd" id="1_dyv06"]
 [ext_resource type="PackedScene" uid="uid://dopo8g5mkyblm" path="res://data/character/player.tscn" id="1_u7skv"]
-[ext_resource type="Script" path="res://data/stages/stage_test.gd" id="2_x6fis"]
 [ext_resource type="Script" path="res://scripts/containers/image_container.gd" id="3_r12md"]
 [ext_resource type="Script" path="res://scripts/containers/bullet_container.gd" id="4_q2e0v"]
 [ext_resource type="Script" path="res://scripts/containers/effect_container.gd" id="5_fx8wi"]
@@ -48,7 +47,6 @@ script = ExtResource("6_0wgp6")
 
 [node name="StageHandler" type="Node" parent="." groups=["stage_handler"]]
 script = ExtResource("8_e6ddu")
-script_stage = ExtResource("2_x6fis")
 
 [node name="SpellCardDisplayer" parent="." groups=["spell_card_displayer"] instance=ExtResource("12_eoofb")]
 

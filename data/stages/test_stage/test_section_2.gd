@@ -1,4 +1,4 @@
-extends StageScript
+extends SectionScript
 
 var cd1 : float = 3.0
 var cd_script : float = 20.0

@@ -1,24 +1,22 @@
 class_name StageHandler
 extends Node
 
-@export var script_stage : GDScript
-var cur_script : Node
+var script_stage : GDScript = preload("res://data/stages/test_stage/test_stage.gd")
+var cur_stage_script : StageScript
 
 func _ready() -> void:
-	cur_script = add_script(script_stage) # This is temporary test
+	cur_stage_script = add_stage_script(script_stage) # This is temporary test
 
 func _process(delta: float) -> void:
 	pass
 
-func add_script(script : GDScript) -> Node:
+func add_stage_script(script : GDScript) -> Node:
 	var inst : Node = script.new()
 	add_child(inst)
-	cur_script = inst
+	cur_stage_script = inst
+	print("Add Script")
 	return inst
 
-func replace_script(script : GDScript) -> Node:
-	cur_script.queue_free()
-	var inst : Node = script.new()
-	cur_script = inst
-	add_child(inst)
-	return inst
+static func current_add_stage_script(script : GDScript) -> void:
+	var handler : StageHandler = GameUtils.get_stage_handler()
+	handler.add_stage_script(script)

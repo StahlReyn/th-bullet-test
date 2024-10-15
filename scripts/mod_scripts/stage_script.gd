@@ -1,12 +1,12 @@
 class_name StageScript
 extends ModScript
+## StageScripts manages a list of Sections and Spellcards
 
-func switch_script(script : GDScript) -> void:
-	var handler : StageHandler = GameUtils.get_stage_handler()
-	handler.replace_script(script)
-	print("Switch Script")
+var section_list = []
 
-func add_script(script : GDScript) -> void:
-	var handler : StageHandler = GameUtils.get_stage_handler()
-	handler.add_script(script)
-	print("Switch Script")
+func add_section_script(script: GDScript) -> SectionScript:
+	var inst : Node = script.new()
+	add_child(inst)
+	section_list.push_front(inst)
+	print("Add Section Script")
+	return inst
