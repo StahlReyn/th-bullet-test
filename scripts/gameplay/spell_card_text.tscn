@@ -32,6 +32,78 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(0, 0)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("FullDisplay/SpellCardName/LabelName:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2, 2)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("FullDisplay/SpellCardName/LabelName:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("FullDisplay/SpellCardName/SpellcardTextBg:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2, 2)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("FullDisplay/SpellCardName/SpellcardTextBg:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("FullDisplay/SpellCardName/Underline:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-190, 50)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("FullDisplay/SpellCardName/Underline:modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_ncx53"]
 resource_name = "end"
@@ -164,6 +236,7 @@ libraries = {
 position = Vector2(750, 800)
 
 [node name="LabelName" type="Label" parent="FullDisplay/SpellCardName"]
+modulate = Color(1, 1, 1, 0)
 z_index = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -175,6 +248,7 @@ offset_top = -22.5
 offset_bottom = 22.5
 grow_horizontal = 0
 grow_vertical = 2
+scale = Vector2(2, 2)
 pivot_offset = Vector2(1000, 23)
 text = "[SPELL CARD]"
 label_settings = ExtResource("1_7soc0")
@@ -183,22 +257,28 @@ vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="SpellcardTextBg" type="Sprite2D" parent="FullDisplay/SpellCardName"]
+modulate = Color(1, 1, 1, 0)
 position = Vector2(633, -4)
+scale = Vector2(2, 2)
 texture = ExtResource("2_6yem2")
 offset = Vector2(-800, 0)
 
 [node name="Underline" type="Sprite2D" parent="FullDisplay/SpellCardName"]
-position = Vector2(-190, 24)
+modulate = Color(1, 1, 1, 0)
+position = Vector2(-190, 50)
 scale = Vector2(2, 2)
 texture = ExtResource("3_a6v32")
 
 [node name="LabelTimer" type="Label" parent="."]
-offset_left = 334.0
-offset_top = 94.0
-offset_right = 428.0
-offset_bottom = 139.0
+custom_minimum_size = Vector2(120, 50)
+offset_left = 330.0
+offset_top = 10.0
+offset_right = 450.0
+offset_bottom = 60.0
 text = "00.00
 "
 label_settings = ExtResource("1_7soc0")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

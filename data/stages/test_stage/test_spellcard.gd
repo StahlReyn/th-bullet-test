@@ -1,16 +1,15 @@
 extends SpellCard
 
-
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	start_spellcard()
+	super()
+	start_section()
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	super(delta)
+	if get_time_left() < 35.0:
+		end_section()
 
-func start_spellcard():
+func start_section():
 	super()
 	spell_name = "[FIVE TIMES STACKER HOOOOOLY]"
 	total_bonus = 10000000
