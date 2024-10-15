@@ -1,6 +1,7 @@
 extends StageScript
 
 @onready var enemy_fairy : PackedScene = preload("res://data/enemies/enemy_lesser_fairy.tscn")
+@onready var enemy_fairy_boss : PackedScene = preload("res://data/enemies/enemy_lesser_fairy_boss.tscn")
 @onready var bullet_circle : PackedScene = preload("res://data/bullets/bullet_test.tscn")
 
 @onready var movement_script_1 : GDScript = preload("res://data/movement/movement_test.gd")
@@ -70,7 +71,7 @@ func _process(delta: float) -> void:
 	if cd_big <= 0:
 		print("BIG FAIRY ", cd_count)
 		if cd_count % 2 == 0:
-			var enemy = spawn_enemy(enemy_fairy, Vector2(400, -100))
+			var enemy : Enemy = spawn_enemy(enemy_fairy_boss, Vector2(400, -100))
 			enemy.add_movement_script(movement_script_3)
 			enemy.main_sprite.set_type(SpriteGroupFairy.Type.BLUE)
 		else:
@@ -79,7 +80,7 @@ func _process(delta: float) -> void:
 				Vector2(600, -100)
 			]
 			for pos in positions:
-				var enemy = spawn_enemy(enemy_fairy, pos)
+				var enemy : Enemy = spawn_enemy(enemy_fairy_boss, pos)
 				enemy.add_movement_script(movement_script_4)
 				enemy.main_sprite.set_type(SpriteGroupFairy.Type.YELLOW)
 		cd_big += 20
