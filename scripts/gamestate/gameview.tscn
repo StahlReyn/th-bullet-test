@@ -49,5 +49,12 @@ script = ExtResource("6_0wgp6")
 script = ExtResource("8_e6ddu")
 script_stage = ExtResource("2_x6fis")
 
+[node name="SpellCardText" type="Node2D" parent="."]
+
+[node name="Label" type="Label" parent="SpellCardText"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "AAAAAAAAAAAAAAAAAAAA"
+
 [connection signal="game_start" from="." to="AreaCollection" method="_on_gameview_game_start"]
 [connection signal="body_entered" from="Player" to="Player" method="_on_body_entered"]

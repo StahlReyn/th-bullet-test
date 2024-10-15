@@ -1,6 +1,22 @@
 class_name ModScript
 extends Node
+## This is script that's inserted to change behavior
+## Ranging from Stages, Spell Cards, Enemies, and Bullets
 
+var time_elapsed : float = 0.0 ## Timer since script is on_ready
+var time_active : float = 0.0 ## Timer that ticks only when active
+
+var enabled : bool = true ## Is enabled
+
+func _ready() -> void:
+	time_elapsed = 0.0
+	time_active = 0.0
+
+func _process(delta: float) -> void:
+	time_elapsed += delta
+	if enabled:
+		time_active += delta
+	
 func spawn_enemy(scene : PackedScene, pos : Vector2 = Vector2(0,0)) -> Enemy:
 	var enemy_container = GameUtils.get_enemy_container()
 	var enemy : Enemy = scene.instantiate()
