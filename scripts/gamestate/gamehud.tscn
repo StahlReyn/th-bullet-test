@@ -21,7 +21,7 @@
 font_size = 14
 
 [node name="Gamehud" type="Control"]
-z_index = 1
+z_index = 20
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -31,11 +31,12 @@ grow_vertical = 2
 script = ExtResource("1_ovxsb")
 
 [node name="Hud-test" type="Sprite2D" parent="."]
-z_index = -3
+z_index = 10
 texture = ExtResource("1_tnihf")
 centered = false
 
 [node name="DebugLabel" type="Label" parent="."]
+z_index = 20
 layout_mode = 2
 offset_left = 868.0
 offset_top = 604.0
@@ -47,6 +48,7 @@ label_settings = SubResource("LabelSettings_k5vxq")
 script = ExtResource("2_hgmoc")
 
 [node name="Stats" type="VBoxContainer" parent="."]
+z_index = 20
 layout_mode = 0
 offset_left = 871.0
 offset_top = 55.0

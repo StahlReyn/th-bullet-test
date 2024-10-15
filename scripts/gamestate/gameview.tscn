@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://btg4d8khha007"]
+[gd_scene load_steps=13 format=3 uid="uid://btg4d8khha007"]
 
 [ext_resource type="Script" path="res://scripts/gamestate/gameview.gd" id="1_dyv06"]
 [ext_resource type="PackedScene" uid="uid://dopo8g5mkyblm" path="res://data/character/player.tscn" id="1_u7skv"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://scripts/containers/stage_handler.gd" id="8_e6ddu"]
 [ext_resource type="Texture2D" uid="uid://cb0p73frtui6m" path="res://assets/img/system/item_get_line.png" id="9_gyqvd"]
 [ext_resource type="Script" path="res://scripts/gamestate/area_collection.gd" id="10_w4su3"]
+[ext_resource type="PackedScene" uid="uid://et66msp52cef" path="res://scripts/gameplay/spell_card_text.tscn" id="12_eoofb"]
 
 [node name="Gameview" type="Node2D" groups=["game_view"]]
 script = ExtResource("1_dyv06")
@@ -49,12 +50,7 @@ script = ExtResource("6_0wgp6")
 script = ExtResource("8_e6ddu")
 script_stage = ExtResource("2_x6fis")
 
-[node name="SpellCardText" type="Node2D" parent="."]
-
-[node name="Label" type="Label" parent="SpellCardText"]
-offset_right = 40.0
-offset_bottom = 23.0
-text = "AAAAAAAAAAAAAAAAAAAA"
+[node name="SpellCardText" parent="." instance=ExtResource("12_eoofb")]
 
 [connection signal="game_start" from="." to="AreaCollection" method="_on_gameview_game_start"]
 [connection signal="body_entered" from="Player" to="Player" method="_on_body_entered"]
