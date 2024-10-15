@@ -43,6 +43,7 @@ image_container=""
 enemy=""
 enemy_container=""
 stage_handler=""
+spell_card_displayer=""
 
 [input]
 

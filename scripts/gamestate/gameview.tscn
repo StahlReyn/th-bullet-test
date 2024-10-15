@@ -50,7 +50,7 @@ script = ExtResource("6_0wgp6")
 script = ExtResource("8_e6ddu")
 script_stage = ExtResource("2_x6fis")
 
-[node name="SpellCardText" parent="." instance=ExtResource("12_eoofb")]
+[node name="SpellCardDisplayer" parent="." groups=["spell_card_displayer"] instance=ExtResource("12_eoofb")]
 
 [connection signal="game_start" from="." to="AreaCollection" method="_on_gameview_game_start"]
 [connection signal="body_entered" from="Player" to="Player" method="_on_body_entered"]

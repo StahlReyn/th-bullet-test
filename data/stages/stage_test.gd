@@ -9,6 +9,8 @@ extends StageScript
 @onready var movement_script_3 : GDScript = preload("res://data/movement/movement_test_3.gd")
 @onready var movement_script_4 : GDScript = preload("res://data/movement/movement_test_4.gd")
 
+@onready var spell_card_1 : GDScript = preload("res://data/stages/test_spellcard.gd")
+
 @onready var title_card : PackedScene = preload("res://data/title_cards/title_card_test.tscn")
 @onready var next_script : GDScript = preload("res://data/stages/stage_test_2.gd")
 
@@ -24,7 +26,8 @@ var cd_count : int = 0
 var cd_script : float = 100.0
 
 func _ready() -> void:
-	spawn_title_card(title_card, Vector2(500,300))
+	#spawn_title_card(title_card, Vector2(500,300))
+	call_deferred("add_script", spell_card_1)
 	super()
 
 func _process(delta: float) -> void:

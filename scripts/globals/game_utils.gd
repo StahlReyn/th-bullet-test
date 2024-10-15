@@ -35,6 +35,9 @@ func get_enemy_container() -> EnemyContainer:
 func get_stage_handler() -> StageHandler:
 	return get_tree().get_nodes_in_group("stage_handler")[0]
 
+func get_spell_card_displayer() -> SpellCardDisplayer:
+	return get_tree().get_nodes_in_group("spell_card_displayer")[0]
+
 func get_point_items() -> Array[Node]:
 	return get_tree().get_nodes_in_group("item")
 
