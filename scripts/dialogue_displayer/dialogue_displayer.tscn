@@ -9,7 +9,7 @@ script = ExtResource("1_6q2me")
 
 [node name="DialogueBalloon" parent="." instance=ExtResource("2_hwxvs")]
 z_index = 10
-position = Vector2(258, 482)
+position = Vector2(350, 526)
 
 [node name="PortraitSetReimuHoldurei" parent="." instance=ExtResource("3_g055i")]
-position = Vector2(547, 568)
+position = Vector2(763, 623)

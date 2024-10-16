@@ -17,6 +17,7 @@
 script = ExtResource("1_dyv06")
 
 [node name="DialogueDisplayer" parent="." instance=ExtResource("2_mfoc0")]
+visible = false
 z_index = 30
 
 [node name="ImageContainer" type="Node2D" parent="." groups=["image_container"]]

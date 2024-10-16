@@ -11,7 +11,7 @@ func _physics_process(delta: float) -> void:
 
 func start_section():
 	super()
-	spell_name = "[FIVE TIMES STACKER HOOOOOLY]"
+	spell_name = "SPC_TEST"
 	total_bonus = 10000000
 	duration = 40.0
 	count_capture = 0

@@ -30,6 +30,15 @@ window/size/viewport_height=960
 window/stretch/mode="viewport"
 window/stretch/scale_mode="integer"
 
+[file_customization]
+
+folder_colors={
+"res://assets/": "red",
+"res://data/": "yellow",
+"res://languages/": "blue",
+"res://scripts/": "pink"
+}
+
 [global_group]
 
 player=""
@@ -85,7 +94,8 @@ focus={
 
 [internationalization]
 
-locale/translations=PackedStringArray("res://languages/system/system.en.translation", "res://languages/system/system.es.translation", "res://languages/system/system.jp.translation")
+locale/translations=PackedStringArray("res://languages/system/system.en.translation", "res://languages/system/system.es.translation", "res://languages/system/system.jp.translation", "res://languages/character_names/character_names.csv", "res://languages/character_names/character_names.en.translation", "res://languages/character_names/character_names.jp.translation", "res://languages/spell_cards/spell_cards.csv", "res://languages/spell_cards/spell_cards.en.translation", "res://languages/spell_cards/spell_cards.jp.translation")
+locale/test="jp"
 
 [layer_names]
 
