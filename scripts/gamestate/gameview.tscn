@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://btg4d8khha007"]
+[gd_scene load_steps=13 format=3 uid="uid://btg4d8khha007"]
 
 [ext_resource type="Script" path="res://scripts/gamestate/gameview.gd" id="1_dyv06"]
 [ext_resource type="PackedScene" uid="uid://dopo8g5mkyblm" path="res://data/character/player.tscn" id="1_u7skv"]
+[ext_resource type="PackedScene" uid="uid://bitw5rm3yby8i" path="res://scripts/dialogue_displayer/dialogue_displayer.tscn" id="2_mfoc0"]
 [ext_resource type="Script" path="res://scripts/containers/image_container.gd" id="3_r12md"]
 [ext_resource type="Script" path="res://scripts/containers/bullet_container.gd" id="4_q2e0v"]
 [ext_resource type="Script" path="res://scripts/containers/effect_container.gd" id="5_fx8wi"]
@@ -14,6 +15,9 @@
 
 [node name="Gameview" type="Node2D" groups=["game_view"]]
 script = ExtResource("1_dyv06")
+
+[node name="DialogueDisplayer" parent="." instance=ExtResource("2_mfoc0")]
+z_index = 30
 
 [node name="ImageContainer" type="Node2D" parent="." groups=["image_container"]]
 script = ExtResource("3_r12md")

@@ -18,12 +18,25 @@ var cd2 : float = 0.0
 var cd_big : float = 0.0
 var cd_count : int = 0
 
+var cd_fps: float = 1
+var cd_fps_count: int = 1
+
 func _ready() -> void:
 	super()
-	duration = 5.0
+	duration = 50.0
 
 func _process(delta: float) -> void:
 	super(delta)
+	
+	# Test fluctuating fps
+	#cd_fps -= delta
+	#if cd_fps <= 0:
+		#if cd_fps_count % 2 == 0:
+			#Engine.max_fps = 60
+		#else:
+			#Engine.max_fps = 10
+		#cd_fps += 1.0
+		#cd_fps_count += 1
 
 	cd1 -= delta
 	cd2 -= delta
@@ -34,6 +47,7 @@ func _process(delta: float) -> void:
 		count1 = 10
 		cd1 += 5.0
 		cd1_count_loop += 1
+	
 	if cd1 <= 0:
 		cd1_loop -= delta
 		while cd1_loop <= 0 and count1 > 0:
@@ -60,7 +74,7 @@ func _process(delta: float) -> void:
 		bullet2.position.x = -cos(time_active * 2) * 50 + 50
 		bullet2.position.y = -50
 		bullet2.velocity.y = 200
-		cd2 += 0.1
+		cd2 += 0.05
 	
 	
 	if cd_big <= 0:
