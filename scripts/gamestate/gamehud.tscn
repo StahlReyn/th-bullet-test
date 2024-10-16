@@ -68,7 +68,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="Stats/HiScoreContainer"]
 custom_minimum_size = Vector2(140, 0)
 layout_mode = 2
-text = "Hi-Score"
+text = "SYS_HIGHSCORE"
 label_settings = ExtResource("5_tyrlp")
 
 [node name="Value" type="Label" parent="Stats/HiScoreContainer"]
@@ -94,7 +94,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="Stats/ScoreContainer"]
 custom_minimum_size = Vector2(140, 0)
 layout_mode = 2
-text = "Score"
+text = "SYS_SCORE"
 label_settings = ExtResource("5_tyrlp")
 
 [node name="Value" type="Label" parent="Stats/ScoreContainer"]
@@ -125,8 +125,7 @@ layout_mode = 2
 modulate = Color(1, 0.537255, 1, 1)
 custom_minimum_size = Vector2(145, 0)
 layout_mode = 2
-text = "Lives
-"
+text = "SYS_LIVES"
 label_settings = ExtResource("5_tyrlp")
 
 [node name="LifeDisplay" type="HBoxContainer" parent="Stats/LifeContainer/MainContainer"]
@@ -144,7 +143,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="Stats/LifeContainer/PieceContainer"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
-text = "(pieces)"
+text = "SYS_PIECES"
 label_settings = ExtResource("9_xfdch")
 horizontal_alignment = 1
 
@@ -177,7 +176,7 @@ layout_mode = 2
 modulate = Color(0.496, 0.8, 0.5112, 1)
 custom_minimum_size = Vector2(145, 0)
 layout_mode = 2
-text = "Spell Card"
+text = "SYS_SPELLCARD"
 label_settings = ExtResource("5_tyrlp")
 
 [node name="LifeDisplay" type="HBoxContainer" parent="Stats/BombContainer/MainContainer"]
@@ -196,7 +195,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="Stats/BombContainer/PieceContainer"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
-text = "(pieces)"
+text = "SYS_PIECES"
 label_settings = ExtResource("9_xfdch")
 horizontal_alignment = 1
 
@@ -237,7 +236,7 @@ hframes = 8
 modulate = Color(1, 0.439216, 0.439216, 1)
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
-text = "Power"
+text = "SYS_POWER"
 label_settings = ExtResource("5_tyrlp")
 
 [node name="Value" type="Label" parent="Stats/PowerContainer"]
@@ -279,7 +278,7 @@ frame = 1
 modulate = Color(0.381352, 0.645355, 1, 1)
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
-text = "Value"
+text = "SYS_VALUE"
 label_settings = ExtResource("5_tyrlp")
 
 [node name="Value" type="Label" parent="Stats/ValueContainer"]
@@ -313,7 +312,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="Stats/GrazeContainer"]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
-text = "Graze"
+text = "SYS_GRAZE"
 label_settings = ExtResource("5_tyrlp")
 
 [node name="Value" type="Label" parent="Stats/GrazeContainer"]

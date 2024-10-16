@@ -83,6 +83,10 @@ focus={
 ]
 }
 
+[internationalization]
+
+locale/translations=PackedStringArray("res://languages/system/system.en.translation", "res://languages/system/system.es.translation", "res://languages/system/system.jp.translation")
+
 [layer_names]
 
 2d_physics/layer_1="player"
