@@ -1,0 +1,69 @@
+[gd_scene load_steps=9 format=3 uid="uid://p6dhswy1pgkx"]
+
+[ext_resource type="Script" path="res://scripts/dialogue_displayer/portrait_set.gd" id="1_lhocp"]
+[ext_resource type="Texture2D" uid="uid://ddm4d60e1pm7f" path="res://data/portraits/reimu_holdurei/body_defeated.tres" id="2_r0grs"]
+[ext_resource type="Texture2D" uid="uid://dnn6mdd6k7ltn" path="res://data/portraits/reimu_holdurei/body_main.tres" id="3_ccw66"]
+[ext_resource type="Texture2D" uid="uid://dueouak764m5q" path="res://data/portraits/reimu_holdurei/face_annoyed.tres" id="4_uyf6k"]
+[ext_resource type="Texture2D" uid="uid://ciascdv5dw8xw" path="res://data/portraits/reimu_holdurei/face_neutral.tres" id="5_a0378"]
+[ext_resource type="Texture2D" uid="uid://bx5op2u7ujb1e" path="res://data/portraits/reimu_holdurei/face_surprised.tres" id="6_daabd"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_85yx8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_r0grs")
+}],
+"loop": true,
+"name": &"defeated",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_ccw66")
+}],
+"loop": true,
+"name": &"main",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5w0k5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_uyf6k")
+}],
+"loop": true,
+"name": &"annoyed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_a0378")
+}],
+"loop": true,
+"name": &"neutral",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_daabd")
+}],
+"loop": true,
+"name": &"surprised",
+"speed": 5.0
+}]
+
+[node name="PortraitSetReimuHoldurei" type="Node2D" node_paths=PackedStringArray("sprite_body", "sprite_face")]
+script = ExtResource("1_lhocp")
+sprite_body = NodePath("Body")
+sprite_face = NodePath("Face")
+
+[node name="Body" type="AnimatedSprite2D" parent="."]
+position = Vector2(-70, 0)
+sprite_frames = SubResource("SpriteFrames_85yx8")
+animation = &"main"
+
+[node name="Face" type="AnimatedSprite2D" parent="."]
+position = Vector2(14, -227)
+sprite_frames = SubResource("SpriteFrames_5w0k5")
+animation = &"annoyed"
