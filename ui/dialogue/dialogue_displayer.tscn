@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bitw5rm3yby8i"]
 
-[ext_resource type="Script" path="res://scripts/dialogue_displayer/dialogue_displayer.gd" id="1_6q2me"]
-[ext_resource type="PackedScene" uid="uid://bph3cyuhiqibp" path="res://scripts/dialogue_displayer/dialogue_balloon.tscn" id="2_hwxvs"]
+[ext_resource type="Script" path="res://ui/dialogue/dialogue_displayer.gd" id="1_6q2me"]
+[ext_resource type="PackedScene" uid="uid://bph3cyuhiqibp" path="res://ui/dialogue/dialogue_balloon.tscn" id="2_hwxvs"]
 [ext_resource type="PackedScene" uid="uid://p6dhswy1pgkx" path="res://data/portraits/reimu_holdurei/portrait_set_reimu_holdurei.tscn" id="3_g055i"]
 
 [node name="DialogueDisplayer" type="Node2D"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://djh1d5tgxtxjj"]
 
-[ext_resource type="Script" path="res://scripts/background/path3d_camera.gd" id="1_81vh5"]
+[ext_resource type="Script" path="res://scenes/background/path3d_camera.gd" id="1_81vh5"]
 [ext_resource type="Material" uid="uid://bw1bv32em7t1g" path="res://data/textures/material_3d_placeholder.tres" id="1_isv44"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_oy4px"]

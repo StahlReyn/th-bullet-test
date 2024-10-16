@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=3 uid="uid://p6dhswy1pgkx"]
 
-[ext_resource type="Script" path="res://scripts/dialogue_displayer/portrait_set.gd" id="1_lhocp"]
+[ext_resource type="Script" path="res://ui/dialogue/portrait_set.gd" id="1_lhocp"]
 [ext_resource type="Texture2D" uid="uid://ddm4d60e1pm7f" path="res://data/portraits/reimu_holdurei/body_defeated.tres" id="2_r0grs"]
 [ext_resource type="Texture2D" uid="uid://dnn6mdd6k7ltn" path="res://data/portraits/reimu_holdurei/body_main.tres" id="3_ccw66"]
 [ext_resource type="Texture2D" uid="uid://dueouak764m5q" path="res://data/portraits/reimu_holdurei/face_annoyed.tres" id="4_uyf6k"]

@@ -11,17 +11,17 @@ config_version=5
 [application]
 
 config/name="th-bullet-test"
-run/main_scene="res://scripts/menu/menu.tscn"
+run/main_scene="res://scenes/menu.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
-GameUtils="*res://scripts/globals/game_utils.gd"
-SceneHandler="*res://scripts/globals/scene_handler.gd"
-GameVariables="*res://scripts/globals/game_variables.gd"
-MathUtils="*res://scripts/globals/math_utils.gd"
-AudioManager="*res://scripts/globals/audio_manager.gd"
+GameUtils="*res://globals/game_utils.gd"
+SceneHandler="*res://globals/scene_handler.gd"
+GameVariables="*res://globals/game_variables.gd"
+MathUtils="*res://globals/math_utils.gd"
+AudioManager="*res://globals/audio_manager.gd"
 
 [display]
 
@@ -35,8 +35,11 @@ window/stretch/scale_mode="integer"
 folder_colors={
 "res://assets/": "red",
 "res://data/": "yellow",
+"res://globals/": "green",
 "res://languages/": "blue",
-"res://scripts/": "pink"
+"res://scenes/": "purple",
+"res://scripts/": "pink",
+"res://ui/": "gray"
 }
 
 [global_group]

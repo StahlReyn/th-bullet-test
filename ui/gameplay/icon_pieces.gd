@@ -6,8 +6,8 @@ enum Type {
 	BOMB
 }
 
-static var scene_heart : PackedScene = preload("res://scripts/gamehud/icon_heart.tscn")
-static var scene_bomb : PackedScene = preload("res://scripts/gamehud/icon_bomb.tscn")
+static var scene_heart : PackedScene = preload("res://ui/gameplay/icon_heart.tscn")
+static var scene_bomb : PackedScene = preload("res://ui/gameplay/icon_bomb.tscn")
 @export var sprite_icon : Sprite2D
 
 var cur_type : int
