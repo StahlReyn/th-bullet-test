@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="SectionSequence" load_steps=5 format=3 uid="uid://crggihiex84to"]
 
-[ext_resource type="Script" path="res://scripts/mod_scripts/section_sequence.gd" id="1_655ts"]
+[ext_resource type="Script" path="res://scripts/mod_scripts/stage_data.gd" id="1_655ts"]
 [ext_resource type="Script" path="res://data/stages/test_stage/test_section_1.gd" id="2_l62ex"]
 [ext_resource type="Script" path="res://data/stages/test_stage/test_section_2.gd" id="3_veexd"]
 [ext_resource type="Script" path="res://data/stages/test_stage/test_spellcard.gd" id="4_3q76k"]

@@ -5,6 +5,7 @@ extends ModScript
 
 var duration : float = 40.0 ## Duration of section, mostly for boss spellcard + non-spell
 var ended_already : bool = false
+var is_subsection : bool = false ## If enabled, the ScriptStage will not wait until this ends
 
 var stage_parent : StageScript
 
@@ -26,12 +27,18 @@ func end_section() -> void:
 	enabled = false
 	if stage_parent:
 		stage_parent.on_section_end()
+	else:
+		printerr("Section have no StageScript Parent")
 
 func end_condition() -> bool:
 	return time_active >= duration
 
 func is_ending() -> bool:
 	return ended_already
+
+## Used for StageScript, Subsection can always continue regardless of ending
+func can_move_next_section() -> bool:
+	return is_ending() or is_subsection
 
 func get_time_left() -> float:
 	return duration - time_active

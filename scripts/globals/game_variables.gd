@@ -1,5 +1,12 @@
 extends Node
 
+enum Difficulties {
+	EASY,
+	NORMAL,
+	HARD,
+	LUNATIC
+}
+
 static var power_max : int = 400
 static var point_value_max : int = 300000
 static var lives_max : int = 8

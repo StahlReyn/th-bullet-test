@@ -2,7 +2,7 @@ class_name StageScript
 extends ModScript
 ## StageScripts manages a list of Sections and Spellcards
 
-var section_sequence : SectionSequence
+var stage_data : StageData
 var section_count : int = 0
 var added_section_list : Array[SectionScript] = []
 
@@ -10,9 +10,9 @@ func _ready() -> void:
 	super()
 	do_next_script()
 
-static func new_stage_script_from_sequence(section_sequence : SectionSequence) -> StageScript:
+static func new_stage_script_from_data(stage_data : StageData) -> StageScript:
 	var inst : StageScript = new()
-	inst.section_sequence = section_sequence
+	inst.stage_data = stage_data
 	print("New StageScript from Sequence")
 	return inst
 
@@ -26,9 +26,8 @@ func add_section_script(script: GDScript) -> SectionScript:
 
 func is_section_available() -> bool:
 	for section in added_section_list:
-		if section.is_ending():
-			continue
-		return false # If ANY is not ending, meaning some ongoing, meaning false
+		if not section.can_move_next_section():
+			return false # If ANY script saying to wait, wait
 	return true
 
 func on_section_end() -> void:
@@ -43,4 +42,4 @@ func do_next_script() -> void:
 		print("Reached final in sequence")
 
 func get_section_list() -> Array[GDScript]:
-	return section_sequence.section_list
+	return stage_data.section_list
