@@ -20,6 +20,7 @@ var cd_count : int = 0
 
 func _ready() -> void:
 	super()
+	duration = 5.0
 
 func _process(delta: float) -> void:
 	super(delta)

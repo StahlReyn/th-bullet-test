@@ -3,7 +3,6 @@ extends SectionScript
 ## Spellcard is more specific type of section script
 ## Non-spells are still Section script, despite boss existing
 
-
 var spell_name : String = "[SPELL CARD NAME]"
 var total_bonus : int = 10000000
 var count_capture : int = 0
@@ -21,12 +20,6 @@ func start_section() -> void:
 	var displayer : SpellCardDisplayer = GameUtils.get_spell_card_displayer()
 	displayer.start_spellcard()
 
-func end_section() -> void:
-	super()
-
 func update_displayer() -> void:
 	var displayer : SpellCardDisplayer = GameUtils.get_spell_card_displayer()
 	displayer.set_spellcard(self)
-
-func is_ending() -> bool:
-	return do_end

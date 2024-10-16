@@ -1,14 +1,22 @@
 class_name StageHandler
 extends Node
 
-var script_stage : GDScript = preload("res://data/stages/test_stage/test_stage.gd")
+var stage_section_sequence : SectionSequence = preload("res://data/stages/test_stage/test_section_sequence.tres")
+
 var cur_stage_script : StageScript
 
 func _ready() -> void:
-	cur_stage_script = add_stage_script(script_stage) # This is temporary test
+	add_stage_script_from_sequence(stage_section_sequence) # This is temporary test
 
 func _process(delta: float) -> void:
 	check_finished_sections()
+
+func add_stage_script_from_sequence(sequence : SectionSequence) -> Node:
+	var inst : StageScript = StageScript.new_stage_script_from_sequence(sequence)
+	add_child(inst)
+	cur_stage_script = inst
+	print("Add Script Sequence")
+	return inst
 
 func add_stage_script(script : GDScript) -> Node:
 	var inst : Node = script.new()
