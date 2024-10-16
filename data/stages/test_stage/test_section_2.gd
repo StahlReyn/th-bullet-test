@@ -1,13 +1,13 @@
 extends SectionScript
 
-var cd1 : float = 3.0
+var cd1 : float = 1.0
 var cd_script : float = 20.0
 
 @onready var enemy_fairy : PackedScene = preload("res://data/enemies/enemy_lesser_fairy.tscn")
 
 func _ready() -> void:
 	super()
-	duration = 5.0
+	duration = 3.0
 
 func _physics_process(delta: float) -> void:
 	super(delta)

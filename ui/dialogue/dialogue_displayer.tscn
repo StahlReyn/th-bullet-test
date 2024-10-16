@@ -4,12 +4,12 @@
 [ext_resource type="PackedScene" uid="uid://bph3cyuhiqibp" path="res://ui/dialogue/dialogue_balloon.tscn" id="2_hwxvs"]
 [ext_resource type="PackedScene" uid="uid://p6dhswy1pgkx" path="res://data/portraits/reimu_holdurei/portrait_set_reimu_holdurei.tscn" id="3_g055i"]
 
-[node name="DialogueDisplayer" type="Node2D"]
+[node name="DialogueDisplayer" type="Node2D" groups=["dialogue_displayer"]]
 script = ExtResource("1_6q2me")
 
 [node name="DialogueBalloon" parent="." instance=ExtResource("2_hwxvs")]
 z_index = 10
-position = Vector2(350, 526)
+position = Vector2(456, 450)
 
 [node name="PortraitSetReimuHoldurei" parent="." instance=ExtResource("3_g055i")]
-position = Vector2(763, 623)
+position = Vector2(827, 551)

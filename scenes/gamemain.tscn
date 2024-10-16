@@ -1,12 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://b7v7flp6p65gf"]
+[gd_scene load_steps=6 format=3 uid="uid://b7v7flp6p65gf"]
 
 [ext_resource type="PackedScene" uid="uid://chg817g0wf0ij" path="res://scripts/gamestate/gamehud.tscn" id="1_585am"]
 [ext_resource type="Script" path="res://scenes/gamemain.gd" id="1_jvava"]
+[ext_resource type="PackedScene" uid="uid://bitw5rm3yby8i" path="res://ui/dialogue/dialogue_displayer.tscn" id="2_aq4qu"]
 [ext_resource type="PackedScene" uid="uid://btg4d8khha007" path="res://scripts/gamestate/gameview.tscn" id="2_frqqi"]
 [ext_resource type="PackedScene" uid="uid://djh1d5tgxtxjj" path="res://scenes/background/background-test.tscn" id="4_4i7d7"]
 
 [node name="Gamemain" type="Node2D"]
 script = ExtResource("1_jvava")
+
+[node name="DialogueDisplayer" parent="." instance=ExtResource("2_aq4qu")]
+z_index = 100
 
 [node name="Gamehud" parent="." instance=ExtResource("1_585am")]
 z_index = 10

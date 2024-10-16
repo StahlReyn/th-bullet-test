@@ -3,4 +3,5 @@ extends Resource
 
 @export var name : String ## Name of speaker in case needed, use CSV keys
 @export var portrait : PackedScene ## Portrait shown
+@export_enum("LEFT", "RIGHT") var type : int
 @export var text : String ## Dialogue content, use CSV Keys

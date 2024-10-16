@@ -1,13 +1,15 @@
-[gd_resource type="Resource" script_class="DialogueSet" load_steps=6 format=3 uid="uid://cbg7g8an5xkap"]
+[gd_resource type="Resource" script_class="DialogueSet" load_steps=7 format=3 uid="uid://cbg7g8an5xkap"]
 
 [ext_resource type="Script" path="res://resources/dialogue_line.gd" id="1_pglt7"]
 [ext_resource type="Script" path="res://resources/dialogue_set.gd" id="1_ppaqy"]
 [ext_resource type="PackedScene" uid="uid://p6dhswy1pgkx" path="res://data/portraits/reimu_holdurei/portrait_set_reimu_holdurei.tscn" id="2_dkg0m"]
+[ext_resource type="PackedScene" uid="uid://beo6ig373e5xy" path="res://data/portraits/reimu_holdurei/portrait_set_reimu_holdurei_2.tscn" id="2_ejlaj"]
 
 [sub_resource type="Resource" id="Resource_1pbup"]
 script = ExtResource("1_pglt7")
 name = "Name Here"
-portrait = ExtResource("2_dkg0m")
+portrait = ExtResource("2_ejlaj")
+type = 0
 text = "Some speech here wow, quite long though to test.
 Second line break here!"
 
@@ -15,6 +17,7 @@ Second line break here!"
 script = ExtResource("1_pglt7")
 name = "Name Here"
 portrait = ExtResource("2_dkg0m")
+type = 1
 text = "Second set of text wow"
 
 [resource]

@@ -38,6 +38,9 @@ func get_stage_handler() -> StageHandler:
 func get_spell_card_displayer() -> SpellCardDisplayer:
 	return get_tree().get_nodes_in_group("spell_card_displayer")[0]
 
+func get_dialogue_displayer() -> DialogueDisplayer:
+	return get_tree().get_nodes_in_group("dialogue_displayer")[0]
+
 func get_point_items() -> Array[Node]:
 	return get_tree().get_nodes_in_group("item")
 

@@ -1,22 +1,22 @@
-[gd_scene load_steps=14 format=3 uid="uid://p6dhswy1pgkx"]
+[gd_scene load_steps=14 format=3 uid="uid://beo6ig373e5xy"]
 
-[ext_resource type="Script" path="res://ui/dialogue/portrait_set.gd" id="1_lhocp"]
-[ext_resource type="Texture2D" uid="uid://ddm4d60e1pm7f" path="res://data/portraits/reimu_holdurei/body_defeated.tres" id="2_r0grs"]
-[ext_resource type="Texture2D" uid="uid://dnn6mdd6k7ltn" path="res://data/portraits/reimu_holdurei/body_main.tres" id="3_ccw66"]
-[ext_resource type="Texture2D" uid="uid://dueouak764m5q" path="res://data/portraits/reimu_holdurei/face_annoyed.tres" id="4_uyf6k"]
-[ext_resource type="Texture2D" uid="uid://ciascdv5dw8xw" path="res://data/portraits/reimu_holdurei/face_neutral.tres" id="5_a0378"]
-[ext_resource type="Texture2D" uid="uid://bx5op2u7ujb1e" path="res://data/portraits/reimu_holdurei/face_surprised.tres" id="6_daabd"]
-[ext_resource type="LabelSettings" uid="uid://baxanrvsxf4vv" path="res://assets/resources/label_settings/label_name_title.tres" id="7_bc6lj"]
-[ext_resource type="LabelSettings" uid="uid://magrn7v6vmcj" path="res://assets/resources/label_settings/label_name_main.tres" id="8_ojf0k"]
-[ext_resource type="LabelSettings" uid="uid://bjjl7v2ai34v2" path="res://assets/resources/label_settings/label_name_ruby.tres" id="8_q6a3x"]
-[ext_resource type="LabelSettings" uid="uid://c6wx3igo44q2q" path="res://assets/resources/label_settings/label_name_alt.tres" id="10_xlb14"]
-[ext_resource type="Texture2D" uid="uid://vu30x87heeip" path="res://data/portraits/reimu_holdurei/bgtext.tres" id="11_r1c76"]
+[ext_resource type="Script" path="res://ui/dialogue/portrait_set.gd" id="1_mju0e"]
+[ext_resource type="Texture2D" uid="uid://ddm4d60e1pm7f" path="res://data/portraits/reimu_holdurei/body_defeated.tres" id="2_b2a4x"]
+[ext_resource type="Texture2D" uid="uid://dnn6mdd6k7ltn" path="res://data/portraits/reimu_holdurei/body_main.tres" id="3_fp3c2"]
+[ext_resource type="Texture2D" uid="uid://dueouak764m5q" path="res://data/portraits/reimu_holdurei/face_annoyed.tres" id="4_qi8ms"]
+[ext_resource type="Texture2D" uid="uid://ciascdv5dw8xw" path="res://data/portraits/reimu_holdurei/face_neutral.tres" id="5_j3nj4"]
+[ext_resource type="Texture2D" uid="uid://bx5op2u7ujb1e" path="res://data/portraits/reimu_holdurei/face_surprised.tres" id="6_2ijpy"]
+[ext_resource type="LabelSettings" uid="uid://baxanrvsxf4vv" path="res://assets/resources/label_settings/label_name_title.tres" id="7_3grhy"]
+[ext_resource type="LabelSettings" uid="uid://bjjl7v2ai34v2" path="res://assets/resources/label_settings/label_name_ruby.tres" id="8_1b43p"]
+[ext_resource type="LabelSettings" uid="uid://magrn7v6vmcj" path="res://assets/resources/label_settings/label_name_main.tres" id="9_p3hiq"]
+[ext_resource type="LabelSettings" uid="uid://c6wx3igo44q2q" path="res://assets/resources/label_settings/label_name_alt.tres" id="10_xkssa"]
+[ext_resource type="Texture2D" uid="uid://vu30x87heeip" path="res://data/portraits/reimu_holdurei/bgtext.tres" id="11_waebf"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_85yx8"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_r0grs")
+"texture": ExtResource("2_b2a4x")
 }],
 "loop": true,
 "name": &"defeated",
@@ -24,7 +24,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_ccw66")
+"texture": ExtResource("3_fp3c2")
 }],
 "loop": true,
 "name": &"main",
@@ -35,7 +35,7 @@ animations = [{
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("4_uyf6k")
+"texture": ExtResource("4_qi8ms")
 }],
 "loop": true,
 "name": &"annoyed",
@@ -43,7 +43,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("5_a0378")
+"texture": ExtResource("5_j3nj4")
 }],
 "loop": true,
 "name": &"neutral",
@@ -51,27 +51,29 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("6_daabd")
+"texture": ExtResource("6_2ijpy")
 }],
 "loop": true,
 "name": &"surprised",
 "speed": 5.0
 }]
 
-[node name="PortraitSetReimuHoldurei" type="Node2D" node_paths=PackedStringArray("sprite_body", "sprite_face")]
-script = ExtResource("1_lhocp")
+[node name="PortraitSetReimuHoldurei2" type="Node2D" node_paths=PackedStringArray("sprite_body", "sprite_face")]
+script = ExtResource("1_mju0e")
 sprite_body = NodePath("Body")
 sprite_face = NodePath("Face")
 
 [node name="Body" type="AnimatedSprite2D" parent="."]
-position = Vector2(-67, 19)
+position = Vector2(79, 7)
 sprite_frames = SubResource("SpriteFrames_85yx8")
 animation = &"main"
+flip_h = true
 
 [node name="Face" type="AnimatedSprite2D" parent="."]
-position = Vector2(17, -208)
+position = Vector2(-5, -220)
 sprite_frames = SubResource("SpriteFrames_5w0k5")
 animation = &"annoyed"
+flip_h = true
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchors_preset = 15
@@ -95,27 +97,27 @@ layout_mode = 2
 [node name="Title" type="Label" parent="MarginContainer/NameBox"]
 layout_mode = 2
 text = "CHAR_HOLDER_TITLE"
-label_settings = ExtResource("7_bc6lj")
+label_settings = ExtResource("7_3grhy")
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Ruby" type="Label" parent="MarginContainer/NameBox"]
 layout_mode = 2
 text = "CHAR_HOLDER_RUBY"
-label_settings = ExtResource("8_q6a3x")
+label_settings = ExtResource("8_1b43p")
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Main" type="Label" parent="MarginContainer/NameBox"]
 layout_mode = 2
 text = "CHAR_HOLDER_MAIN"
-label_settings = ExtResource("8_ojf0k")
+label_settings = ExtResource("9_p3hiq")
 horizontal_alignment = 1
 
 [node name="Alt" type="Label" parent="MarginContainer/NameBox"]
 layout_mode = 2
 text = "CHAR_HOLDER_ALT"
-label_settings = ExtResource("10_xlb14")
+label_settings = ExtResource("10_xkssa")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -125,4 +127,4 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 
 [node name="Sprite2D" type="Sprite2D" parent="MarginContainer/CenterContainer"]
-texture = ExtResource("11_r1c76")
+texture = ExtResource("11_waebf")
