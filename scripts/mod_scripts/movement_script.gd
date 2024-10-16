@@ -6,7 +6,7 @@ var parent : Node
 func _ready() -> void:
 	pass
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	pass
 
 func process_movement(delta: float) -> void:

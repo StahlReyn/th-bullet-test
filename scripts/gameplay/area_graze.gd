@@ -13,7 +13,7 @@ func _ready() -> void:
 	graze_sprite.rotation = 0
 	graze_sprite.scale = Vector2(2,2)
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	graze_sprite.rotation += delta
 	if Input.is_action_pressed("focus"):
 		graze_sprite.scale = lerp(graze_sprite.scale, Vector2(2,2), delta * focus_transition_speed)

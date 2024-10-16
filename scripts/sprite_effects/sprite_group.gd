@@ -25,7 +25,7 @@ func _ready() -> void:
 	cur_type = 0
 	frame_timer = 0.0
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	frame_timer -= delta
 	if frame_timer <= 0:
 		update_frame()

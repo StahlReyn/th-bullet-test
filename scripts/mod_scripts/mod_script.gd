@@ -12,7 +12,7 @@ func _ready() -> void:
 	time_elapsed = 0.0
 	time_active = 0.0
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	time_elapsed += delta
 	if enabled:
 		time_active += delta

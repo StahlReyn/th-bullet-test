@@ -12,7 +12,7 @@ func _ready() -> void:
 	player = GameUtils.get_player()
 	position = position_unfocused
 	
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	super(delta)
 	process_position(delta)
 

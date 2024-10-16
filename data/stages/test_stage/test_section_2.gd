@@ -9,7 +9,7 @@ func _ready() -> void:
 	super()
 	duration = 5.0
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	super(delta)
 	cd1 -= delta
 	if cd1 <= 0:

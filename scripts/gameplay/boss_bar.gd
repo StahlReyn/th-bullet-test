@@ -5,7 +5,7 @@ var parent : Enemy
 func _ready() -> void:
 	call_deferred("setup_parent")
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	update_value()
 
 func setup_parent():

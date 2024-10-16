@@ -22,7 +22,7 @@ func _ready() -> void:
 	color.a = 0
 	set_modulate(color)
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	timer -= delta
 	if timer <= 0:
 		update_state()

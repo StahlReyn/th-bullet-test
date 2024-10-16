@@ -35,7 +35,7 @@ var distance_squared : float
 func _ready() -> void:
 	magnet_target = GameUtils.get_player()
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	spawn_time -= delta
 	if magnet_target:
 		distance_squared = global_position.distance_squared_to(magnet_target.global_position)

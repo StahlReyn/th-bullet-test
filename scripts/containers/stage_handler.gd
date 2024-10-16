@@ -8,7 +8,7 @@ var cur_stage_script : StageScript
 func _ready() -> void:
 	add_stage_script_from_data(stage_data) # This is temporary test
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	check_finished_sections()
 
 func add_stage_script_from_data(data : StageData) -> Node:

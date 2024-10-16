@@ -26,7 +26,7 @@ func _ready() -> void:
 	state = State.NORMAL
 	do_spawn_movement()
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	state_timer -= delta
 	process_movement_input()
 	process_shoot_input()

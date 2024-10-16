@@ -6,7 +6,7 @@ var appear_time : float = 0
 func _ready() -> void:
 	appear_time = 0
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if appear_time > 0:
 		appear_time -= delta
 		visible = true

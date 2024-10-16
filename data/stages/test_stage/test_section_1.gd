@@ -25,7 +25,7 @@ func _ready() -> void:
 	super()
 	duration = 50.0
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	super(delta)
 	
 	# Test fluctuating fps

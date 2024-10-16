@@ -26,7 +26,7 @@ static func create_icon(type: int, num: int) -> IconPieces:
 func _ready() -> void:
 	pass
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	match cur_type:
 		Type.LIFE:
 			update_sprite(

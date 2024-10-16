@@ -11,7 +11,7 @@ var cooldown_time : float
 func _ready() -> void:
 	reset_cooldown()
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	cooldown_time -= delta
 	if can_shoot():
 		do_shoot()

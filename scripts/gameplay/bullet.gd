@@ -20,7 +20,7 @@ func _ready() -> void:
 	if audio_spawn:
 		audio_spawn.play()
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	total_time += delta
 	movement_handler.process_script(delta)
 	process_movement(delta)

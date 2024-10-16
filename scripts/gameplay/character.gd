@@ -23,7 +23,7 @@ var is_dead : bool = false
 func _ready() -> void:
 	reset_hp()
 
-func _process(delta: float) -> void:	
+func _physics_process(delta: float) -> void:	
 	total_time += delta
 	process_movement(delta)
 	update_animation()

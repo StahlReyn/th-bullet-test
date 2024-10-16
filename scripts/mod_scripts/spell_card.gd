@@ -12,7 +12,7 @@ var count_attempt : int = 0
 func _ready() -> void:
 	super()
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	super(delta)
 
 func start_section() -> void:

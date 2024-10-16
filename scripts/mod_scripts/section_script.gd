@@ -12,7 +12,7 @@ var stage_parent : StageScript
 func _ready() -> void:
 	super()
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	super(delta)
 	if end_condition() and not ended_already:
 		end_section()

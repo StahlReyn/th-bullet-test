@@ -22,7 +22,7 @@ func _ready() -> void:
 	set_state(State.REGULAR)
 	call_deferred("setup_nodes")
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if cur_spellcard:
 		label_name.text = cur_spellcard.spell_name
 		label_timer.text = "%.2f" % cur_spellcard.get_time_left()
