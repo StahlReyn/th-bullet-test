@@ -24,12 +24,17 @@ var mod_speed : float = 10.0
 
 var position_type : int = 0 # From PortraitLine Enum
 
+var opacity_free : bool = false # queue free when opacity is 0 properly
+
 func _ready() -> void:
 	# set_position_type(DialogueLine.PortraitPosition.LEFT_BACK)
 	pass
 
 func _process(delta: float) -> void:
 	process_position(delta)
+	if opacity_free and get_modulate().a <= 0.01:
+		print("Freed Portrait")
+		queue_free()
 
 func set_position_type(type: int, instant: bool = false) -> void:
 	position_type = type

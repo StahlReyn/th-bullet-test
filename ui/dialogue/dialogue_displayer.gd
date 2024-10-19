@@ -49,6 +49,7 @@ func end_dialogue() -> void:
 	for id in portrait_dict:
 		var portrait : PortraitSet = portrait_dict[id]
 		portrait.set_initial_position()
+		portrait.opacity_free = true
 	cur_dialogue_script.end_section()
 	cur_dialogue_script = null
 	cur_dialogue_action = null
