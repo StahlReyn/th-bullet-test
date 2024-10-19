@@ -1,6 +1,7 @@
 class_name SectionDialogueScript
 extends SectionScript
 ## For section where character talks
+## Section ending is called from Dialogue Displayer
 
 var dialogue_set : DialogueSet
 

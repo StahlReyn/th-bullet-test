@@ -14,17 +14,20 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("bomb"):
-		if not cur_dialogue_script:
-			print("No dialogue section yet")
-		elif check_end_dialogue():
-			end_dialogue()
-		else:
-			while true:
-				next_dialogue()
-				update_portrait()
-				if not cur_dialogue_action.auto:
-					break
+		next_dialogue_action_input()
 
+func next_dialogue_action_input():
+	if not cur_dialogue_script:
+		print("No dialogue section yet")
+	elif check_end_dialogue():
+		end_dialogue()
+	else:
+		while true:
+			next_dialogue()
+			update_portrait()
+			if not cur_dialogue_action.auto:
+				break
+					
 func check_end_dialogue() -> bool:
 	return cur_action_index >= cur_dialogue_script.get_dialogue_action_count()
 
@@ -39,9 +42,13 @@ func next_dialogue() -> void:
 
 func start_dialogue() -> void:
 	reset_anim()
+	next_dialogue_action_input()
 
 func end_dialogue() -> void:
 	print("END DIALOG")
+	for id in portrait_dict:
+		var portrait : PortraitSet = portrait_dict[id]
+		portrait.set_initial_position()
 	cur_dialogue_script.end_section()
 	cur_dialogue_script = null
 	cur_dialogue_action = null

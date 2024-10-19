@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="DialogueSet" load_steps=11 format=3 uid="uid://cbg7g8an5xkap"]
+[gd_resource type="Resource" script_class="DialogueSet" load_steps=14 format=3 uid="uid://cbg7g8an5xkap"]
 
 [ext_resource type="Script" path="res://resources/dialogue_action.gd" id="1_b1blp"]
 [ext_resource type="Script" path="res://resources/dialogue_line.gd" id="1_pglt7"]
@@ -47,12 +47,40 @@ text = "how evil!"
 [sub_resource type="Resource" id="Resource_gql33"]
 script = ExtResource("1_pglt7")
 id = "B"
-auto = false
+auto = true
 face_anim = "annoyed"
 body_anim = "defeated"
 position_type = 3
 text = ""
 
+[sub_resource type="Resource" id="Resource_wdw5l"]
+script = ExtResource("1_pglt7")
+id = "A"
+auto = false
+face_anim = ""
+body_anim = ""
+position_type = 0
+text = "very true..."
+
+[sub_resource type="Resource" id="Resource_kaphr"]
+script = ExtResource("1_pglt7")
+id = "A"
+auto = true
+face_anim = ""
+body_anim = ""
+position_type = 0
+text = ""
+
+[sub_resource type="Resource" id="Resource_f40fj"]
+script = ExtResource("1_pglt7")
+id = "B"
+auto = false
+face_anim = ""
+body_anim = ""
+position_type = 1
+text = "This is going to be a long night
+(two side speak fire writing)"
+
 [resource]
 script = ExtResource("1_ppaqy")
-dialogue_actions = Array[ExtResource("1_b1blp")]([SubResource("Resource_4tm5t"), SubResource("Resource_npw07"), SubResource("Resource_qsdu4"), SubResource("Resource_4i2dr"), SubResource("Resource_gql33")])
+dialogue_actions = Array[ExtResource("1_b1blp")]([SubResource("Resource_4tm5t"), SubResource("Resource_npw07"), SubResource("Resource_qsdu4"), SubResource("Resource_4i2dr"), SubResource("Resource_gql33"), SubResource("Resource_wdw5l"), SubResource("Resource_kaphr"), SubResource("Resource_f40fj")])

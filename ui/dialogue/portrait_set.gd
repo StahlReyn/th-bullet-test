@@ -53,12 +53,16 @@ func set_position_type(type: int, instant: bool = false) -> void:
 		global_position = pos_target
 		set_modulate(mod_target)
 
-func set_initial_position() -> void:
+func set_initial_position(instant: bool = false) -> void:
 	if DialogueLine.is_left(position_type):
-		global_position = pos_left_start
+		pos_target = pos_left_start
 	else:
-		global_position = pos_right_start
-	set_modulate(mod_start)
+		pos_target = pos_right_start
+	mod_target = mod_start
+	# Move instantly, This is for initializing
+	if instant:
+		global_position = pos_target
+		set_modulate(mod_target)
 	
 func set_body_anim(anim_name: String) -> void:
 	sprite_body.play(anim_name)

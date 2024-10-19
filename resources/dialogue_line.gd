@@ -17,7 +17,7 @@ enum PortraitPosition {
 @export var body_anim : String ## Body Animation Name
 @export var position_type : PortraitPosition
 @export_group("Dialogue")
-@export var text : String ## Dialogue content, use CSV Keys
+@export_multiline var text : String ## Dialogue content, use CSV Keys
 
 static func is_back(type: int) -> bool:
 	if (type == PortraitPosition.LEFT_BACK or 
@@ -39,9 +39,9 @@ static func is_right(type: int) -> bool:
 
 static func new_set_from_line(line: DialogueLine) -> PortraitSet:
 	var new_portrait : PortraitSet = line.portrait.instantiate()
-	new_portrait.set_position_type(line.position_type, true)
 	update_portrait_anim(new_portrait, line)
-	new_portrait.set_initial_position()
+	new_portrait.set_initial_position(true)
+	new_portrait.set_position_type(line.position_type)
 	return new_portrait
 
 static func update_portrait_anim(portrait: PortraitSet, line: DialogueLine):
