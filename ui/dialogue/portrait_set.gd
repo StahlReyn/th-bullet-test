@@ -6,6 +6,7 @@ extends Node2D
 @export_category("Sprite")
 @export var sprite_body : AnimatedSprite2D ## Sprite set for body, larger part
 @export var sprite_face : AnimatedSprite2D ## Sprite set for face, smaller part
+@export var speech_position : Node2D ## Where dialogue would come out from
 
 var pos_left : Vector2 = Vector2(200, 550)
 var pos_right : Vector2 = Vector2(800, 550)
@@ -35,6 +36,9 @@ func _process(delta: float) -> void:
 	if opacity_free and get_modulate().a <= 0.01:
 		print("Freed Portrait")
 		queue_free()
+
+func get_speech_position() -> Vector2:
+	return speech_position.global_position
 
 func set_position_type(type: int, instant: bool = false) -> void:
 	position_type = type

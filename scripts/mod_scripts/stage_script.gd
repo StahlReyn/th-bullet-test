@@ -21,7 +21,7 @@ func add_section_script(script: GDScript) -> SectionScript:
 	add_child(section)
 	added_section_list.push_front(section)
 	section.set_stage_parent(self)
-	print("Add Section Script")
+	print("+ Add Section Script")
 	return section
 
 func is_section_available() -> bool:

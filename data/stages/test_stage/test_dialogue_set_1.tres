@@ -14,7 +14,7 @@ portrait = ExtResource("2_dkg0m")
 face_anim = ""
 body_anim = ""
 position_type = 3
-text = "I am evil enemy"
+text = ""
 
 [sub_resource type="Resource" id="Resource_npw07"]
 script = ExtResource("1_pglt7")
@@ -42,7 +42,7 @@ auto = false
 face_anim = "surprised"
 body_anim = "defeated"
 position_type = 1
-text = "how evil!"
+text = "i am evil!"
 
 [sub_resource type="Resource" id="Resource_gql33"]
 script = ExtResource("1_pglt7")

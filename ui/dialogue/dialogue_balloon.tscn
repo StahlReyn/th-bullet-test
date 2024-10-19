@@ -5,13 +5,21 @@
 [ext_resource type="LabelSettings" uid="uid://fxsflib1sm3p" path="res://assets/resources/label_settings/label_dialogue.tres" id="2_043al"]
 [ext_resource type="Texture2D" uid="uid://cb3maqphtrmg3" path="res://assets/img/system/dialogue_tail.png" id="3_y3tjd"]
 
-[node name="DialogueBalloon" type="Node2D" node_paths=PackedStringArray("label_main")]
+[node name="DialogueBalloon" type="Node2D"]
+z_index = 10
 script = ExtResource("1_1dabg")
-label_main = NodePath("Balloon/MarginContainer/Label")
 
 [node name="Balloon" type="MarginContainer" parent="."]
-offset_right = 140.0
-offset_bottom = 41.0
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -41.0
+offset_top = -44.0
+offset_bottom = 11.0
+grow_horizontal = 0
+grow_vertical = 2
 
 [node name="NinePatchRect" type="NinePatchRect" parent="Balloon"]
 z_index = -1
@@ -32,12 +40,11 @@ theme_override_constants/margin_bottom = 12
 
 [node name="Label" type="Label" parent="Balloon/MarginContainer"]
 layout_mode = 2
-text = "placeholder aaaaaaa
-multi line!"
 label_settings = ExtResource("2_043al")
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="DialogueTail" type="Sprite2D" parent="."]
-position = Vector2(219, -17)
+position = Vector2(88, -44)
 texture = ExtResource("3_y3tjd")
+offset = Vector2(0, -17)

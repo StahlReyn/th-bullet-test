@@ -58,11 +58,12 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="PortraitSetReimuHoldurei" type="Node2D" node_paths=PackedStringArray("sprite_body", "sprite_face")]
+[node name="PortraitSetReimuHoldurei" type="Node2D" node_paths=PackedStringArray("sprite_body", "sprite_face", "speech_position")]
 script = ExtResource("1_lhocp")
 id = "holder_1"
 sprite_body = NodePath("Body")
 sprite_face = NodePath("Face")
+speech_position = NodePath("SpeechPosition")
 
 [node name="Body" type="AnimatedSprite2D" parent="."]
 position = Vector2(-67, 19)
@@ -127,3 +128,6 @@ size_flags_vertical = 4
 
 [node name="Sprite2D" type="Sprite2D" parent="MarginContainer/CenterContainer"]
 texture = ExtResource("11_r1c76")
+
+[node name="SpeechPosition" type="Node2D" parent="."]
+position = Vector2(-214, -149)

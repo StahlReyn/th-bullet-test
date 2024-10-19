@@ -7,8 +7,8 @@
 [node name="DialogueDisplayer" type="Node2D" groups=["dialogue_displayer"]]
 script = ExtResource("1_6q2me")
 
-[node name="DialogueBalloon" parent="." instance=ExtResource("2_hwxvs")]
-z_index = 10
+[node name="DialogueBalloonTest" parent="." instance=ExtResource("2_hwxvs")]
+visible = false
 position = Vector2(456, 450)
 
 [node name="PortraitTest" parent="." instance=ExtResource("3_g055i")]
