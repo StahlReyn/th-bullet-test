@@ -60,6 +60,7 @@ animations = [{
 
 [node name="PortraitSetReimuHoldurei2" type="Node2D" node_paths=PackedStringArray("sprite_body", "sprite_face")]
 script = ExtResource("1_mju0e")
+id = "holder_2"
 sprite_body = NodePath("Body")
 sprite_face = NodePath("Face")
 
@@ -76,6 +77,7 @@ animation = &"annoyed"
 flip_h = true
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

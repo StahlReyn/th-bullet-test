@@ -60,6 +60,7 @@ animations = [{
 
 [node name="PortraitSetReimuHoldurei" type="Node2D" node_paths=PackedStringArray("sprite_body", "sprite_face")]
 script = ExtResource("1_lhocp")
+id = "holder_1"
 sprite_body = NodePath("Body")
 sprite_face = NodePath("Face")
 

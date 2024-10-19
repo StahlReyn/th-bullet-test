@@ -12,4 +12,5 @@ z_index = 10
 position = Vector2(456, 450)
 
 [node name="PortraitSetReimuHoldurei" parent="." instance=ExtResource("3_g055i")]
+visible = false
 position = Vector2(827, 551)

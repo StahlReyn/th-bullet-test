@@ -7,7 +7,7 @@ var cd_script : float = 20.0
 
 func _ready() -> void:
 	super()
-	duration = 3.0
+	duration = 1.0
 
 func _physics_process(delta: float) -> void:
 	super(delta)

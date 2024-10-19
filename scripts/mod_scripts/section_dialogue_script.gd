@@ -22,11 +22,11 @@ func update_displayer() -> void:
 func get_dialogue_set() -> DialogueSet:
 	return dialogue_set
 
-func get_dialogue_lines() -> Array[DialogueLine]:
-	return get_dialogue_set().dialogue_lines
+func get_dialogue_actions() -> Array[DialogueAction]:
+	return get_dialogue_set().dialogue_actions
 
-func get_dialogue_line(index : int) -> DialogueLine:
-	return get_dialogue_lines()[index]
+func get_dialogue_action(index : int) -> DialogueAction:
+	return get_dialogue_actions()[index]
 
-func get_dialogue_line_count() -> int:
-	return len(get_dialogue_lines())
+func get_dialogue_action_count() -> int:
+	return len(get_dialogue_actions())
