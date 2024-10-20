@@ -1,6 +1,6 @@
 extends MovementScript
 
-@onready var bullet_circle : PackedScene = preload("res://data/bullets/circle_small.tscn")
+@onready var bullet_circle : PackedScene = BulletUtils.scene_dict["circle_small"]
 
 var player : Player
 var cd_shoot : float

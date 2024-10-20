@@ -1,7 +1,7 @@
 extends SpellCard
 
 @onready var enemy_boss : PackedScene = preload("res://data/enemies/enemy_lesser_fairy_boss.tscn")
-@onready var bullet_crystal : PackedScene = preload("res://data/bullets/crystal_small.tscn")
+@onready var bullet_crystal : PackedScene = BulletUtils.scene_dict["crystal_small"]
 @onready var audio_shoot : AudioStream = preload("res://assets/audio/sfx/hit_noise_fade.wav")
 
 @onready var script_expiry : GDScript = preload("res://data/movement/common/expiry_timer.gd")
