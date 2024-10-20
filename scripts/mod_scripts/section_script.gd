@@ -10,11 +10,13 @@ var is_subsection : bool = false ## If enabled, the ScriptStage will not wait un
 var stage_parent : StageScript
 
 func _ready() -> void:
+	print_rich("[color=green]==== Section Script ====[/color]")
 	super()
 
 func _physics_process(delta: float) -> void:
 	super(delta)
 	if end_condition() and not ended_already:
+		print_rich("[color=orange]END SECTION - Section Condition[/color]")
 		end_section()
 
 func start_section() -> void:
@@ -22,7 +24,7 @@ func start_section() -> void:
 
 ## This ends the section. Can also be called externally, like Boss HP condition
 func end_section() -> void:
-	print("END SECTION")
+	prints("END SECTION", end_condition(), ended_already)
 	ended_already = true
 	enabled = false
 	if stage_parent:

@@ -10,6 +10,7 @@ var count_attempt : int = 0
 # Duration is part of section already
 
 func _ready() -> void:
+	print_rich("[color=green]==== Spell Card Script ====[/color]")
 	super()
 
 func _physics_process(delta: float) -> void:

@@ -8,6 +8,7 @@ var added_section_list : Array[SectionScript] = []
 
 func _ready() -> void:
 	super()
+	print_rich("[color=green][b]==== Stage Script ====[/b][/color]")
 	do_next_script()
 
 static func new_stage_script_from_data(stage_data : StageData) -> StageScript:
@@ -21,7 +22,7 @@ func add_section_script(script: GDScript) -> SectionScript:
 	add_child(section)
 	added_section_list.push_front(section)
 	section.set_stage_parent(self)
-	print("+ Add Section Script")
+	print_rich("[color=yellow]+ Add Section Script[/color]")
 	return section
 
 func is_section_available() -> bool:
@@ -34,12 +35,12 @@ func on_section_end() -> void:
 	do_next_script()
 
 func do_next_script() -> void:
-	print("SECTION: ", section_count)
+	print_rich("[color=yellow]> Next Script: [/color]", section_count)
 	if section_count < len(get_section_list()):
 		add_section_script(get_section_list()[section_count])
 		section_count += 1
 	else:
-		print("Reached final in sequence")
+		print_rich("[color=yellow]** Reached final in sequence **[/color]")
 
 func get_section_list() -> Array[GDScript]:
 	return stage_data.section_list

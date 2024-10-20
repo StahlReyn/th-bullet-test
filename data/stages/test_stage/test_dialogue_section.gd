@@ -4,12 +4,8 @@ extends SectionDialogueScript
 
 func _ready() -> void:
 	super()
+	dialogue_set = set_1
 	start_section()
 
 func _physics_process(delta: float) -> void:
 	super(delta)
-
-func start_section():
-	dialogue_set = set_1
-	update_displayer()
-	super()

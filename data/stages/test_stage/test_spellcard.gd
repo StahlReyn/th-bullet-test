@@ -6,8 +6,10 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	super(delta)
-	if get_time_left() < 35.0:
-		end_section()
+
+func end_condition() -> bool:
+	return get_time_left() < 35.0
+	#return time_active >= duration
 
 func start_section():
 	super()

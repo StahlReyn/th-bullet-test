@@ -32,12 +32,12 @@ func check_end_dialogue() -> bool:
 	return cur_action_index >= cur_dialogue_script.get_dialogue_action_count()
 
 func next_dialogue() -> void:
-	print("Next Dialogue: ", cur_action_index)
+	prints("Next Dialogue:", cur_action_index, "/", cur_dialogue_script.get_dialogue_action_count())
 	cur_dialogue_action = cur_dialogue_script.get_dialogue_action(cur_action_index)
 	cur_action_index += 1
 
+# Dialogue Balloon
 func create_balloon() -> void:
-	# Dialogue Balloon
 	if cur_dialogue_action is DialogueLine and cur_dialogue_action.text != "":
 		var dialogue_balloon : DialogueBalloon = DialogueBalloon.create_balloon(
 			self, 
@@ -47,8 +47,6 @@ func create_balloon() -> void:
 		)
 		if first_action: # If first action treat as if pressed once already
 			dialogue_balloon.press_count = 1
-	else:
-		print("No Dialogue")
 
 func start_dialogue() -> void:
 	first_action = true
@@ -56,11 +54,11 @@ func start_dialogue() -> void:
 	next_dialogue_action_input()
 
 func end_dialogue() -> void:
-	print("END DIALOG")
 	for id in portrait_dict:
 		var portrait : PortraitSet = portrait_dict[id]
 		portrait.set_initial_position()
 		portrait.opacity_free = true
+	print_rich("[color=orange]END SECTION - Dialogue End[/color]")
 	cur_dialogue_script.end_section()
 	reset_dialogue_variables()
 
