@@ -1,6 +1,6 @@
 extends MovementScript
 
-@onready var bullet_circle : PackedScene = BulletUtils.scene_dict["circle_small"]
+@onready var bullet_circle : PackedScene = BulletUtils.scene_dict["knife"]
 @onready var audio_shoot : AudioStream = preload("res://assets/audio/sfx/hit_noise_fade.wav")
 
 var player : Player
