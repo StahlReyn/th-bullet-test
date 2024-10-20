@@ -5,6 +5,9 @@ var game_area : Vector2 = Vector2(768,896)
 func get_player() -> Player:
 	return get_tree().get_nodes_in_group("player")[0]
 
+func get_enemy_list() -> Array[Node]:
+	return get_tree().get_nodes_in_group("enemy")
+
 func get_bullet_count() -> int:
 	return len(get_tree().get_nodes_in_group("bullet"))
 

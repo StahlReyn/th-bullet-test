@@ -1,15 +1,128 @@
-[gd_scene load_steps=3 format=3 uid="uid://curt0mp7nsjs6"]
+[gd_scene load_steps=20 format=3 uid="uid://curt0mp7nsjs6"]
 
 [ext_resource type="Script" path="res://scripts/containers/shooter_container.gd" id="1_rwmxh"]
 [ext_resource type="PackedScene" uid="uid://qbaoce8pthqa" path="res://data/shooters/reimu_yingyang.tscn" id="2_6m7pe"]
+[ext_resource type="PackedScene" uid="uid://dik2yfd8001np" path="res://data/shooters/reimu_base.tscn" id="2_n7fp3"]
+[ext_resource type="PackedScene" uid="uid://c0etu2q8nruel" path="res://data/bullets/player_shooters/reimu_base.tscn" id="3_yf8fw"]
+[ext_resource type="Script" path="res://resources/shooter_layout.gd" id="4_rdoyi"]
+[ext_resource type="PackedScene" uid="uid://clpuwtwfi7qgj" path="res://data/bullets/player_shooters/reimu_homing.tscn" id="6_h7dpu"]
+[ext_resource type="PackedScene" uid="uid://icd748p18cgv" path="res://data/bullets/player_shooters/reimu_focus.tscn" id="7_h3e8b"]
+
+[sub_resource type="Resource" id="Resource_4ucxd"]
+resource_local_to_scene = true
+script = ExtResource("4_rdoyi")
+min_power = 0
+unfocus_pos = Vector2(20, -50)
+focus_pos = Vector2(20, -50)
+
+[sub_resource type="Resource" id="Resource_pn35s"]
+resource_local_to_scene = true
+script = ExtResource("4_rdoyi")
+min_power = 0
+unfocus_pos = Vector2(-20, -50)
+focus_pos = Vector2(-20, -50)
+
+[sub_resource type="Resource" id="Resource_7qx47"]
+resource_local_to_scene = true
+script = ExtResource("4_rdoyi")
+min_power = 100
+unfocus_pos = Vector2(0, -50)
+focus_pos = Vector2(0, -60)
+
+[sub_resource type="Resource" id="Resource_bykjl"]
+resource_local_to_scene = true
+script = ExtResource("4_rdoyi")
+min_power = 200
+unfocus_pos = Vector2(-40, -40)
+focus_pos = Vector2(-25, -60)
+
+[sub_resource type="Resource" id="Resource_rdyuh"]
+resource_local_to_scene = true
+script = ExtResource("4_rdoyi")
+min_power = 300
+unfocus_pos = Vector2(-50, -25)
+focus_pos = Vector2(-30, -50)
+
+[sub_resource type="Resource" id="Resource_0l7wb"]
+resource_local_to_scene = true
+script = ExtResource("4_rdoyi")
+min_power = 400
+unfocus_pos = Vector2(-80, -10)
+focus_pos = Vector2(-45, -50)
+
+[sub_resource type="Resource" id="Resource_yloup"]
+resource_local_to_scene = true
+script = ExtResource("4_rdoyi")
+min_power = 200
+unfocus_pos = Vector2(40, -40)
+focus_pos = Vector2(25, -60)
+
+[sub_resource type="Resource" id="Resource_ejq67"]
+resource_local_to_scene = true
+script = ExtResource("4_rdoyi")
+min_power = 300
+unfocus_pos = Vector2(50, -25)
+focus_pos = Vector2(30, -50)
+
+[sub_resource type="Resource" id="Resource_i6p4k"]
+resource_local_to_scene = true
+script = ExtResource("4_rdoyi")
+min_power = 400
+unfocus_pos = Vector2(80, -10)
+focus_pos = Vector2(45, -50)
+
+[sub_resource type="Resource" id="Resource_fehqh"]
+resource_local_to_scene = true
+script = ExtResource("4_rdoyi")
+min_power = 300
+unfocus_pos = Vector2(0, -50)
+focus_pos = Vector2(0, -60)
+
+[sub_resource type="Resource" id="Resource_434n2"]
+resource_local_to_scene = true
+script = ExtResource("4_rdoyi")
+min_power = 400
+unfocus_pos = Vector2(-30, -45)
+focus_pos = Vector2(-15, -60)
+
+[sub_resource type="Resource" id="Resource_0req8"]
+resource_local_to_scene = true
+script = ExtResource("4_rdoyi")
+min_power = 400
+unfocus_pos = Vector2(30, -45)
+focus_pos = Vector2(15, -60)
 
 [node name="HomingAmulet1" type="Node2D"]
 script = ExtResource("1_rwmxh")
 
+[node name="ReimuBase" parent="." instance=ExtResource("2_n7fp3")]
+unfocus_bullet = ExtResource("3_yf8fw")
+layouts = Array[ExtResource("4_rdoyi")]([SubResource("Resource_4ucxd")])
+
+[node name="ReimuBase2" parent="." instance=ExtResource("2_n7fp3")]
+unfocus_bullet = ExtResource("3_yf8fw")
+layouts = Array[ExtResource("4_rdoyi")]([SubResource("Resource_pn35s")])
+
 [node name="ReimuYingyang" parent="." instance=ExtResource("2_6m7pe")]
-position_unfocused = Vector2(30, -50)
-position_focused = Vector2(15, -60)
+position = Vector2(1, -70)
+unfocus_bullet = ExtResource("6_h7dpu")
+focus_bullet = ExtResource("7_h3e8b")
+layouts = Array[ExtResource("4_rdoyi")]([SubResource("Resource_7qx47"), SubResource("Resource_bykjl"), SubResource("Resource_rdyuh"), SubResource("Resource_0l7wb")])
 
 [node name="ReimuYingyang2" parent="." instance=ExtResource("2_6m7pe")]
-position_unfocused = Vector2(-30, -50)
-position_focused = Vector2(-15, -60)
+position = Vector2(1, -70)
+unfocus_bullet = ExtResource("6_h7dpu")
+focus_bullet = ExtResource("7_h3e8b")
+layouts = Array[ExtResource("4_rdoyi")]([SubResource("Resource_yloup"), SubResource("Resource_ejq67"), SubResource("Resource_i6p4k")])
+
+[node name="ReimuYingyang3" parent="." instance=ExtResource("2_6m7pe")]
+position = Vector2(1, -70)
+unfocus_bullet = ExtResource("6_h7dpu")
+focus_bullet = ExtResource("7_h3e8b")
+layouts = Array[ExtResource("4_rdoyi")]([SubResource("Resource_fehqh"), SubResource("Resource_434n2")])
+
+[node name="ReimuYingyang4" parent="." instance=ExtResource("2_6m7pe")]
+position = Vector2(1, -70)
+unfocus_bullet = ExtResource("6_h7dpu")
+focus_bullet = ExtResource("7_h3e8b")
+layouts = Array[ExtResource("4_rdoyi")]([SubResource("Resource_0req8")])

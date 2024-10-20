@@ -31,15 +31,15 @@ func process_movement(delta) -> void:
 		rotation = velocity.angle()
 
 func check_remove() -> void:
-	if position.x > 1000 or position.x < -300 or position.y > 1000 or position.y < -300:
-		queue_free()
+	if position.x > 1000 or position.x < -200 or position.y > 1000 or position.y < -200:
+		call_deferred("queue_free")
 
 func on_hit():
 	penetration_count -= 1
 	if penetration_count <= 0:
 		if bullet_hit_effect_scene:
 			AfterEffect.add_effect(bullet_hit_effect_scene, self)
-		queue_free()
+		call_deferred("queue_free")
 	
 func add_movement_script(script : GDScript) -> Node:
 	return movement_handler.add_movement_script(self, script)

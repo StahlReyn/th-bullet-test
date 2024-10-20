@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://clpuwtwfi7qgj"]
+
+[ext_resource type="Script" path="res://scripts/gameplay/bullet.gd" id="1_oass1"]
+[ext_resource type="Texture2D" uid="uid://clnl18fndfi38" path="res://assets/img/bullets/talisman.png" id="2_fm1xn"]
+[ext_resource type="Script" path="res://data/bullets/sprite_group_basic_bullet.gd" id="3_ft8tb"]
+[ext_resource type="Script" path="res://data/movement/common/homing_enemy.gd" id="4_vyet6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_eyqfo"]
+radius = 6.0
+
+[node name="Bullet" type="Area2D" node_paths=PackedStringArray("main_sprite") groups=["bullet"]]
+modulate = Color(1, 1, 1, 0.392157)
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("1_oass1")
+main_sprite = NodePath("Sprite")
+rotation_based_on_velocity = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_eyqfo")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+rotation = 1.5708
+scale = Vector2(2, 2)
+texture = ExtResource("2_fm1xn")
+hframes = 10
+vframes = 4
+frame = 3
+script = ExtResource("3_ft8tb")
+
+[node name="Node" type="Node" parent="." node_paths=PackedStringArray("parent")]
+script = ExtResource("4_vyet6")
+parent = NodePath("..")

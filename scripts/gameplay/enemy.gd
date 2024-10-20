@@ -35,13 +35,13 @@ func _physics_process(delta: float) -> void:
 
 func check_despawn() -> void:
 	if position.x > 1000 or position.x < -200 or position.y > 1000 or position.y < -300:
-		queue_free()
+		call_deferred("queue_free")
 
 func do_death():
 	super()
 	drop_items()
 	if do_free_on_death:
-		queue_free()
+		call_deferred("queue_free")
 
 func drop_items():
 	var item_container : ItemContainer = GameUtils.get_item_container()

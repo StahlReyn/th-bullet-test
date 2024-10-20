@@ -23,7 +23,7 @@ var cd_fps_count: int = 1
 
 func _ready() -> void:
 	super()
-	duration = 0.1
+	duration = 60.0
 
 func _physics_process(delta: float) -> void:
 	super(delta)
