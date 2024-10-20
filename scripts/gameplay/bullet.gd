@@ -4,7 +4,7 @@ extends Area2D
 @export_group("Visuals")
 @export var main_sprite : Sprite2D
 @export var bullet_hit_effect_scene : PackedScene
-@export var rotation_based_on_velocity : bool = false
+@export var rotation_based_on_velocity : bool = true
 @export_group("Gameplay")
 @export var damage : int = 1
 @export var penetration : int = 1

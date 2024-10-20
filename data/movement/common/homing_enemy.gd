@@ -34,7 +34,3 @@ func get_enemy_target() -> Enemy:
 			if enemy.position.y > cur_enemy.position.y:
 				cur_enemy = enemy
 	return cur_enemy
-
-func rotate_towards_target(object, target, rotation_speed):
-	var target_angle = object.global_position.angle_to_point(target)
-	object.rotation = lerp_angle(object.rotation, target_angle, rotation_speed)

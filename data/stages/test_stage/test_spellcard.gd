@@ -29,7 +29,7 @@ func _ready() -> void:
 	boss = spawn_enemy(enemy_boss, Vector2(380,0))
 	boss.do_despawn = false
 	boss.do_free_on_death = false
-	boss.mhp = 500;
+	boss.mhp = 1000;
 	boss.reset_hp()
 	boss.drop_power = 40
 	boss.drop_point = 20
@@ -98,12 +98,12 @@ func shoot_spiral() -> void:
 		for i in range(5):
 			bp_spiral(2, i*TAU/5 + shot_count_1 * 0.01)
 			bp_spiral(-2, i*TAU/5 + shot_count_1 * 0.01)
-		shot_cd_1 += 0.08
+		shot_cd_1 += 0.07
 
 func shoot_circle() -> void:
 	if shot_cd_2 <= 0:
 		shot_count_2 += 1
-		bp_circle(32, shot_count_2 * 0.01)
+		bp_circle(35, shot_count_2 * 0.01)
 		AudioManager.play_audio(audio_shoot)
 		shot_cd_2 += 1.0
 
@@ -119,10 +119,9 @@ func bp_spiral(speed, offset) -> void:
 	)
 
 func bp_circle(count, offset) -> void:
-	var direction : Vector2 = Vector2.ZERO
 	for i in range(count):
-		direction.x = cos(TAU * i/count)
-		direction.y = sin(TAU * i/count)
+		var angle = TAU * i/count + offset
+		var direction = Vector2(cos(angle),sin(angle))
 		var bullet = spawn_bullet(bullet_crystal, pos_spiral)
 		bullet.velocity = direction * 300
 		bullet.set_color(

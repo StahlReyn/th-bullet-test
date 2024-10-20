@@ -18,11 +18,11 @@ func process_movement(delta: float) -> void:
 	
 	if cd_shoot <= 0:
 		var direction : Vector2 = Vector2.ZERO
-		var max = 16
+		var total = 16
 		var i = 0
-		while i < max:
-			direction.x = cos(TAU * i/max)
-			direction.y = sin(TAU * i/max)
+		while i < total:
+			direction.x = cos(TAU * i/total)
+			direction.y = sin(TAU * i/total)
 			var bullet = spawn_bullet(bullet_circle, parent.position)
 			bullet.set_color((i % 2) * 3 + 1, SpriteGroupBasicBullet.ColorVariant.LIGHT)
 			bullet.velocity = direction * 300

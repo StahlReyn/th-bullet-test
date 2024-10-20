@@ -14,7 +14,7 @@ var section_time : float = 0.0
 var cur_velocity : Vector2 = Vector2(0,0)
 var part = 0
 
-var shot_count : float = 0
+var shot_count : int = 0
 
 func _ready() -> void:
 	player = GameUtils.get_player()
@@ -22,7 +22,7 @@ func _ready() -> void:
 
 func set_stat():
 	if parent is Enemy:
-		parent.mhp = 50
+		parent.mhp = 160
 		parent.reset_hp()
 		parent.drop_power = 15
 		parent.drop_point = 10

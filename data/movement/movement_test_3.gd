@@ -20,7 +20,7 @@ func _ready() -> void:
 
 func set_stat():
 	if parent is Enemy:
-		parent.mhp = 80
+		parent.mhp = 200
 		parent.reset_hp()
 		parent.drop_power = 0
 		parent.drop_point = 15
