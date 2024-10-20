@@ -1,7 +1,9 @@
 extends MovementScript
 
 @onready var bullet_circle : PackedScene = BulletUtils.scene_dict["circle_small_cross"]
+@onready var scene_laser : PackedScene = BulletUtils.scene_dict["laser_basic"]
 @onready var audio_shoot : AudioStream = preload("res://assets/audio/sfx/hit_noise_fade.wav")
+@onready var script_rotation : GDScript = preload("res://data/movement/common/rotation_constant.gd")
 
 var player : Player
 var audio_node : Node
@@ -42,6 +44,10 @@ func process_movement(delta: float) -> void:
 		0:
 			cur_velocity.y = 400
 			check_part_cd(0.0)
+			var cur_laser = spawn_laser(scene_laser, parent.global_position)
+			cur_laser.set_node_follow(parent)
+			var cur_script = cur_laser.add_movement_script(script_rotation)
+			cur_script.rotation_speed = 1.0
 		1:
 			cur_velocity.y += -200 * delta
 			check_part_cd(2.0)

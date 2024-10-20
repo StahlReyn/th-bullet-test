@@ -1,6 +1,6 @@
 extends Sprite2D
 
-@export var spin_speed : float = 10 ## deg/s
+@export var rotation_speed : float = 10 ## deg/s
 
 func _physics_process(delta: float) -> void:
-	rotation += delta * spin_speed
+	rotation += delta * rotation_speed

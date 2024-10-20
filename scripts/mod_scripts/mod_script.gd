@@ -30,7 +30,14 @@ static func spawn_bullet(scene : PackedScene, pos : Vector2 = Vector2(0,0)) -> B
 	bullet.global_position = pos
 	container.add_child(bullet)
 	return bullet
-	
+
+static func spawn_laser(scene : PackedScene, pos : Vector2 = Vector2(0,0)) -> Laser:
+	var container = GameUtils.get_bullet_container()
+	var bullet : Laser = scene.instantiate()
+	bullet.global_position = pos
+	container.add_child(bullet)
+	return bullet
+
 static func spawn_image(image : Texture2D, pos : Vector2 = Vector2(0,0)) -> Sprite2D:
 	var sprite = Sprite2D.new()
 	var container = GameUtils.get_image_container()

@@ -9,6 +9,7 @@ extends Area2D
 @export var damage : int = 1
 @export var penetration : int = 1
 @export var velocity : Vector2 = Vector2.ZERO
+@export var delay_time : float = 0.2
 
 var total_time : float
 var penetration_count : int

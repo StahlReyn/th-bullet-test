@@ -1,6 +1,7 @@
 extends Node
 
 var scene_dict : Dictionary = {
+	# Bullets
 	"circle_small" = preload("res://data/bullets/basic/circle_small.tscn"),
 	"circle_medium" = preload("res://data/bullets/basic/circle_medium.tscn"),
 	"circle_border" = preload("res://data/bullets/basic/circle_border.tscn"),
@@ -10,4 +11,6 @@ var scene_dict : Dictionary = {
 	"talisman" = preload("res://data/bullets/basic/talisman.tscn"),
 	"arrow" = preload("res://data/bullets/basic/arrow.tscn"),
 	"knife" = preload("res://data/bullets/basic/knife.tscn"),
+	# Lasers
+	"laser_basic" = preload("res://data/bullets/laser/laser_basic.tscn"),
 }
