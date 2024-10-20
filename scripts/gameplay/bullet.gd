@@ -1,13 +1,15 @@
 class_name Bullet
 extends Area2D
 
+@export_group("Visuals")
 @export var main_sprite : Sprite2D
 @export var bullet_hit_effect_scene : PackedScene
 @export var rotation_based_on_velocity : bool = false
+@export_group("Gameplay")
 @export var damage : int = 1
 @export var penetration : int = 1
+@export var velocity : Vector2 = Vector2.ZERO
 
-var velocity : Vector2 = Vector2.ZERO
 var total_time : float
 var penetration_count : int
 

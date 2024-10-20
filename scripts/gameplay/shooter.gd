@@ -12,7 +12,6 @@ extends Node2D
 
 var position_speed : float = 20.0 ## How fast bullet change position between focus
 var cooldown_time : float = 0.0
-var base_speed : float = 2000
 
 func _ready() -> void:
 	reset_cooldown()
@@ -40,7 +39,6 @@ func do_shoot() -> void:
 	var bullet : Bullet = get_bullet_scene().instantiate()
 	bullet.top_level = true
 	bullet.global_position = self.global_position
-	bullet.velocity = Vector2.UP * base_speed
 	bullet_container.add_child(bullet)
 	reset_cooldown()
 

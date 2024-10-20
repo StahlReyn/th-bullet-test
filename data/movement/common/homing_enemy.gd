@@ -7,6 +7,8 @@ var cur_target_enemy : Enemy
 
 func _ready() -> void:
 	cur_target_enemy = get_enemy_target()
+	#if parent != null:
+	#	parent.velocity = parent.velocity.normalized() * bullet_speed
 
 func _physics_process(delta: float) -> void:
 	if cur_target_enemy == null:

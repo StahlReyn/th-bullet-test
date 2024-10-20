@@ -4,6 +4,8 @@ extends SpellCard
 @onready var bullet_crystal : PackedScene = preload("res://data/bullets/crystal_small.tscn")
 @onready var audio_shoot : AudioStream = preload("res://assets/audio/sfx/hit_noise_fade.wav")
 
+@onready var script_expiry : GDScript = preload("res://data/movement/common/expiry_timer.gd")
+
 var shot_count_1 : int = 0
 var shot_cd_1 : float = 1.0
 
@@ -41,8 +43,11 @@ func _physics_process(delta: float) -> void:
 	pos_spiral = boss.position
 	boss_movement()
 	
-	if boss.hp <= 0:
+	if boss.hp <= 0 and not start_ending:
 		start_ending = true
+		var expire_node = boss.add_movement_script(script_expiry)
+		expire_node.duration = 3.0
+		expire_node.active = true
 	if start_ending:
 		enabled = false
 		end_delay_cd -= delta
