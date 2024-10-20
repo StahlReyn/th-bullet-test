@@ -14,8 +14,8 @@ var count1 : int = 10
 var cd1_loop : float = 0.0
 var cd1_count_loop : int = 0
 
-var cd2 : float = 0.0
-var cd_big : float = 0.0
+var cd2 : float = 1.0
+var cd_big : float = 1.0
 var cd_count : int = 0
 
 var cd_fps: float = 1
@@ -23,7 +23,7 @@ var cd_fps_count: int = 1
 
 func _ready() -> void:
 	super()
-	duration = 60.0
+	duration = 0.1
 
 func _physics_process(delta: float) -> void:
 	super(delta)

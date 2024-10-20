@@ -1,6 +1,10 @@
 class_name Enemy
 extends Character
 
+@export_group("Important")
+@export var do_despawn : bool = true
+@export var do_free_on_death : bool = true
+@export var self_update_anim : bool = true
 @export_group("Drops")
 @export var drop_spawn_speed : float = 1000.0
 @export var drop_spawn_time : float = 0.1
@@ -14,7 +18,6 @@ extends Character
 @export var drop_life_piece : int = 0
 
 var movement_handler : MovementHandler # Movement Handler is auto created
-var self_update_anim : bool = true
 
 func _ready() -> void:
 	super()
@@ -27,7 +30,8 @@ func _physics_process(delta: float) -> void:
 	process_movement(delta)
 	if self_update_anim:
 		update_animation()
-	check_despawn()
+	if do_despawn:
+		check_despawn()
 
 func check_despawn() -> void:
 	if position.x > 1000 or position.x < -200 or position.y > 1000 or position.y < -300:
@@ -36,7 +40,8 @@ func check_despawn() -> void:
 func do_death():
 	super()
 	drop_items()
-	queue_free()
+	if do_free_on_death:
+		queue_free()
 
 func drop_items():
 	var item_container : ItemContainer = GameUtils.get_item_container()
