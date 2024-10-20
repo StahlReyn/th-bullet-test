@@ -1,6 +1,6 @@
 extends MovementScript
 
-@onready var bullet_circle : PackedScene = preload("res://data/bullets/bullet_test.tscn")
+@onready var bullet_circle : PackedScene = preload("res://data/bullets/circle_small.tscn")
 @onready var audio_shoot : AudioStream = preload("res://assets/audio/sfx/hit_noise_fade.wav")
 
 var player : Player
@@ -72,5 +72,6 @@ func bullet_pattern1(speed, scale, offset) -> void:
 	var direction = Vector2(cos(angle),sin(angle))
 	var bullet = spawn_bullet(bullet_circle, parent.position)
 	bullet.velocity = direction * 300
+	bullet.set_color(SpriteGroupBasicBullet.ColorType.BLUE, SpriteGroupBasicBullet.ColorVariant.LIGHT)
 
 # bullet.global_position.direction_to(player.global_position)

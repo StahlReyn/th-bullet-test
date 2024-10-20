@@ -2,7 +2,7 @@ extends SectionScript
 
 @onready var enemy_fairy : PackedScene = preload("res://data/enemies/enemy_lesser_fairy.tscn")
 @onready var enemy_fairy_boss : PackedScene = preload("res://data/enemies/enemy_lesser_fairy_boss.tscn")
-@onready var bullet_circle : PackedScene = preload("res://data/bullets/bullet_test.tscn")
+@onready var bullet_circle_small : PackedScene = preload("res://data/bullets/circle_small.tscn")
 
 @onready var movement_script_1 : GDScript = preload("res://data/movement/movement_test.gd")
 @onready var movement_script_2 : GDScript = preload("res://data/movement/movement_test_2.gd")
@@ -23,7 +23,7 @@ var cd_fps_count: int = 1
 
 func _ready() -> void:
 	super()
-	duration = 1.0
+	duration = 60.0
 
 func _physics_process(delta: float) -> void:
 	super(delta)
@@ -45,7 +45,7 @@ func _physics_process(delta: float) -> void:
 	if count1 <= 0:
 		cd1_loop = 0.0
 		count1 = 10
-		cd1 += 5.0
+		cd1 += 3.0
 		cd1_count_loop += 1
 	
 	if cd1 <= 0:
@@ -66,11 +66,11 @@ func _physics_process(delta: float) -> void:
 	
 	
 	if cd2 <= 0:
-		var bullet1 = spawn_bullet(bullet_circle)
+		var bullet1 = spawn_bullet(bullet_circle_small)
 		bullet1.position.x = cos(time_active * 2) * 50 + 700
 		bullet1.position.y = -50
 		bullet1.velocity.y = 200
-		var bullet2 = spawn_bullet(bullet_circle)
+		var bullet2 = spawn_bullet(bullet_circle_small)
 		bullet2.position.x = -cos(time_active * 2) * 50 + 50
 		bullet2.position.y = -50
 		bullet2.velocity.y = 200
