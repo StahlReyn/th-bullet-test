@@ -1,9 +1,5 @@
 class_name Bullet
-extends Area2D
-
-signal hit
-signal hit_wall
-signal exit_wall
+extends Entity
 
 @export_group("Visuals")
 @export var main_sprite : Sprite2D
@@ -12,65 +8,29 @@ signal exit_wall
 @export_group("Gameplay")
 @export var damage : int = 1
 @export var penetration : int = 1
-@export var velocity : Vector2 = Vector2.ZERO
-@export var delay_time : float = 0.0
 
-var total_time : float
-var hit_count : int
-var in_wall = false
-
-var movement_handler : MovementHandler # Movement Handler is auto created
-
-func _ready() -> void:
-	total_time = 0.0
-	hit_count = 0
+func _init() -> void:
+	super()
 	monitorable = true
 	monitoring = false
-	movement_handler = MovementHandler.new()
-	add_child(movement_handler)
+	
+func _ready() -> void:
+	super()
 
 func _physics_process(delta: float) -> void:
-	total_time += delta
-	if total_time >= delay_time:
-		movement_handler.process_script(delta)
-		process_movement(delta)
-		check_hit_wall()
-		check_remove()
+	super(delta)
 
 func process_movement(delta) -> void:
-	position += velocity * delta
+	super(delta)
 	if rotation_based_on_velocity:
 		rotation = velocity.angle()
 
-func check_hit_wall() -> void:
-	if (position.x > GameUtils.game_area.x 
-			or position.x < 0 
-			or position.y > GameUtils.game_area.y
-			or position.y < 0):\
-			if not in_wall: # emit only once
-				hit_wall.emit()
-				in_wall = true
-	else:
-		in_wall = false
-		exit_wall.emit()
-
-func check_remove() -> void:
-	if (position.x > 900 
-		or position.x < -100 
-		or position.y > 1000 
-		or position.y < -100):
-		call_deferred("queue_free")
-
 func on_hit():
-	hit.emit()
-	hit_count += 1
+	super()
 	if hit_count >= penetration:
 		if bullet_hit_effect_scene:
 			AfterEffect.add_effect(bullet_hit_effect_scene, self)
 		call_deferred("queue_free")
-	
-func add_movement_script(script : GDScript) -> Node:
-	return movement_handler.add_movement_script(self, script)
 
 func set_color(type: int, variant: int) -> void:
 	if main_sprite is SpriteGroupBasicBullet:

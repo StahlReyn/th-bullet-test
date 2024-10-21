@@ -1,37 +1,33 @@
 class_name Character
-extends Area2D
+extends Entity
 ## Parent class for Player and Enemy
-
-signal hit
 
 @export_group("Nodes")
 @export var main_sprite : Node2D
 @export var main_collision : CollisionShape2D
-
 @export_group("After Effects")
 @export var death_effect_scene : PackedScene
-
 @export_group("Stat")
 @export var mhp : int = 1
 
-var total_time : float = 0;
 var hp : int
-
-var velocity = Vector2.ZERO
 var is_dead : bool = false
 
-func _ready() -> void:
-	reset_hp()
+func _init() -> void:
+	super()
 	monitorable = false
 	monitoring = true
+	
+func _ready() -> void:
+	super()
+	reset_hp()
 
 func _physics_process(delta: float) -> void:	
-	total_time += delta
-	process_movement(delta)
-	update_animation()
+	super(delta)
 
-func process_movement(delta) -> void:
-	position += velocity * delta
+func physics_process_active(delta: float) -> void:
+	super(delta)
+	update_animation()
 
 # Passes self so script can also access other like velocity
 func update_animation() -> void:

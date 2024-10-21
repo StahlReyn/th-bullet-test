@@ -27,7 +27,7 @@ func _ready() -> void:
 	super()
 	start_section()
 	boss = spawn_enemy(enemy_boss, Vector2(380,0))
-	boss.do_despawn = false
+	boss.do_check_despawn = false
 	boss.do_free_on_death = false
 	boss.mhp = 1000;
 	boss.reset_hp()

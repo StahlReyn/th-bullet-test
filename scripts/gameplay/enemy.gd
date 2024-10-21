@@ -2,7 +2,6 @@ class_name Enemy
 extends Character
 
 @export_group("Important")
-@export var do_despawn : bool = true
 @export var do_free_on_death : bool = true
 @export var self_update_anim : bool = true
 @export_group("Drops")
@@ -17,25 +16,16 @@ extends Character
 @export var drop_life : int = 0
 @export var drop_life_piece : int = 0
 
-var movement_handler : MovementHandler # Movement Handler is auto created
-
 func _ready() -> void:
 	super()
-	movement_handler = MovementHandler.new()
-	add_child(movement_handler)
 
 func _physics_process(delta: float) -> void:
-	total_time += delta
-	movement_handler.process_script(delta)
-	process_movement(delta)
-	if self_update_anim:
-		update_animation()
-	if do_despawn:
-		check_despawn()
+	super(delta)
 
-func check_despawn() -> void:
-	if position.x > 1000 or position.x < -200 or position.y > 1000 or position.y < -300:
-		call_deferred("queue_free")
+func update_animation():
+	if not self_update_anim: # If not update just ignore
+		return
+	super()
 
 func do_death():
 	super()
@@ -62,6 +52,3 @@ func drop_item_type(item_container: ItemContainer, type: int, count: int):
 		item.set_random_spawn_velocity(drop_spawn_speed, drop_spawn_time)
 		item_container.call_deferred("add_child", item)
 		item.call_deferred("set_type", type)
-
-func add_movement_script(script : GDScript) -> Node:
-	return movement_handler.add_movement_script(self, script)

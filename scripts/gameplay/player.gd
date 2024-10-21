@@ -16,23 +16,21 @@ enum State {
 @export var area_graze : AreaGraze
 @export var audio_shoot : AudioStreamPlayer2D ## shoot audio is done on player side to not overlap multiple shooters
 @export var audio_item : AudioStreamPlayer2D ## Audio for item collection
-@onready var game_view : GameView = $".."
 
 var state_timer : float = 0.0
 var state : int = State.NORMAL
 
 func _ready() -> void:
 	super()
-	state = State.NORMAL
 	do_spawn_movement()
 
 func _physics_process(delta: float) -> void:
 	state_timer -= delta
+	super(delta)
 	process_movement_input()
 	process_shoot_input()
 	process_state()
 	process_iframe()
-	super(delta)
 
 func process_movement_input() -> void:
 	velocity = Vector2.ZERO

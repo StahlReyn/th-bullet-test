@@ -9,14 +9,20 @@ var time_active : float = 0.0 ## Timer that ticks only when active
 @export var enabled : bool = true ## Is enabled
 
 func _ready() -> void:
-	time_elapsed = 0.0
-	time_active = 0.0
+	pass
 
 func _physics_process(delta: float) -> void:
 	time_elapsed += delta
-	if enabled:
-		time_active += delta
+	if is_active():
+		physics_process_active(delta)
+		
+func physics_process_active(delta: float) -> void:
+	time_active += delta
 	
+func is_active() -> bool:
+	return enabled
+
+
 static func spawn_enemy(scene : PackedScene, pos : Vector2 = Vector2(0,0)) -> Enemy:
 	var enemy_container = GameUtils.get_enemy_container()
 	var enemy : Enemy = scene.instantiate()
