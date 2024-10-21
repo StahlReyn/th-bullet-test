@@ -25,49 +25,76 @@ func setup() -> void:
 func _on_hit_wall() -> void:
 	print("Lily Hit Wall")
 	parent as Bullet
+	
+	# The direction of bullets, Default up (as if hit bottom)
+	var init_direction = Vector2.UP
+	var base_direction = Vector2.UP
+	if parent.position.y <= 0: # hit top wall, go down
+		base_direction = Vector2.DOWN
+	elif parent.position.x <= 0: # hit left wall, go right
+		base_direction = Vector2.RIGHT
+	elif parent.position.x >= GameUtils.game_area.x: # hit right wall, go left
+		base_direction = Vector2.LEFT
+	
+	var angle_rotated = init_direction.angle_to(base_direction)
+	
 	# laser
 	var cur_laser = spawn_laser(laser, parent.position)
-	cur_laser.rotation = -PI/2
+	cur_laser.rotation = base_direction.angle()
 	cur_laser.target_size.y = 100
 	cur_laser.switch_state(Laser.State.STATIC, 2.0)
 	cur_laser.material = blend_add
 	
+	# Audio node to laser
 	var audio_node = AudioStreamPlayer2D.new()
 	audio_node.set_stream(hit_sound)
 	cur_laser.add_child(audio_node)
 	audio_node.play()
+	
 	# Stream
-	for stream_num in range(4):
-		var amp_mult = 1
-		var base_velocity_x = 0
-		if stream_num == 0:
-			base_velocity_x = -150
-		elif stream_num == 3:
-			base_velocity_x = 150
-		if stream_num < 2:
-			amp_mult = -1
+	var stream_count : int = 4
+	var mid : int = stream_count / 2 # ASSUME Even number, get higher index (4 gives 2)
+	for stream_num in range(stream_count):
+		var base_amp = 200
+		var side_velocity = 180
+		var forward_velocity = -600
+		var stream_from_center = stream_num - mid
+		if stream_num < mid: # inverse halfway
+			base_amp *= -1
+			stream_from_center += 1 # offset due to double 0 center
+		side_velocity *= stream_from_center # Side velocity based on how far from center
+		
+		# Initial is UP, then rotated
+		var frequency = Vector2(3, 0).rotated(angle_rotated) # Only Width side waves
+		var amplitude = Vector2(base_amp, 0).rotated(angle_rotated)
+		var phase_offset = Vector2(PI/2, 0).rotated(angle_rotated).abs() # Offset should not inverse
+		var base_velocity = Vector2(side_velocity, forward_velocity).rotated(angle_rotated)
+		
 		for i in range(60):
 			var cur_bullet = spawn_bullet(stream, parent.position)
 			cur_bullet.delay_time = i * 0.02
 			cur_bullet.material = blend_add
+			
 			var cur_script = cur_bullet.add_movement_script(stream_movement)
-			cur_script.frequency.x = 3
-			cur_script.amplitude.x = 200 * amp_mult
-			cur_script.phase_offset.x = PI/2
-			cur_script.base_velocity = Vector2(base_velocity_x, -500)
+			cur_script.frequency = frequency
+			cur_script.amplitude = amplitude
+			cur_script.phase_offset = phase_offset
+			cur_script.base_velocity = base_velocity
+	
+	# Initial is UP, then rotated. Calculated outside to avoid rotating per every bullet
+	var spray_min = Vector2(0, -150).rotated(angle_rotated)
+	var spray_max = Vector2(-150, 150).rotated(angle_rotated)
+	var spray_accel = Vector2(0, -150).rotated(angle_rotated)
+	
 	# Spray
 	for i in range(40):
 		var cur_bullet = spawn_bullet(stream, parent.position)
 		cur_bullet.delay_time = i * 0.02
 		cur_bullet.material = blend_add
-		cur_bullet.velocity.y = randf_range(0, 100)
-		cur_bullet.velocity.x = randf_range(-150, 150)
+		cur_bullet.velocity.y = randf_range(spray_min.x, spray_max.x)
+		cur_bullet.velocity.x = randf_range(spray_min.y, spray_max.y)
 		var cur_script = cur_bullet.add_movement_script(accel_movement)
-		cur_script.acceleration = Vector2(0, -150)
+		cur_script.acceleration = spray_accel
+		
 	# Remove self
 	call_deferred("queue_free")
-
-#@export var frequency : Vector2 = Vector2(1,1) ##rad / sec
-#@export var amplitude : Vector2 = Vector2(100,100) ##(of velocity)
-#@export var phase_offset : Vector2 = Vector2(0,0) ##rad
-#@export var base_velocity : Vector2 = Vector2(0,0)
