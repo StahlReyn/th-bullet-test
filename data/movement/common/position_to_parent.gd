@@ -6,7 +6,7 @@ extends MovementScript
 func _ready() -> void:
 	set_position()
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	set_position()
 
 func set_position() -> void:

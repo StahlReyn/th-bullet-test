@@ -21,6 +21,7 @@ delay_time = 1.0
 shape = SubResource("RectangleShape2D_ywisj")
 
 [node name="Sprite" type="Sprite2D" parent="."]
+use_parent_material = true
 rotation = 1.5708
 scale = Vector2(2, 2)
 texture = ExtResource("2_wfyib")

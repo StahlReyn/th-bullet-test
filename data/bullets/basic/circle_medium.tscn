@@ -18,6 +18,7 @@ rotation_based_on_velocity = false
 shape = SubResource("CircleShape2D_y5w4u")
 
 [node name="Sprite" type="Sprite2D" parent="."]
+use_parent_material = true
 scale = Vector2(2, 2)
 texture = ExtResource("2_gq7lf")
 hframes = 10

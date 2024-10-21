@@ -5,7 +5,8 @@ extends MovementScript
 @onready var audio_shoot : AudioStream = preload("res://assets/audio/sfx/hit_noise_fade.wav")
 @onready var script_rotation : GDScript = preload("res://data/movement/common/rotation_constant.gd")
 
-@onready var bullet_chain : PackedScene = preload("res://data/bullets/laser/laser_curvy.tscn")
+@onready var bullet_lily : PackedScene = BulletUtils.scene_dict["circle_large"]
+@onready var script_lily : GDScript = preload("res://data/movement/example/murderous_lilies.gd")
 
 var player : Player
 var audio_node : Node
@@ -46,12 +47,6 @@ func process_movement(delta: float) -> void:
 		0:
 			cur_velocity.y = 400
 			check_part_cd(0.0)
-			var cur_laser = spawn_laser(scene_laser, parent.global_position)
-			cur_laser.set_node_follow(parent)
-			var cur_script = cur_laser.add_movement_script(script_rotation)
-			cur_script.rotation_speed = 1.0
-			var chain_bullet = spawn_bullet(bullet_chain, parent.global_position + Vector2(0, 400))
-			chain_bullet.velocity = Vector2(100,200)
 		1:
 			cur_velocity.y += -200 * delta
 			check_part_cd(2.0)
@@ -69,6 +64,8 @@ func check_part_cd(time: float) -> void: ## How long next section last
 		part += 1
 		section_time = 0.0
 		print(part)
+		if part > 1:
+			spawn_lily()
 
 func shoot_1() -> void:
 	if cd_shoot <= 0:
@@ -83,5 +80,16 @@ func bullet_pattern1(speed, scale, offset) -> void:
 	var bullet = spawn_bullet(bullet_circle, parent.position)
 	bullet.velocity = direction * 300
 	bullet.set_color(SpriteGroupBasicBullet.ColorType.BLUE, SpriteGroupBasicBullet.ColorVariant.LIGHT)
+
+func spawn_lily() -> void:
+	print("Spawned Lily")
+	var direction = parent.position.direction_to(GameUtils.get_player().position)
+	var cur_lily = spawn_bullet(bullet_lily, parent.position)
+	cur_lily.velocity = direction * 400
+	cur_lily.set_color(
+		SpriteGroupBasicBullet.ColorType.RED, 
+		SpriteGroupBasicBullet.ColorVariant.LIGHT
+	)
+	cur_lily.add_movement_script(script_lily)
 
 # bullet.global_position.direction_to(player.global_position)

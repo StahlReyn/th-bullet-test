@@ -1,6 +1,9 @@
 class_name Bullet
 extends Area2D
 
+signal hit
+signal hit_wall
+
 @export_group("Visuals")
 @export var main_sprite : Sprite2D
 @export var bullet_hit_effect_scene : PackedScene
@@ -9,7 +12,7 @@ extends Area2D
 @export var damage : int = 1
 @export var penetration : int = 1
 @export var velocity : Vector2 = Vector2.ZERO
-@export var delay_time : float = 0.2
+@export var delay_time : float = 0.0
 
 var total_time : float
 var penetration_count : int
@@ -24,20 +27,30 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	total_time += delta
-	movement_handler.process_script(delta)
-	process_movement(delta)
-	check_remove()
+	if total_time >= delay_time:
+		movement_handler.process_script(delta)
+		process_movement(delta)
+		check_hit_wall()
+		check_remove()
 
 func process_movement(delta) -> void:
 	position += velocity * delta
 	if rotation_based_on_velocity:
 		rotation = velocity.angle()
 
+func check_hit_wall() -> void:
+	if (position.x > GameUtils.game_area.x 
+		or position.x < 0 
+		or position.y > GameUtils.game_area.y
+		or position.y < 0):
+		hit_wall.emit()
+
 func check_remove() -> void:
 	if position.x > 1000 or position.x < -200 or position.y > 1000 or position.y < -200:
 		call_deferred("queue_free")
 
 func on_hit():
+	hit.emit()
 	penetration_count -= 1
 	if penetration_count <= 0:
 		if bullet_hit_effect_scene:

@@ -8,7 +8,7 @@ var elapsed_time : float = 0.0
 func _ready() -> void:
 	elapsed_time = 0.0
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if active:
 		elapsed_time += delta
 		if elapsed_time >= duration:

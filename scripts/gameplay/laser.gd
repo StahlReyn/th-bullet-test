@@ -24,6 +24,7 @@ static var width_remove = 1.0
 
 var state_timer : float = 0.0
 var state : int = 0
+var had_follow : bool = false
 
 func _ready() -> void:
 	super()
@@ -61,7 +62,7 @@ func _physics_process(delta: float) -> void:
 	laser_collision.position.x = cur_length * 0.5
 	if node_follow != null:
 		global_position = node_follow.global_position + follow_offset
-	else:
+	elif had_follow: # Only end early if the node had a follow before. Some laser are on own
 		if state == State.STATIC:
 			print("Preemptive Laser End")
 			switch_state(State.END, 100.0)
@@ -89,3 +90,4 @@ func switch_state(state: int, state_timer: float):
 
 func set_node_follow(node : Node2D) -> void:
 	node_follow = node
+	had_follow = true

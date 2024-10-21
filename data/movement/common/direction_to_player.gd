@@ -6,7 +6,7 @@ extends MovementScript
 func _ready() -> void:
 	set_direction()
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	pass
 
 func set_direction() -> void:

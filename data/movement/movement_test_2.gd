@@ -1,6 +1,6 @@
 extends MovementScript
 
-@onready var bullet_circle : PackedScene = BulletUtils.scene_dict["circle_small"]
+@onready var bullet_circle : PackedScene = BulletUtils.scene_dict["spike"]
 @onready var audio_shoot : AudioStream = preload("res://assets/audio/sfx/hit_noise_fade.wav")
 
 var player : Player
@@ -24,7 +24,7 @@ func process_movement(delta: float) -> void:
 			direction.x = cos(TAU * i/total)
 			direction.y = sin(TAU * i/total)
 			var bullet = spawn_bullet(bullet_circle, parent.position)
-			bullet.set_color((i % 2) * 3 + 1, SpriteGroupBasicBullet.ColorVariant.LIGHT)
+			bullet.set_color((i % 2) * 3 + 2, SpriteGroupBasicBullet.ColorVariant.LIGHT)
 			bullet.velocity = direction * 300
 			i += 1
 		AudioManager.play_audio(audio_shoot)

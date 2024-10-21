@@ -15,7 +15,7 @@ var cd1_loop : float = 0.0
 var cd1_count_loop : int = 0
 
 var cd2 : float = 1.0
-var cd_big : float = 1.0
+var cd_big : float = 15.0
 var cd_count : int = 0
 
 var cd_fps: float = 1
@@ -27,16 +27,6 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	super(delta)
-	
-	# Test fluctuating fps
-	#cd_fps -= delta
-	#if cd_fps <= 0:
-		#if cd_fps_count % 2 == 0:
-			#Engine.max_fps = 60
-		#else:
-			#Engine.max_fps = 10
-		#cd_fps += 1.0
-		#cd_fps_count += 1
 
 	cd1 -= delta
 	cd2 -= delta
