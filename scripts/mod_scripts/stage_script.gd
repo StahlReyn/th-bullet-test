@@ -36,7 +36,7 @@ func on_section_end() -> void:
 
 func do_next_script() -> void:
 	print_rich("[color=yellow]> Next Script: [/color]", section_count)
-	if section_count < len(get_section_list()):
+	if section_count < get_section_list().size():
 		add_section_script(get_section_list()[section_count])
 		section_count += 1
 	else:

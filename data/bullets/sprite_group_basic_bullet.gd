@@ -21,8 +21,8 @@ enum ColorVariant { ## Row Number y
 }
 
 func set_color(type: int, variant: int) -> void:
-	frame_coords.x = wrap(type, 0, len(ColorType))
-	frame_coords.y = wrap(variant, 0, len(ColorVariant))
+	frame_coords.x = wrap(type, 0, ColorType.size())
+	frame_coords.y = wrap(variant, 0, ColorVariant.size())
 
 func set_random_color(variant: int) -> void:
 	set_color(randi(), variant)

@@ -9,13 +9,13 @@ func get_enemy_list() -> Array[Node]:
 	return get_tree().get_nodes_in_group("enemy")
 
 func get_bullet_count() -> int:
-	return len(get_tree().get_nodes_in_group("bullet"))
+	return get_tree().get_nodes_in_group("bullet").size()
 
 func get_item_count() -> int:
-	return len(get_tree().get_nodes_in_group("item"))
+	return get_tree().get_nodes_in_group("item").size()
 
 func get_enemy_count() -> int:
-	return len(get_tree().get_nodes_in_group("enemy"))
+	return get_tree().get_nodes_in_group("enemy").size()
 
 func get_game_view() -> GameView:
 	return get_tree().get_nodes_in_group("game_view")[0]

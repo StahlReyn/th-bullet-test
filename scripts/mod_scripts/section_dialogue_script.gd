@@ -28,4 +28,4 @@ func get_dialogue_action(index : int) -> DialogueAction:
 	return get_dialogue_actions()[index]
 
 func get_dialogue_action_count() -> int:
-	return len(get_dialogue_actions())
+	return get_dialogue_actions().size()
