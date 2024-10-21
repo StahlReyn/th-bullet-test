@@ -16,3 +16,8 @@ var scene_dict : Dictionary = {
 	# Lasers
 	"laser_basic" = preload("res://data/bullets/laser/laser_basic.tscn"),
 }
+
+enum CollisionMask {
+	TARGET_PLAYER = 4,
+	TARGET_ENEMY = 8,
+}

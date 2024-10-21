@@ -13,18 +13,20 @@ extends MovementScript
 @onready var hit_sound = preload("res://assets/audio/sfx/bullet_big_noisy.wav")
 
 func _ready() -> void:
+	super()
 	call_deferred("setup")
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func _physics_process(delta: float) -> void:
+	super(delta)
 
 func setup() -> void:
 	parent.connect("hit_wall", _on_hit_wall)
+	if parent is Bullet:
+		parent.damage = 100
+		parent.penetration = 100
 
 func _on_hit_wall() -> void:
 	print("Lily Hit Wall")
-	parent as Bullet
 	
 	# The direction of bullets, Default up (as if hit bottom)
 	var init_direction = Vector2.UP
@@ -40,6 +42,8 @@ func _on_hit_wall() -> void:
 	
 	# laser
 	var cur_laser = spawn_laser(laser, parent.position)
+	basic_copy(cur_laser, parent)
+	cur_laser.damage = 200
 	cur_laser.rotation = base_direction.angle()
 	cur_laser.target_size.y = 100
 	cur_laser.switch_state(Laser.State.STATIC, 2.0)
@@ -72,6 +76,7 @@ func _on_hit_wall() -> void:
 		
 		for i in range(60):
 			var cur_bullet = spawn_bullet(stream, parent.position)
+			basic_copy(cur_bullet, parent)
 			cur_bullet.delay_time = i * 0.02
 			cur_bullet.material = blend_add
 			
@@ -89,6 +94,7 @@ func _on_hit_wall() -> void:
 	# Spray
 	for i in range(40):
 		var cur_bullet = spawn_bullet(stream, parent.position)
+		basic_copy(cur_bullet, parent)
 		cur_bullet.delay_time = i * 0.02
 		cur_bullet.material = blend_add
 		cur_bullet.velocity.y = randf_range(spray_min.x, spray_max.x)
@@ -98,3 +104,8 @@ func _on_hit_wall() -> void:
 		
 	# Remove self
 	call_deferred("queue_free")
+
+func basic_copy(to_copy, base):
+	to_copy.collision_layer = base.collision_layer
+	to_copy.collision_mask = base.collision_mask
+	to_copy.modulate = base.modulate

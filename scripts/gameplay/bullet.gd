@@ -15,13 +15,13 @@ signal hit_wall
 @export var delay_time : float = 0.0
 
 var total_time : float
-var penetration_count : int
+var hit_count : int
 
 var movement_handler : MovementHandler # Movement Handler is auto created
 
 func _ready() -> void:
 	total_time = 0.0
-	penetration_count = penetration
+	hit_count = 0
 	movement_handler = MovementHandler.new()
 	add_child(movement_handler)
 
@@ -51,8 +51,8 @@ func check_remove() -> void:
 
 func on_hit():
 	hit.emit()
-	penetration_count -= 1
-	if penetration_count <= 0:
+	hit_count += 1
+	if hit_count >= penetration:
 		if bullet_hit_effect_scene:
 			AfterEffect.add_effect(bullet_hit_effect_scene, self)
 		call_deferred("queue_free")

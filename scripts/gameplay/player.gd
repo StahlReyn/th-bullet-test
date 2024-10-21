@@ -68,11 +68,10 @@ func process_state() -> void:
 				switch_state(State.NORMAL, 0.0)
 	
 func process_iframe() -> void:
-	pass
-	#if is_invincible():
-		#var color : Color = main_anim_sprite.get_modulate()
-		#color.a = cos(state_timer * 20) * 0.2 + 0.8
-		#main_anim_sprite.set_modulate(color)
+	if is_invincible():
+		main_sprite.modulate.a = cos(state_timer * 20) * 0.2 + 0.8
+	else:
+		main_sprite.modulate.a = 1
 
 func get_speed():
 	if Input.is_action_pressed("focus"):

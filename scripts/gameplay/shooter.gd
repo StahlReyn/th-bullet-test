@@ -37,6 +37,8 @@ func can_shoot() -> bool:
 func do_shoot() -> void:
 	var bullet_container = GameUtils.get_bullet_container()
 	var bullet : Bullet = get_bullet_scene().instantiate()
+	bullet.collision_layer = BulletUtils.CollisionMask.TARGET_ENEMY
+	bullet.modulate.a = 0.3
 	bullet.top_level = true
 	bullet.global_position = self.global_position
 	bullet_container.add_child(bullet)

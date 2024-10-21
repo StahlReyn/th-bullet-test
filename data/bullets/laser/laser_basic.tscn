@@ -15,6 +15,7 @@ laser_collision = NodePath("CollisionShape2D")
 base_size = Vector2(16, 16)
 main_sprite = NodePath("Sprite")
 rotation_based_on_velocity = false
+damage = 10
 delay_time = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
