@@ -12,6 +12,8 @@ extends MovementScript
 @onready var blend_add = preload("res://data/canvas_material/blend_additive.tres")
 @onready var hit_sound = preload("res://assets/audio/sfx/bullet_big_noisy.wav")
 
+@export var remove_on_hit_wall = true
+
 func _ready() -> void:
 	super()
 	call_deferred("setup")
@@ -21,30 +23,39 @@ func _physics_process(delta: float) -> void:
 
 func setup() -> void:
 	parent.connect("hit_wall", _on_hit_wall)
-	if parent is Bullet:
+	if parent is Bullet: # Main bullet
 		parent.damage = 100
 		parent.penetration = 100
 
 func _on_hit_wall() -> void:
 	print("Lily Hit Wall")
-	
 	# The direction of bullets, Default up (as if hit bottom)
 	var init_direction = Vector2.UP
-	var base_direction = Vector2.UP
+	var target_direction = get_target_direction()
+	var angle_rotated = init_direction.angle_to(target_direction)
+	# Major components
+	part_laser(angle_rotated)
+	part_stream(angle_rotated)
+	part_spray(angle_rotated)
+	# Remove self
+	if remove_on_hit_wall:
+		parent.call_deferred("queue_free")
+
+func get_target_direction() -> Vector2:
 	if parent.position.y <= 0: # hit top wall, go down
-		base_direction = Vector2.DOWN
+		return Vector2.DOWN
 	elif parent.position.x <= 0: # hit left wall, go right
-		base_direction = Vector2.RIGHT
+		return Vector2.RIGHT
 	elif parent.position.x >= GameUtils.game_area.x: # hit right wall, go left
-		base_direction = Vector2.LEFT
-	
-	var angle_rotated = init_direction.angle_to(base_direction)
-	
+		return Vector2.LEFT
+	return Vector2.UP # Else go up as default
+
+func part_laser(angle_rotated : float) -> void:
 	# laser
 	var cur_laser = spawn_laser(laser, parent.position)
 	basic_copy(cur_laser, parent)
 	cur_laser.damage = 200
-	cur_laser.rotation = base_direction.angle()
+	cur_laser.rotation = angle_rotated - PI/2 #target_direction.angle()
 	cur_laser.target_size.y = 100
 	cur_laser.switch_state(Laser.State.STATIC, 2.0)
 	cur_laser.material = blend_add
@@ -55,7 +66,7 @@ func _on_hit_wall() -> void:
 	cur_laser.add_child(audio_node)
 	audio_node.play()
 	
-	# Stream
+func part_stream(angle_rotated : float) -> void:
 	var stream_count : int = 4
 	var mid : int = stream_count / 2 # ASSUME Even number, get higher index (4 gives 2)
 	for stream_num in range(stream_count):
@@ -77,7 +88,7 @@ func _on_hit_wall() -> void:
 		for i in range(60):
 			var cur_bullet = spawn_bullet(stream, parent.position)
 			basic_copy(cur_bullet, parent)
-			cur_bullet.delay_time = i * 0.02
+			cur_bullet.delay_time = i * 0.03
 			cur_bullet.material = blend_add
 			
 			var cur_script = cur_bullet.add_movement_script(stream_movement)
@@ -85,13 +96,13 @@ func _on_hit_wall() -> void:
 			cur_script.amplitude = amplitude
 			cur_script.phase_offset = phase_offset
 			cur_script.base_velocity = base_velocity
-	
+
+func part_spray(angle_rotated : float) -> void:
 	# Initial is UP, then rotated. Calculated outside to avoid rotating per every bullet
 	var spray_min = Vector2(0, -150).rotated(angle_rotated)
 	var spray_max = Vector2(-150, 150).rotated(angle_rotated)
 	var spray_accel = Vector2(0, -150).rotated(angle_rotated)
 	
-	# Spray
 	for i in range(40):
 		var cur_bullet = spawn_bullet(stream, parent.position)
 		basic_copy(cur_bullet, parent)
@@ -101,11 +112,8 @@ func _on_hit_wall() -> void:
 		cur_bullet.velocity.x = randf_range(spray_min.y, spray_max.y)
 		var cur_script = cur_bullet.add_movement_script(accel_movement)
 		cur_script.acceleration = spray_accel
-		
-	# Remove self
-	call_deferred("queue_free")
 
-func basic_copy(to_copy, base):
+func basic_copy(to_copy, base) -> void:
 	to_copy.collision_layer = base.collision_layer
 	to_copy.collision_mask = base.collision_mask
 	to_copy.modulate = base.modulate

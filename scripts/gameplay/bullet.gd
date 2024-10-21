@@ -3,6 +3,7 @@ extends Area2D
 
 signal hit
 signal hit_wall
+signal exit_wall
 
 @export_group("Visuals")
 @export var main_sprite : Sprite2D
@@ -16,12 +17,15 @@ signal hit_wall
 
 var total_time : float
 var hit_count : int
+var in_wall = false
 
 var movement_handler : MovementHandler # Movement Handler is auto created
 
 func _ready() -> void:
 	total_time = 0.0
 	hit_count = 0
+	monitorable = true
+	monitoring = false
 	movement_handler = MovementHandler.new()
 	add_child(movement_handler)
 
@@ -40,13 +44,21 @@ func process_movement(delta) -> void:
 
 func check_hit_wall() -> void:
 	if (position.x > GameUtils.game_area.x 
-		or position.x < 0 
-		or position.y > GameUtils.game_area.y
-		or position.y < 0):
-		hit_wall.emit()
+			or position.x < 0 
+			or position.y > GameUtils.game_area.y
+			or position.y < 0):\
+			if not in_wall: # emit only once
+				hit_wall.emit()
+				in_wall = true
+	else:
+		in_wall = false
+		exit_wall.emit()
 
 func check_remove() -> void:
-	if position.x > 1000 or position.x < -200 or position.y > 1000 or position.y < -200:
+	if (position.x > 900 
+		or position.x < -100 
+		or position.y > 1000 
+		or position.y < -100):
 		call_deferred("queue_free")
 
 func on_hit():

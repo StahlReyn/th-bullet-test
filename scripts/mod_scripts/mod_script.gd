@@ -6,7 +6,7 @@ extends Node
 var time_elapsed : float = 0.0 ## Timer since script is on_ready
 var time_active : float = 0.0 ## Timer that ticks only when active
 
-var enabled : bool = true ## Is enabled
+@export var enabled : bool = true ## Is enabled
 
 func _ready() -> void:
 	time_elapsed = 0.0

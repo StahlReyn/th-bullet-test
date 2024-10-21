@@ -12,7 +12,7 @@ enum State {
 @export_group("Important")
 @export var laser_collision : CollisionShape2D ## Collision for laser to change
 @export var base_size : Vector2 ## Basic size
-@export var lerp_speed : float = 5.0 ## how fast laser grows
+@export var lerp_speed : float = 6.0 ## how fast laser grows
 @export var laser_active_time : float = 5.0 
 @export var target_size : Vector2 = Vector2(1500,32)
 @export_group("Node Following")
@@ -20,7 +20,7 @@ enum State {
 @export var follow_offset : Vector2 = Vector2(0,0)
 
 static var pre_size = 0.1
-static var width_remove = 1.0
+static var width_remove = 3.0
 
 var state_timer : float = 0.0
 var state : int = 0

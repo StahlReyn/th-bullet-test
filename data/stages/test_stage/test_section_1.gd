@@ -9,13 +9,13 @@ extends SectionScript
 @onready var movement_script_3 : GDScript = preload("res://data/movement/movement_test_3.gd")
 @onready var movement_script_4 : GDScript = preload("res://data/movement/movement_test_4.gd")
 
-var cd1 : float = 3.0
+var cd1 : float = 300.0
 var count1 : int = 10
 var cd1_loop : float = 0.0
 var cd1_count_loop : int = 0
 
 var cd2 : float = 1.0
-var cd_big : float = 15.0
+var cd_big : float = 1.0
 var cd_count : int = 0
 
 var cd_fps: float = 1
@@ -82,5 +82,5 @@ func _physics_process(delta: float) -> void:
 				var enemy :  = spawn_enemy(enemy_fairy_boss, pos)
 				enemy.add_movement_script(movement_script_4)
 				enemy.main_sprite.set_type(SpriteGroupFairy.Type.YELLOW)
-		cd_big += 15
+		cd_big += 150
 		cd_count += 1

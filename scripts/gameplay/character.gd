@@ -22,6 +22,8 @@ var is_dead : bool = false
 
 func _ready() -> void:
 	reset_hp()
+	monitorable = false
+	monitoring = true
 
 func _physics_process(delta: float) -> void:	
 	total_time += delta

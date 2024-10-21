@@ -5,7 +5,7 @@ extends MovementScript
 @onready var audio_shoot : AudioStream = preload("res://assets/audio/sfx/hit_noise_fade.wav")
 @onready var script_rotation : GDScript = preload("res://data/movement/common/rotation_constant.gd")
 
-@onready var bullet_lily : PackedScene = BulletUtils.scene_dict["circle_large"]
+@onready var bullet_lily : PackedScene = preload("res://data/bullets/example/bullet_lily.tscn")#BulletUtils.scene_dict["circle_large"]
 @onready var script_lily : GDScript = preload("res://data/movement/example/murderous_lilies.gd")
 
 var player : Player
@@ -51,7 +51,7 @@ func process_movement(delta: float) -> void:
 			cur_velocity.y += -200 * delta
 			check_part_cd(2.0)
 		2:
-			shoot_1()
+			#shoot_1()
 			check_part_cd(3.0)
 		3:
 			cur_velocity.y += -300 * delta
@@ -90,6 +90,6 @@ func spawn_lily() -> void:
 		SpriteGroupBasicBullet.ColorType.RED, 
 		SpriteGroupBasicBullet.ColorVariant.LIGHT
 	)
-	cur_lily.add_movement_script(script_lily)
+	#cur_lily.add_movement_script(script_lily)
 
 # bullet.global_position.direction_to(player.global_position)
