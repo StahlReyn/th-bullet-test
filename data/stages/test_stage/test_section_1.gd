@@ -65,7 +65,7 @@ func _physics_process(delta: float) -> void:
 			cd1_loop += 0.2
 	
 	
-	if cd2 <= 0:
+	if cd2 <= 0 and false:
 		var bullet1 = spawn_bullet(bullet_circle_small)
 		bullet1.position.x = cos(time_active * 2) * 50 + 700
 		bullet1.position.y = -50

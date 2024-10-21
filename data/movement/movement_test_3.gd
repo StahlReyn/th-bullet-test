@@ -5,6 +5,8 @@ extends MovementScript
 @onready var audio_shoot : AudioStream = preload("res://assets/audio/sfx/hit_noise_fade.wav")
 @onready var script_rotation : GDScript = preload("res://data/movement/common/rotation_constant.gd")
 
+@onready var bullet_chain : PackedScene = preload("res://data/bullets/laser/laser_curvy.tscn")
+
 var player : Player
 var audio_node : Node
 
@@ -48,6 +50,8 @@ func process_movement(delta: float) -> void:
 			cur_laser.set_node_follow(parent)
 			var cur_script = cur_laser.add_movement_script(script_rotation)
 			cur_script.rotation_speed = 1.0
+			var chain_bullet = spawn_bullet(bullet_chain, parent.global_position + Vector2(0, 400))
+			chain_bullet.velocity = Vector2(100,200)
 		1:
 			cur_velocity.y += -200 * delta
 			check_part_cd(2.0)
