@@ -20,6 +20,10 @@ enum State {
 var state_timer : float = 0.0
 var state : int = State.NORMAL
 
+func _init() -> void:
+	super()
+	do_check_despawn = false # Always false for player to not despawn
+
 func _ready() -> void:
 	super()
 	do_spawn_movement()

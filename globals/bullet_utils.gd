@@ -29,7 +29,7 @@ enum CollisionMask {
 func base_func(bullet: Bullet, i: int):
 	return
 	
-func spawn_circle(bullet_scene: PackedScene, pos: Vector2, speed: float, count: int, offset: float = 0, iterator: Callable = base_func) -> Array[Bullet]:
+func spawn_circle(bullet_scene: PackedScene, pos: Vector2, speed: float, count: int, offset: float = 0) -> Array[Bullet]:
 	var direction : Vector2 = Vector2.ZERO
 	var bullet : Bullet
 	var bullet_list : Array[Bullet]
@@ -38,7 +38,6 @@ func spawn_circle(bullet_scene: PackedScene, pos: Vector2, speed: float, count: 
 		direction.y = sin(TAU * i/count + offset)
 		bullet = ModScript.spawn_bullet(bullet_scene, pos)
 		bullet.velocity = direction * speed
-		iterator.call(bullet, i)
 		bullet_list.append(bullet)
 	
 	return bullet_list

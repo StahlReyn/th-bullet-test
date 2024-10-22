@@ -16,19 +16,18 @@ func process_movement(delta: float) -> void:
 	parent.velocity.y = sin(parent.total_time * 3) * 300 + 100
 	
 	if cd_shoot <= 0:
-		BulletUtils.spawn_circle(
+		var bullet_list = BulletUtils.spawn_circle(
 			bullet_scene, # Bullet to spawn
 			parent.position, # Position
 			300, # Speed
 			32, # Count
 			0, # Offset rad
-			bullet_iterate # Iterator function
 		)
+		for i in bullet_list.size():
+			var bullet = bullet_list[i]
+			# bullet.delay_time = i * 0.02 # delay causes spiral
+			bullet.set_color((i % 2) * 3 + 2) # Swapping color every 2 index
 		AudioManager.play_audio(audio_shoot)
 		cd_shoot += 2.0
-
-func bullet_iterate(bullet: Bullet, i: int):
-	# bullet.delay_time = i * 0.02 # delay causes spiral
-	bullet.set_color((i % 2) * 3 + 2) # Swapping color every 2 index
 
 # bullet.global_position.direction_to(player.global_position)

@@ -8,10 +8,6 @@ signal hit
 signal hit_wall
 signal exit_wall
 
-static var despawn_coord : PackedVector2Array = [
-	Vector2(-100,-100), Vector2(900,1000)
-]
-
 @export var delay_time : float = 0.0
 @export var velocity : Vector2 = Vector2.ZERO
 @export var do_check_despawn : bool = true
@@ -20,7 +16,8 @@ static var despawn_coord : PackedVector2Array = [
 var total_time : float = 0.0
 var active_time : float = 0.0
 var hit_count : int = 0
-var in_wall = false
+var in_wall : bool = false
+var despawn_padding : float = 50
 
 func _init() -> void:
 	# Auto create Movement Handler
@@ -64,10 +61,10 @@ func check_hit_wall() -> void:
 		exit_wall.emit()
 
 func check_despawn() -> void:
-	if (position.x > despawn_coord[1].x 
-		or position.x < despawn_coord[0].x
-		or position.y > despawn_coord[1].y  
-		or position.y < despawn_coord[0].y):
+	if (position.x > GameUtils.game_area.x + despawn_padding
+			or position.x < - despawn_padding
+			or position.y > GameUtils.game_area.y + despawn_padding
+			or position.y < - despawn_padding):\
 		call_deferred("queue_free")
 
 func on_hit():
