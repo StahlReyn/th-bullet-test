@@ -39,5 +39,8 @@ func spawn_circle(bullet_scene: PackedScene, pos: Vector2, speed: float, count: 
 		bullet = ModScript.spawn_bullet(bullet_scene, pos)
 		bullet.velocity = direction * speed
 		bullet_list.append(bullet)
-	
 	return bullet_list
+
+func clear_bullets() -> void:
+	for bullet in GameUtils.get_bullet_list():
+		bullet.do_remove()

@@ -49,7 +49,7 @@ func check_death():
 func do_death():
 	is_dead = true
 	if death_effect_scene:
-		AfterEffect.add_effect(death_effect_scene, self)
+		AfterEffect.add_effect(death_effect_scene, global_position)
 
 func _on_area_entered(area: Area2D) -> void:
 	if area is Bullet:

@@ -8,6 +8,9 @@ func get_player() -> Player:
 func get_enemy_list() -> Array[Node]:
 	return get_tree().get_nodes_in_group("enemy")
 
+func get_bullet_list() -> Array[Node]:
+	return get_tree().get_nodes_in_group("bullet")
+	
 func get_bullet_count() -> int:
 	return get_tree().get_nodes_in_group("bullet").size()
 

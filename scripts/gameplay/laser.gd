@@ -69,7 +69,7 @@ func _physics_process(delta: float) -> void:
 
 func on_hit():
 	if bullet_hit_effect_scene:
-		AfterEffect.add_effect(bullet_hit_effect_scene, self)
+		AfterEffect.add_effect(bullet_hit_effect_scene, global_position)
 	#call_deferred("queue_free")
 
 func process_state() -> void:

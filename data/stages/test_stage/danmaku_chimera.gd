@@ -62,13 +62,14 @@ func end_condition() -> bool:
 	return time_active >= duration
 
 func end_section() -> void:
+	BulletUtils.clear_bullets()
 	super()
 	
 func start_section():
 	super()
 	spell_name = "Nue Sign \"Danmaku Chimera\""
 	total_bonus = 25000000
-	duration = 40.0
+	duration = 6.0
 	update_displayer()
 
 func spawn_bullet_line():

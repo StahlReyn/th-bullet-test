@@ -6,12 +6,13 @@ extends Node2D
 @export var lifetime : float = 1.0
 
 func _ready() -> void:
-	audio_start.play()
+	if audio_start:
+		audio_start.play()
 	await get_tree().create_timer(lifetime).timeout
 	queue_free()
 
-static func add_effect(scene : PackedScene, target : Node2D):
+static func add_effect(scene : PackedScene, pos : Vector2):
 	var effect : AfterEffect = scene.instantiate()
 	effect.top_level = true
-	effect.global_position = target.global_position
+	effect.global_position = pos
 	GameUtils.get_effect_container().add_child(effect)
