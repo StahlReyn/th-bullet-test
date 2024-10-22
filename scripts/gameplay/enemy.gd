@@ -2,7 +2,7 @@ class_name Enemy
 extends Character
 
 @export_group("Important")
-@export var do_free_on_death : bool = true
+@export var remove_on_death : bool = true
 @export var self_update_anim : bool = true
 @export_group("Drops")
 @export var drop_spawn_speed : float = 1000.0
@@ -30,8 +30,8 @@ func update_animation():
 func do_death():
 	super()
 	drop_items()
-	if do_free_on_death:
-		call_deferred("queue_free")
+	if remove_on_death:
+		do_remove()
 
 func drop_items():
 	var item_container : ItemContainer = GameUtils.get_item_container()

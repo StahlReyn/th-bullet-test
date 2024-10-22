@@ -30,17 +30,14 @@ var boss : Enemy
 var state : int = State.IDLE
 var state_timer : float = 3.0
 
-var cd1 : float = 2.0
 var shot_count_1 : int = 0
 
+# Pattern Variables
 var bullet_base_speed : float = 320
-var bullet_spin_speed : float = 0.4 # rad / s
-var cur_spin_speed : float = 0.0
-var time_rotating : float = 0.0
 var line_count : int = 16
-var rotation_amount : float = PI/4
 var spin_time : float = 2.0
 var spawn_time : float = 1.0
+var spin_speed : float = 0.19 # This is more of multiplier. Speed is also depend on distance
 
 func _ready() -> void:
 	super()
@@ -48,7 +45,7 @@ func _ready() -> void:
 	switch_state(State.IDLE, 1.0)
 	boss = spawn_enemy(enemy_boss, Vector2(380,400))
 	boss.do_check_despawn = false
-	boss.do_free_on_death = false
+	boss.remove_on_death = false
 	boss.mhp = 1000;
 	boss.reset_hp()
 	boss.drop_power = 40
@@ -58,11 +55,8 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	super(delta)
 	state_timer -= delta
-	#cd1 -= delta
 	process_state()
-	match state:
-		State.SPINNING:
-			rotate_bullets(delta)
+
 
 func end_condition() -> bool:
 	return time_active >= duration
@@ -78,7 +72,7 @@ func start_section():
 	update_displayer()
 
 func spawn_bullet_line():
-	var angle_offset = 0 # (shot_count_1 % 2) * PI/16
+	var angle_offset = (shot_count_1 % 2) * PI/16
 	for circle_i in range(10):
 		var bullet_list = BulletUtils.spawn_circle(
 			bullet_line,
@@ -99,7 +93,7 @@ func spawn_bullet_line():
 	shot_count_1 += 1
 
 func set_bullet_style(bullet: Entity) -> void:
-	bullet.despawn_padding = 500  # increase padding as rotate move offscreen far
+	bullet.despawn_padding = 300  # increase padding as rotate move offscreen far
 	bullet.material = blend_add
 	bullet.set_color(SpriteGroupBasicBullet.ColorType.BLUE)
 
@@ -112,7 +106,7 @@ func process_state() -> void:
 			State.SPAWNING:
 				switch_state(State.SPINNING, spin_time)
 				stop_bullets()
-				time_rotating = 0.0
+				change_path()
 			State.SPINNING:
 				switch_state(State.SPAWNING, spawn_time)
 				continue_bullets()
@@ -123,51 +117,52 @@ func stop_bullets() -> void:
 	
 	chimera_list_1.clean_list()
 	chimera_list_1.replace_entities(bullet_circle)
-	for entity in chimera_list_1:
+	for entity : Entity in chimera_list_1:
 		entity.velocity = Vector2(0,0)
+		entity.do_check_despawn = false
 		set_bullet_style(entity)
 	
 	chimera_list_2.clean_list()
 	chimera_list_2.replace_entities(bullet_circle)
-	for entity in chimera_list_2:
+	for entity : Entity in chimera_list_2:
 		entity.velocity = Vector2(0,0)
+		entity.do_check_despawn = false
 		set_bullet_style(entity)
 
-func rotate_bullets(delta: float) -> void:
-	# print("CHIMERA - Rotate Bullet")
-	time_rotating += delta
-	var angle_spin = sin(time_rotating * PI / spin_time) * 0.0077
-	
+func change_path() -> void:
 	chimera_list_1.clean_list()
-	for bullet in chimera_list_1:
-		bullet.position = rotate_around_point(bullet.position, boss.position, angle_spin)
+	for entity : Entity in chimera_list_1:
+		var distance = entity.position.distance_to(boss.position)
+		var direction = entity.position.direction_to(boss.position).rotated(0.4*PI)
+		entity.velocity = direction * spin_speed * distance
 	chimera_list_2.clean_list()
-	for bullet in chimera_list_2:
-		bullet.position = rotate_around_point(bullet.position, boss.position, -angle_spin)
-	
+	for entity : Entity in chimera_list_2:
+		var distance = entity.position.distance_to(boss.position)
+		var direction = entity.position.direction_to(boss.position).rotated(-0.4*PI)
+		entity.velocity = direction * spin_speed * distance
+
 func continue_bullets() -> void:
 	print("CHIMERA - Continue Bullet")
 	chimera_list_1.clean_list()
 	chimera_list_1.replace_entities(bullet_line)
-	for entity in chimera_list_1:
+	for entity : Entity in chimera_list_1:
 		var direction = entity.position.direction_to(boss.position)
 		entity.velocity = -direction * bullet_base_speed
+		entity.do_check_despawn = true
 		set_bullet_style(entity)
 	
+	chimera_list_2.clean_list()
 	chimera_list_2.replace_entities(bullet_line)
-	for entity in chimera_list_2:
+	for entity : Entity in chimera_list_2:
 		var direction = entity.position.direction_to(boss.position)
 		entity.velocity = -direction * bullet_base_speed
+		entity.do_check_despawn = true
 		set_bullet_style(entity)
 
 func switch_state(state: int, state_timer: float):
 	self.state = state
 	self.state_timer = state_timer
 
-func rotate_around_point(point1: Vector2, point2: Vector2, angle: float) -> Vector2:
-	var diff = point1 - point2
-	return diff.rotated(angle) + point2
-
-static func ease_angle(start: float, end: float, value: float) -> float:
-	end -= start
-	return -end * 0.5 * (cos(PI * value) - 1) + start
+#func rotate_around_point(point1: Vector2, point2: Vector2, angle: float) -> Vector2:
+	#var diff = point1 - point2
+	#return diff.rotated(angle) + point2

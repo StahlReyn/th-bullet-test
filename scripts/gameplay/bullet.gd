@@ -28,18 +28,21 @@ func process_movement(delta) -> void:
 func on_hit():
 	super()
 	if hit_count >= penetration:
-		if bullet_hit_effect_scene:
-			AfterEffect.add_effect(bullet_hit_effect_scene, self)
-		call_deferred("queue_free")
+		do_remove()
+
+func do_remove() -> void:
+	if bullet_hit_effect_scene:
+		AfterEffect.add_effect(bullet_hit_effect_scene, self)
+	super()
 
 func set_color(type: int = 0, variant: int = 0) -> void:
 	if main_sprite is SpriteGroupBasicBullet:
 		main_sprite.set_color(type, variant)
 	else:
-		push_warning("Cannot set color to non-sprite group bullets")
+		printerr("Cannot set color to non-sprite group bullets")
 
 func set_random_color(variant: int = 0) -> void:
 	if main_sprite is SpriteGroupBasicBullet:
 		main_sprite.set_random_color(variant)
 	else:
-		push_warning("Cannot set color to non-sprite group bullets")
+		printerr("Cannot set color to non-sprite group bullets")

@@ -49,27 +49,37 @@ func process_movement(delta) -> void:
 	position += velocity * delta
 
 func check_hit_wall() -> void:
-	if (position.x > GameUtils.game_area.x 
-			or position.x < 0 
-			or position.y > GameUtils.game_area.y
-			or position.y < 0):\
-			if not in_wall: # emit only once
-				hit_wall.emit()
-				in_wall = true
+	if is_in_wall_area():
+		if not in_wall: # emit only once
+			hit_wall.emit()
+			in_wall = true
 	else:
 		in_wall = false
 		exit_wall.emit()
 
+func is_in_wall_area() -> bool:
+	return (position.x > GameUtils.game_area.x 
+			or position.x < 0 
+			or position.y > GameUtils.game_area.y
+			or position.y < 0)
+	
 func check_despawn() -> void:
-	if (position.x > GameUtils.game_area.x + despawn_padding
+	if is_in_despawn_area():
+		do_remove()
+
+func is_in_despawn_area() -> bool:
+	return (position.x > GameUtils.game_area.x + despawn_padding
 			or position.x < - despawn_padding
 			or position.y > GameUtils.game_area.y + despawn_padding
-			or position.y < - despawn_padding):\
-		call_deferred("queue_free")
+			or position.y < - despawn_padding)
 
 func on_hit():
 	hit.emit()
 	hit_count += 1
+
+# in base entity do_remove isnt called automatically, let the child class or external handle it
+func do_remove():
+	call_deferred("queue_free")
 	
 func add_movement_script(script : GDScript) -> Node:
 	if movement_handler == null:
