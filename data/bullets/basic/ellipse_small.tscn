@@ -17,6 +17,7 @@ main_sprite = NodePath("Sprite")
 shape = SubResource("CircleShape2D_rm5dy")
 
 [node name="Sprite" type="Sprite2D" parent="."]
+use_parent_material = true
 rotation = 1.5708
 scale = Vector2(2, 2)
 texture = ExtResource("2_11b1o")

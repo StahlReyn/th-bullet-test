@@ -10,7 +10,7 @@ func _ready() -> void:
 	pass
 
 func _physics_process(delta: float) -> void:
-	var time = parent.total_time - parent.delay_time
+	var time = parent.active_time
 	parent.velocity = base_velocity
 	parent.velocity.x += sin(time * frequency.x + phase_offset.x) * amplitude.x
 	parent.velocity.y += sin(time * frequency.y + phase_offset.y) * amplitude.y

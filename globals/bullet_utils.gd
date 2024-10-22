@@ -13,6 +13,9 @@ var scene_dict : Dictionary = {
 	"arrow" = preload("res://data/bullets/basic/arrow.tscn"),
 	"spike" = preload("res://data/bullets/basic/spike.tscn"),
 	"knife" = preload("res://data/bullets/basic/knife.tscn"),
+	# Partial Lasers
+	"partial_laser_medium" = preload("res://data/bullets/basic/partial_laser_medium.tscn"),
+	"partial_laser_medium_subtle" = preload("res://data/bullets/basic/partial_laser_medium_subtle.tscn"),
 	# Lasers
 	"laser_basic" = preload("res://data/bullets/laser/laser_basic.tscn"),
 }

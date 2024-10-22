@@ -5,7 +5,7 @@ extends MovementScript
 
 @onready var laser = BulletUtils.scene_dict["laser_basic"]
 @onready var bullet = BulletUtils.scene_dict["circle_medium"]
-@onready var stream = BulletUtils.scene_dict["circle_medium"]
+@onready var stream = BulletUtils.scene_dict["partial_laser_medium_subtle"]
 @onready var stream_movement = preload("res://data/movement/common/movement_sine.gd")
 @onready var accel_movement = preload("res://data/movement/common/acceleration_constant.gd")
 
@@ -54,11 +54,11 @@ func part_laser(angle_rotated : float) -> void:
 	# laser
 	var cur_laser = spawn_laser(laser, parent.position)
 	basic_copy(cur_laser, parent)
+	set_bullet_style(cur_laser)
 	cur_laser.damage = 200
 	cur_laser.rotation = angle_rotated - PI/2 #target_direction.angle()
 	cur_laser.target_size.y = 100
 	cur_laser.switch_state(Laser.State.STATIC, 2.0)
-	cur_laser.material = blend_add
 	
 	# Audio node to laser
 	var audio_node = AudioStreamPlayer2D.new()
@@ -88,8 +88,9 @@ func part_stream(angle_rotated : float) -> void:
 		for i in range(60):
 			var cur_bullet = spawn_bullet(stream, parent.position)
 			basic_copy(cur_bullet, parent)
-			cur_bullet.delay_time = i * 0.03
-			cur_bullet.material = blend_add
+			set_bullet_style(cur_bullet)
+			cur_bullet.modulate.a = 0.3
+			cur_bullet.delay_time = i * 0.02 + 0.1
 			
 			var cur_script = cur_bullet.add_movement_script(stream_movement)
 			cur_script.frequency = frequency
@@ -104,16 +105,20 @@ func part_spray(angle_rotated : float) -> void:
 	var spray_accel = Vector2(0, -150).rotated(angle_rotated)
 	
 	for i in range(40):
-		var cur_bullet = spawn_bullet(stream, parent.position)
+		var cur_bullet = spawn_bullet(bullet, parent.position)
 		basic_copy(cur_bullet, parent)
+		set_bullet_style(cur_bullet)
 		cur_bullet.delay_time = i * 0.02
-		cur_bullet.material = blend_add
 		cur_bullet.velocity.y = randf_range(spray_min.x, spray_max.x)
 		cur_bullet.velocity.x = randf_range(spray_min.y, spray_max.y)
 		var cur_script = cur_bullet.add_movement_script(accel_movement)
 		cur_script.acceleration = spray_accel
 
-func basic_copy(to_copy, base) -> void:
+func basic_copy(to_copy: Entity, base: Entity) -> void:
 	to_copy.collision_layer = base.collision_layer
 	to_copy.collision_mask = base.collision_mask
 	to_copy.modulate = base.modulate
+
+func set_bullet_style(bullet: Entity) -> void:
+	bullet.material = blend_add
+	bullet.set_color(SpriteGroupBasicBullet.ColorType.RED)

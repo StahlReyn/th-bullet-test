@@ -1,7 +1,7 @@
 class_name MovementScript
 extends ModScript
 
-@export var parent : Node
+@export var parent : Entity
 
 func _ready() -> void:
 	pass

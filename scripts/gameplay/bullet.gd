@@ -32,13 +32,13 @@ func on_hit():
 			AfterEffect.add_effect(bullet_hit_effect_scene, self)
 		call_deferred("queue_free")
 
-func set_color(type: int, variant: int) -> void:
+func set_color(type: int = 0, variant: int = 0) -> void:
 	if main_sprite is SpriteGroupBasicBullet:
 		main_sprite.set_color(type, variant)
 	else:
 		push_warning("Cannot set color to non-sprite group bullets")
 
-func set_random_color(variant: int) -> void:
+func set_random_color(variant: int = 0) -> void:
 	if main_sprite is SpriteGroupBasicBullet:
 		main_sprite.set_random_color(variant)
 	else:

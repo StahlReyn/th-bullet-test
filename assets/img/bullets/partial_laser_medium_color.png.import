@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ds3vu1q7qkmd6"
-path="res://.godot/imported/laser_curvy.png-2674d95898d4cd5da55b7df7c23b6b8e.ctex"
+uid="uid://cx2oiys0uqsm2"
+path="res://.godot/imported/partial_laser_medium_color.png-1987b5dcd339b0aa1d33bbc73ff8f522.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/img/bullets/laser_curvy.png"
-dest_files=["res://.godot/imported/laser_curvy.png-2674d95898d4cd5da55b7df7c23b6b8e.ctex"]
+source_file="res://assets/img/bullets/partial_laser_medium_color.png"
+dest_files=["res://.godot/imported/partial_laser_medium_color.png-1987b5dcd339b0aa1d33bbc73ff8f522.ctex"]
 
 [params]
 
