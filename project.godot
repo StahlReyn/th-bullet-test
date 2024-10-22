@@ -23,6 +23,7 @@ GameVariables="*res://globals/game_variables.gd"
 MathUtils="*res://globals/math_utils.gd"
 AudioManager="*res://globals/audio_manager.gd"
 BulletUtils="*res://globals/bullet_utils.gd"
+SaveManager="*res://globals/save_manager.gd"
 
 [debug]
 
