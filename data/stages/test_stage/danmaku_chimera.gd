@@ -10,6 +10,8 @@ enum State {
 	IDLE,
 	SPAWNING,
 	SPINNING,
+	ENDING,
+	ENDED,
 }
 
 @onready var enemy_boss : PackedScene = preload("res://data/enemies/enemy_lesser_fairy_boss.tscn")
@@ -30,6 +32,8 @@ var boss : Enemy
 var state : int = State.IDLE
 var state_timer : float = 3.0
 
+var boss_target_position : Vector2 = Vector2(385, 385)
+
 var shot_count_1 : int = 0
 
 # Pattern Variables
@@ -42,8 +46,8 @@ var spin_speed : float = 0.19 # This is more of multiplier. Speed is also depend
 func _ready() -> void:
 	super()
 	start_section()
-	switch_state(State.IDLE, 1.0)
-	boss = spawn_enemy(enemy_boss, Vector2(380,400))
+	switch_state(State.IDLE, 3.0)
+	boss = spawn_enemy(enemy_boss, Vector2(385,-50))
 	boss.do_check_despawn = false
 	boss.remove_on_death = false
 	boss.mhp = 1000;
@@ -56,20 +60,28 @@ func _physics_process(delta: float) -> void:
 	super(delta)
 	state_timer -= delta
 	process_state()
-
+	if is_instance_valid(boss):
+		#print(boss_target_position)
+		boss.position = lerp(boss.position, boss_target_position, delta * 2)
+		if boss.hp < 0 and can_switch_end():
+			switch_state(State.ENDING, 2.0)
+	if time_active >= duration and can_switch_end():
+		switch_state(State.ENDING, 2.0)
 
 func end_condition() -> bool:
-	return time_active >= duration
+	return state == State.ENDED
+
+func can_switch_end() -> bool:
+	return not (state == State.ENDING or state == State.ENDED)
 
 func end_section() -> void:
-	BulletUtils.clear_bullets()
 	super()
 	
 func start_section():
 	super()
 	spell_name = "Nue Sign \"Danmaku Chimera\""
 	total_bonus = 25000000
-	duration = 6.0
+	duration = 50.0
 	update_displayer()
 
 func spawn_bullet_line():
@@ -103,15 +115,12 @@ func process_state() -> void:
 		match state:
 			State.IDLE: 
 				switch_state(State.SPAWNING, spawn_time)
-				spawn_bullet_line() # When switch spawn
 			State.SPAWNING:
 				switch_state(State.SPINNING, spin_time)
-				stop_bullets()
-				change_path()
 			State.SPINNING:
 				switch_state(State.SPAWNING, spawn_time)
-				continue_bullets()
-				spawn_bullet_line()
+			State.ENDING:
+				switch_state(State.ENDED, 5.0)
 
 func stop_bullets() -> void:
 	print("CHIMERA - Stop Bullet")
@@ -163,6 +172,23 @@ func continue_bullets() -> void:
 func switch_state(state: int, state_timer: float):
 	self.state = state
 	self.state_timer = state_timer
+	on_state_change(state)
+
+func on_state_change(state: int):
+	match state:
+		State.SPAWNING:
+			boss.position = boss_target_position
+			continue_bullets()
+			spawn_bullet_line()
+		State.SPINNING:
+			stop_bullets()
+			change_path()
+		State.ENDING:
+			if is_instance_valid(boss):
+				boss.do_check_despawn = true
+			boss_target_position = Vector2(385,-200)
+			enabled = false
+			BulletUtils.clear_bullets()
 
 #func rotate_around_point(point1: Vector2, point2: Vector2, angle: float) -> Vector2:
 	#var diff = point1 - point2

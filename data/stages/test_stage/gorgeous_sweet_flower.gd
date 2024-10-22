@@ -63,6 +63,7 @@ func end_condition() -> bool:
 	return time_active >= duration or end_delay_cd <= 0
 
 func end_section() -> void:
+	BulletUtils.clear_bullets()
 	boss_target_position = Vector2(380,-200)
 	super()
 	
