@@ -22,8 +22,10 @@ enum State {
 @onready var script_expiry : GDScript = preload("res://data/movement/common/expiry_timer.gd")
 @onready var blend_add = preload("res://data/canvas_material/blend_additive.tres")
 
-var bullet_chimera_list_1 : Array[Bullet] = [] # Two sets as one goes another direction
-var bullet_chimera_list_2 : Array[Bullet] = []
+ # Two sets as one goes another direction
+var chimera_list_1 : EntityList = EntityList.new()
+var chimera_list_2 : EntityList = EntityList.new()
+
 var boss : Enemy
 var state : int = State.IDLE
 var state_timer : float = 3.0
@@ -88,9 +90,9 @@ func spawn_bullet_line():
 		for i in bullet_list.size():
 			var bullet : Bullet = bullet_list[i]
 			if circle_i % 2 == 0:
-				bullet_chimera_list_1.append(bullet)
+				chimera_list_1.add_entity(bullet)
 			else:
-				bullet_chimera_list_2.append(bullet)
+				chimera_list_2.add_entity(bullet)
 			bullet.set_color(SpriteGroupBasicBullet.ColorType.BLUE)
 			bullet.delay_time = circle_i * 0.1
 			set_bullet_style(bullet)
@@ -118,72 +120,45 @@ func process_state() -> void:
 
 func stop_bullets() -> void:
 	print("CHIMERA - Stop Bullet")
-	clean_bullet_list()
-
-	var new_list_1 : Array[Bullet] = []
-	for bullet in bullet_chimera_list_1:
-		var new_bullet = ModScript.spawn_bullet(bullet_circle, bullet.position)
-		new_bullet.velocity = Vector2(0,0)
-		set_bullet_style(new_bullet)
-		new_list_1.append(new_bullet)
-		bullet.call_deferred("queue_free")
-	bullet_chimera_list_1 = new_list_1
 	
-	var new_list_2 : Array[Bullet] = []
-	for bullet in bullet_chimera_list_2:
-		var new_bullet = ModScript.spawn_bullet(bullet_circle, bullet.position)
-		new_bullet.velocity = Vector2(0,0)
-		set_bullet_style(new_bullet)
-		new_list_2.append(new_bullet)
-		bullet.call_deferred("queue_free")
-	bullet_chimera_list_2 = new_list_2
+	chimera_list_1.clean_list()
+	chimera_list_1.replace_entities(bullet_circle)
+	for entity in chimera_list_1:
+		entity.velocity = Vector2(0,0)
+		set_bullet_style(entity)
+	
+	chimera_list_2.clean_list()
+	chimera_list_2.replace_entities(bullet_circle)
+	for entity in chimera_list_2:
+		entity.velocity = Vector2(0,0)
+		set_bullet_style(entity)
 
 func rotate_bullets(delta: float) -> void:
 	# print("CHIMERA - Rotate Bullet")
-	clean_bullet_list()
 	time_rotating += delta
 	var angle_spin = sin(time_rotating * PI / spin_time) * 0.0077
 	
-	for bullet in bullet_chimera_list_1:
+	chimera_list_1.clean_list()
+	for bullet in chimera_list_1:
 		bullet.position = rotate_around_point(bullet.position, boss.position, angle_spin)
-	for bullet in bullet_chimera_list_2:
+	chimera_list_2.clean_list()
+	for bullet in chimera_list_2:
 		bullet.position = rotate_around_point(bullet.position, boss.position, -angle_spin)
 	
 func continue_bullets() -> void:
 	print("CHIMERA - Continue Bullet")
-	clean_bullet_list()
-	var new_list_1 : Array[Bullet] = []
-	for bullet in bullet_chimera_list_1:
-		var direction = bullet.position.direction_to(boss.position)
-		var new_bullet = ModScript.spawn_bullet(bullet_line, bullet.position)
-		new_bullet.velocity = -direction * bullet_base_speed
-		set_bullet_style(new_bullet)
-		new_list_1.append(new_bullet)
-		bullet.call_deferred("queue_free")
-	bullet_chimera_list_1 = new_list_1
+	chimera_list_1.clean_list()
+	chimera_list_1.replace_entities(bullet_line)
+	for entity in chimera_list_1:
+		var direction = entity.position.direction_to(boss.position)
+		entity.velocity = -direction * bullet_base_speed
+		set_bullet_style(entity)
 	
-	var new_list_2 : Array[Bullet] = []
-	for bullet in bullet_chimera_list_2:
-		var direction = bullet.position.direction_to(boss.position)
-		var new_bullet = ModScript.spawn_bullet(bullet_line, bullet.position)
-		new_bullet.velocity = -direction * bullet_base_speed
-		set_bullet_style(new_bullet)
-		new_list_2.append(new_bullet)
-		bullet.call_deferred("queue_free")
-	bullet_chimera_list_2 = new_list_2
-
-func clean_bullet_list() -> void:
-	var old_list_1 = bullet_chimera_list_1
-	bullet_chimera_list_1 = []
-	for item in old_list_1:
-		if is_instance_valid(item):
-			bullet_chimera_list_1.append(item)
-	
-	var old_list_2 = bullet_chimera_list_2
-	bullet_chimera_list_2 = []
-	for item in old_list_2:
-		if is_instance_valid(item):
-			bullet_chimera_list_2.append(item)
+	chimera_list_2.replace_entities(bullet_line)
+	for entity in chimera_list_2:
+		var direction = entity.position.direction_to(boss.position)
+		entity.velocity = -direction * bullet_base_speed
+		set_bullet_style(entity)
 
 func switch_state(state: int, state_timer: float):
 	self.state = state
@@ -192,7 +167,6 @@ func switch_state(state: int, state_timer: float):
 func rotate_around_point(point1: Vector2, point2: Vector2, angle: float) -> Vector2:
 	var diff = point1 - point2
 	return diff.rotated(angle) + point2
-
 
 static func ease_angle(start: float, end: float, value: float) -> float:
 	end -= start

@@ -17,7 +17,7 @@ var total_time : float = 0.0
 var active_time : float = 0.0
 var hit_count : int = 0
 var in_wall : bool = false
-var despawn_padding : float = 50
+var despawn_padding : float = 100
 
 func _init() -> void:
 	# Auto create Movement Handler

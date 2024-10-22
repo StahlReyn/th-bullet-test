@@ -22,6 +22,20 @@ func physics_process_active(delta: float) -> void:
 func is_active() -> bool:
 	return enabled
 
+static func get_container_for_entity(entity: Entity):
+	if entity is Enemy:
+		return GameUtils.get_enemy_container()
+	elif entity is Bullet or entity is Laser:
+		return GameUtils.get_bullet_container()
+	printerr("Get container for entity gets non specified container")
+	return null
+
+static func spawn_entity(scene : PackedScene, pos : Vector2 = Vector2(0,0)) -> Entity:
+	var entity : Entity = scene.instantiate()
+	var entity_container = get_container_for_entity(entity)
+	entity.global_position = pos
+	entity_container.add_child(entity)
+	return entity
 
 static func spawn_enemy(scene : PackedScene, pos : Vector2 = Vector2(0,0)) -> Enemy:
 	var enemy_container = GameUtils.get_enemy_container()
