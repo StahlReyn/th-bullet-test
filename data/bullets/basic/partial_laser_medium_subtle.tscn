@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://data/bullets/sprite_group_basic_bullet.gd" id="3_qmr8c"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4sm73"]
-radius = 13.0384
+radius = 12.0
 
 [node name="Bullet" type="Area2D" node_paths=PackedStringArray("main_sprite") groups=["bullet"]]
 collision_layer = 4
