@@ -71,8 +71,6 @@ func start_section():
 	spell_name = "FLOWER SIGN \"KNOCK OFF MEILING\""
 	total_bonus = 5000000
 	duration = 30.0
-	count_capture = 0
-	count_attempt = 0
 	update_displayer()
 
 func boss_movement():

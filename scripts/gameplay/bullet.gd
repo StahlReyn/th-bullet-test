@@ -22,7 +22,7 @@ func _physics_process(delta: float) -> void:
 
 func process_movement(delta) -> void:
 	super(delta)
-	if rotation_based_on_velocity:
+	if rotation_based_on_velocity and velocity != Vector2.ZERO:
 		rotation = velocity.angle()
 
 func on_hit():

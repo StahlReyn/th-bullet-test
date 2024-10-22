@@ -5,10 +5,18 @@ var stage_data : StageData = preload("res://data/stages/test_stage/test_stage.tr
 
 var cur_stage_script : StageScript
 
+var cd1 = 1.0
+var added = false
+
 func _ready() -> void:
-	add_stage_script_from_data(stage_data) # This is temporary test
+	pass
 
 func _physics_process(delta: float) -> void:
+	cd1 -= delta
+	if not added and cd1 <= 0: # This is temporary test
+		add_stage_script_from_data(stage_data)
+		added = true
+	
 	check_finished_sections()
 
 func add_stage_script_from_data(data : StageData) -> Node:
