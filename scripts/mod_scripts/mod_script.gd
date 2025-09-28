@@ -6,21 +6,29 @@ extends Node
 var time_elapsed : float = 0.0 ## Timer since script is on_ready
 var time_active : float = 0.0 ## Timer that ticks only when active
 
-@export var enabled : bool = true ## Is enabled
-
 func _ready() -> void:
 	pass
 
 func _physics_process(delta: float) -> void:
 	time_elapsed += delta
-	if is_active():
-		physics_process_active(delta)
+	physics_process_active(delta)
 		
 func physics_process_active(delta: float) -> void:
 	time_active += delta
-	
-func is_active() -> bool:
-	return enabled
+
+func get_existing_boss(create_scene : PackedScene, index : int = 0) -> EnemyBoss:
+	var bosses = get_tree().get_nodes_in_group("enemy_boss")
+	if bosses.size() > index:
+		return bosses[index]
+	return spawn_enemy(create_scene, Vector2(385,-50))
+
+func timer_setup(wait_time: float, function: Callable) -> Timer:
+	var timer = Timer.new()
+	timer.wait_time = wait_time
+	timer.connect("timeout", function)
+	add_child(timer)
+	timer.start(wait_time)
+	return timer
 
 static func get_container_for_entity(entity: Entity):
 	if entity is Enemy:
@@ -28,34 +36,44 @@ static func get_container_for_entity(entity: Entity):
 	elif entity is Bullet or entity is Laser:
 		return GameUtils.get_bullet_container()
 	printerr("Get container for entity gets non specified container")
-	return null
+	return GameUtils.get_bullet_container()
 
 static func spawn_entity(scene : PackedScene, pos : Vector2 = Vector2(0,0)) -> Entity:
 	var entity : Entity = scene.instantiate()
-	var entity_container = get_container_for_entity(entity)
+	var container = get_container_for_entity(entity)
 	entity.global_position = pos
-	entity_container.add_child(entity)
+	container.call_deferred("add_child", entity)
+	if entity is Enemy:
+		GameVariables.enemy_spawned += 1
 	return entity
 
 static func spawn_enemy(scene : PackedScene, pos : Vector2 = Vector2(0,0)) -> Enemy:
-	var enemy_container = GameUtils.get_enemy_container()
+	var container = GameUtils.get_enemy_container()
 	var enemy : Enemy = scene.instantiate()
 	enemy.global_position = pos
-	enemy_container.add_child(enemy)
+	container.call_deferred("add_child", enemy)
+	GameVariables.enemy_spawned += 1
+	return enemy
+
+static func spawn_enemy_boss(scene : PackedScene, pos : Vector2 = Vector2(0,0)) -> EnemyBoss:
+	var enemy : EnemyBoss = spawn_enemy(scene, pos)
+	enemy.stop_all_despawn()
+	enemy.set_inactive()
+	enemy.add_to_group("enemy_boss")
 	return enemy
 
 static func spawn_bullet(scene : PackedScene, pos : Vector2 = Vector2(0,0)) -> Bullet:
 	var container = GameUtils.get_bullet_container()
 	var bullet : Bullet = scene.instantiate()
 	bullet.global_position = pos
-	container.add_child(bullet)
+	container.call_deferred("add_child", bullet)
 	return bullet
 
 static func spawn_laser(scene : PackedScene, pos : Vector2 = Vector2(0,0)) -> Laser:
 	var container = GameUtils.get_bullet_container()
 	var bullet : Laser = scene.instantiate()
 	bullet.global_position = pos
-	container.add_child(bullet)
+	container.call_deferred("add_child", bullet)
 	return bullet
 
 static func spawn_image(image : Texture2D, pos : Vector2 = Vector2(0,0)) -> Sprite2D:
@@ -64,13 +82,55 @@ static func spawn_image(image : Texture2D, pos : Vector2 = Vector2(0,0)) -> Spri
 	sprite.texture = image
 	sprite.top_level = true
 	sprite.global_position = pos
-	container.add_child(sprite)
+	container.call_deferred("add_child", sprite)
 	return sprite
 
 static func spawn_title_card(scene : PackedScene, pos : Vector2 = Vector2(0,0)) -> TitleCard:
-	var image_container = GameUtils.get_image_container()
+	var container = GameUtils.get_image_container()
 	var image : TitleCard = scene.instantiate()
 	image.top_level = true
 	image.global_position = pos
-	image_container.add_child(image)
+	container.call_deferred("add_child", image)
 	return image
+
+# Common Lambda Function
+class LF:
+	static func accel(entity: Entity, accel : Vector2):
+		entity.set_meta("accel", accel)
+		entity.add_behavior_func("accel", Processor.accel)
+
+	static func circle(entity: Entity, freq: float, amp: float, shift: float = 0.0):
+		entity.set_meta("circle_movement", {
+			"freq": freq,
+			"amp": amp,
+			"shift": shift
+		})
+		entity.add_behavior_func("circle", Processor.circle)
+	
+	static func teleport_smooth_pos(e : Entity):
+		e.position = e.get_meta("smooth_pos")
+	
+	static func smooth_pos(entity: Entity, pos: Vector2, rate : float = 1.0):
+		entity.set_meta("smooth_pos", pos)
+		entity.set_meta("smooth_rate", rate)
+		entity.add_behavior_func("smooth_pos", Processor.smooth_pos)
+	
+	static func rot_vel(entity: Entity, speed: float):
+		entity.set_meta("rot_vel", speed)
+		entity.add_behavior_func("rot_vel", Processor.rot_vel)
+
+# Static func so it all can share, avoid having unique for each entities
+class Processor:
+	static func accel(e : Entity, delta: float):
+		e.velocity += delta * e.get_meta("accel")
+	
+	static func rot_vel(e : Entity, delta: float):
+		e.rotation += delta * e.get_meta("rot_vel")
+	
+	static func circle(e : Entity, delta: float):
+		var params = e.get_meta("circle")
+		e.velocity += delta * Vector2.from_angle(e.active_time * params.freq + params.shift) * params.amp
+	
+	static func smooth_pos(e : Entity, delta: float):
+		e.position = MathUtils.lerp_smooth(e.position, e.get_meta("smooth_pos"), e.get_meta("smooth_rate"), delta)
+		

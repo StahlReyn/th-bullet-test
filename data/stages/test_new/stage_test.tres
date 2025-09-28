@@ -1,0 +1,85 @@
+[gd_resource type="Resource" script_class="StageData" load_steps=37 format=3 uid="uid://b6org8ginbbsr"]
+
+[ext_resource type="Script" path="res://resources/stage_data.gd" id="1_qsp84"]
+[ext_resource type="Script" path="res://resources/stage_action.gd" id="2_obigo"]
+[ext_resource type="Script" path="res://resources/stage_action_script.gd" id="3_iuw4r"]
+[ext_resource type="Resource" uid="uid://c2k5bx6vbki28" path="res://data/stages/test_new/dialogues/dialogue_start.tres" id="4_klw34"]
+[ext_resource type="Script" path="res://data/stages/test_new/scripts/section_1.gd" id="4_w3rn1"]
+[ext_resource type="Script" path="res://data/stages/test_new/scripts/section_2.gd" id="5_iip8u"]
+[ext_resource type="Script" path="res://data/stages/test_new/scripts/section_3.gd" id="6_c5cl7"]
+[ext_resource type="Script" path="res://data/stages/test_new/scripts/spell_card_chimera.gd" id="7_l5fjw"]
+[ext_resource type="Script" path="res://resources/dialogue_set.gd" id="8_wm3v4"]
+[ext_resource type="Script" path="res://resources/stage_action_dialogue.gd" id="9_kqxls"]
+[ext_resource type="Resource" uid="uid://3wrtknycht6e" path="res://data/stages/test_new/dialogues/dialogue_nue.tres" id="10_qfhoa"]
+[ext_resource type="Resource" uid="uid://dyg8qpj5elvkh" path="res://data/stages/test_new/dialogues/dialogue_nue_after.tres" id="12_eonak"]
+[ext_resource type="Script" path="res://data/stages/test_new/scripts/section_4.gd" id="13_2rvw2"]
+[ext_resource type="Script" path="res://data/stages/test_new/scripts/section_5.gd" id="14_msu5l"]
+[ext_resource type="Resource" uid="uid://dvj0i7xk63t50" path="res://data/stages/test_new/dialogues/dialogue_letty.tres" id="15_xdvat"]
+[ext_resource type="Script" path="res://data/stages/test_new/scripts/spell_card_hailstorm.gd" id="16_w2a2t"]
+[ext_resource type="Resource" uid="uid://3rf8bxkny5l4" path="res://data/stages/test_new/dialogues/dialogue_letty_after.tres" id="17_3ks61"]
+[ext_resource type="Script" path="res://data/stages/test_new/scripts/section_6.gd" id="18_kccn1"]
+[ext_resource type="Script" path="res://data/stages/test_new/scripts/section_7.gd" id="19_1v55b"]
+[ext_resource type="Script" path="res://data/stages/test_new/scripts/section_8.gd" id="20_p3uoq"]
+[ext_resource type="Resource" uid="uid://p7unvqpauw6y" path="res://data/stages/test_new/dialogues/dialogue_junko.tres" id="21_qgtku"]
+[ext_resource type="Script" path="res://data/stages/test_new/scripts/spell_card_junko_pong.gd" id="22_gf44q"]
+[ext_resource type="Resource" uid="uid://d3ufqy1huplcb" path="res://data/stages/test_new/dialogues/dialogue_junko_after.tres" id="23_gutw5"]
+
+[sub_resource type="Resource" id="Resource_v5li2"]
+script = ExtResource("9_kqxls")
+dialogue_data = Array[ExtResource("8_wm3v4")]([ExtResource("4_klw34")])
+
+[sub_resource type="Resource" id="Resource_ksmro"]
+script = ExtResource("3_iuw4r")
+script_data = Array[GDScript]([ExtResource("4_w3rn1"), ExtResource("5_iip8u"), ExtResource("6_c5cl7")])
+
+[sub_resource type="Resource" id="Resource_0e0ai"]
+script = ExtResource("9_kqxls")
+dialogue_data = Array[ExtResource("8_wm3v4")]([ExtResource("10_qfhoa")])
+
+[sub_resource type="Resource" id="Resource_6hckk"]
+script = ExtResource("3_iuw4r")
+script_data = Array[GDScript]([ExtResource("7_l5fjw")])
+
+[sub_resource type="Resource" id="Resource_h1ymj"]
+script = ExtResource("9_kqxls")
+dialogue_data = Array[ExtResource("8_wm3v4")]([ExtResource("12_eonak")])
+
+[sub_resource type="Resource" id="Resource_ctx8p"]
+script = ExtResource("3_iuw4r")
+script_data = Array[GDScript]([ExtResource("13_2rvw2"), ExtResource("14_msu5l")])
+
+[sub_resource type="Resource" id="Resource_8kkcu"]
+script = ExtResource("9_kqxls")
+dialogue_data = Array[ExtResource("8_wm3v4")]([ExtResource("15_xdvat")])
+
+[sub_resource type="Resource" id="Resource_2w2wi"]
+script = ExtResource("3_iuw4r")
+script_data = Array[GDScript]([ExtResource("16_w2a2t")])
+
+[sub_resource type="Resource" id="Resource_o7wp2"]
+script = ExtResource("9_kqxls")
+dialogue_data = Array[ExtResource("8_wm3v4")]([ExtResource("17_3ks61")])
+
+[sub_resource type="Resource" id="Resource_v4icj"]
+script = ExtResource("3_iuw4r")
+script_data = Array[GDScript]([ExtResource("18_kccn1"), ExtResource("19_1v55b"), ExtResource("20_p3uoq")])
+
+[sub_resource type="Resource" id="Resource_5i74i"]
+script = ExtResource("9_kqxls")
+dialogue_data = Array[ExtResource("8_wm3v4")]([ExtResource("21_qgtku")])
+
+[sub_resource type="Resource" id="Resource_1fu3v"]
+script = ExtResource("3_iuw4r")
+script_data = Array[GDScript]([ExtResource("22_gf44q")])
+
+[sub_resource type="Resource" id="Resource_n4h1h"]
+script = ExtResource("9_kqxls")
+dialogue_data = Array[ExtResource("8_wm3v4")]([ExtResource("23_gutw5")])
+
+[resource]
+script = ExtResource("1_qsp84")
+stage_number = 0
+stage_difficulty = 0
+start_index = 0
+start_power = 0
+stage_actions = Array[ExtResource("2_obigo")]([SubResource("Resource_v5li2"), SubResource("Resource_ksmro"), SubResource("Resource_0e0ai"), SubResource("Resource_6hckk"), SubResource("Resource_h1ymj"), SubResource("Resource_ctx8p"), SubResource("Resource_8kkcu"), SubResource("Resource_2w2wi"), SubResource("Resource_o7wp2"), SubResource("Resource_v4icj"), SubResource("Resource_5i74i"), SubResource("Resource_1fu3v"), SubResource("Resource_n4h1h")])

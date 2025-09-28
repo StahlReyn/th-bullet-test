@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bb7a1p1w0pn4j"]
 
-[ext_resource type="Script" path="res://scripts/gameplay/bullet.gd" id="1_ipcvi"]
+[ext_resource type="Script" path="res://scripts/entities/bullet.gd" id="1_ipcvi"]
 [ext_resource type="Texture2D" uid="uid://bhakl6ssf8840" path="res://assets/img/bullets/partial_laser_small.png" id="2_rahlt"]
 [ext_resource type="Script" path="res://data/bullets/sprite_group_basic_bullet.gd" id="3_crrut"]
 
@@ -12,6 +12,8 @@ collision_layer = 4
 collision_mask = 0
 script = ExtResource("1_ipcvi")
 main_sprite = NodePath("Sprite")
+damage = 2
+rotation_based_on_velocity = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_6nof5")

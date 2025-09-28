@@ -23,9 +23,9 @@ func _ready() -> void:
 	call_deferred("setup_nodes")
 
 func _physics_process(delta: float) -> void:
-	if cur_spellcard:
-		label_name.text = cur_spellcard.spell_name
-		label_timer.text = "%.2f" % cur_spellcard.get_time_left()
+	if is_instance_valid(cur_spellcard):
+		label_name.text = cur_spellcard.section_name
+		label_timer.text = "%.2f" % max(cur_spellcard.get_time_left(), 0.0)
 	process_timer_display(delta)
 
 func setup_nodes() -> void:
@@ -47,8 +47,8 @@ func process_timer_display(delta: float) -> void:
 			target_color.a = 1
 			target_pos = timer_pos_spell
 	
-	label_timer.set_modulate(lerp(cur_color, target_color, delta * timer_lerp_speed))
-	label_timer.position = lerp(cur_pos, target_pos, delta * timer_lerp_speed)
+	label_timer.set_modulate(MathUtils.lerp_smooth(cur_color, target_color, timer_lerp_speed, delta))
+	label_timer.position = MathUtils.lerp_smooth(cur_pos, target_pos, timer_lerp_speed, delta)
 
 func reset_anim() -> void:
 	animation_node.play(&"RESET")

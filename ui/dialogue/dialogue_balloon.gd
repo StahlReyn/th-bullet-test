@@ -15,21 +15,30 @@ var press_count : int = 0
 func _ready() -> void:
 	scale.x = 0
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if scale.x < 1:
 		scale.x += scale_x_speed * delta
 		scale.x = clamp(scale.x, 0, 1)
-	if Input.is_action_just_pressed("dialogue"):
+	if Input.is_action_just_pressed("dialogue") or Input.is_action_pressed("skip"):
 		press_count += 1
-		# Default Two as when it just spawn its pressed once already
-		if press_count >= 2:
+		if press_count >= 1:
 			queue_free()
-	# Runs constantly but fine as it's just 1-2 objects
 	update_balloon_offset()
 	set_tail_position()
 
 func set_display_text(text: String) -> void:
-	label_main.text = text
+	var words = tr(text).split(" ")
+	var char_count = 0
+	var cur_line = ""
+	for word in words:
+		char_count += word.length()
+		cur_line += word
+		if char_count > 40:
+			cur_line += "\n"
+			char_count = 0
+		else:
+			cur_line += " "
+	label_main.text = cur_line
 
 func set_position_type(num: int) -> void:
 	position_type = num

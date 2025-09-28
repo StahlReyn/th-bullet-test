@@ -31,7 +31,7 @@ func _ready() -> void:
 	# set_position_type(DialogueLine.PortraitPosition.LEFT_BACK)
 	pass
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	process_position(delta)
 	if opacity_free and get_modulate().a <= 0.01:
 		print("Freed Portrait")
@@ -44,6 +44,8 @@ func set_position_type(type: int, instant: bool = false) -> void:
 	position_type = type
 	# Update Position
 	match position_type:
+		DialogueLine.PortraitPosition.SAME:
+			pass # Dont change anything
 		DialogueLine.PortraitPosition.LEFT:
 			pos_target = pos_left
 		DialogueLine.PortraitPosition.RIGHT:
@@ -63,7 +65,8 @@ func set_position_type(type: int, instant: bool = false) -> void:
 		set_modulate(mod_target)
 
 func set_initial_position(instant: bool = false) -> void:
-	if DialogueLine.is_left(position_type):
+	# if same assume left
+	if DialogueLine.is_left(position_type) or position_type == DialogueLine.PortraitPosition.SAME:
 		pos_target = pos_left_start
 	else:
 		pos_target = pos_right_start
@@ -72,7 +75,14 @@ func set_initial_position(instant: bool = false) -> void:
 	if instant:
 		global_position = pos_target
 		set_modulate(mod_target)
-	
+
+func set_back_position(instant: bool = false) -> void:
+	match position_type:
+		DialogueLine.PortraitPosition.LEFT:
+			set_position_type(DialogueLine.PortraitPosition.LEFT_BACK, instant)
+		DialogueLine.PortraitPosition.RIGHT:
+			set_position_type(DialogueLine.PortraitPosition.RIGHT_BACK, instant)
+
 func set_body_anim(anim_name: String) -> void:
 	sprite_body.play(anim_name)
 
@@ -80,5 +90,5 @@ func set_face_anim(anim_name: String) -> void:
 	sprite_face.play(anim_name)
 
 func process_position(delta: float) -> void:
-	global_position = lerp(global_position, pos_target, pos_move_speed * delta)
-	set_modulate(lerp(get_modulate(), mod_target, mod_speed * delta))
+	global_position = MathUtils.lerp_smooth(global_position, pos_target, pos_move_speed, delta)
+	set_modulate(MathUtils.lerp_smooth(get_modulate(), mod_target, mod_speed, delta))
